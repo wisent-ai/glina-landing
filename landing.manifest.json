@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 2,
+  "generator": "@wisent-ai/landing-cli@0.2.0",
+  "generatedAt": "2026-08-23T03:36:10.925Z",
+  "product": "Glina",
+  "briefDigest": "8eb8628283fe1b8584948c46d62a660f3d480ae7238b3cfbff2cfdb9a7668e8f",
+  "componentPlanDigest": "da244951a53d8eef49ace4fb48bf256efe2cbfe963b51ae4e69e46d7f84d79b2",
+  "componentCatalogDigest": "c62215f848ceb620b452776fc948b6f27bf7b5c638102735b3216a007497aa4c",
+  "componentRuntimeDigest": "5d97516048ab931c7ea026e068f11a1bf3c15f208e0e3cad8d7e9554ad3b926a",
+  "planDigest": "879fe66e9d1e717eee4e1882cc47efbcb528a7765ca851760b755529683322c8",
+  "tokens": {
+    "path": "/Users/lukaszbartoszcze/Documents/CodingProjects/Wisent/wisent-components/tokens.json",
+    "digest": "29a00929f58750f9c7a2f59936bdd59bd22e439f76b5575ca57a0f20513db9df"
+  },
+  "fonts": [],
+  "files": [
+    ".gitignore",
+    "next.config.ts",
+    "package.json",
+    "scripts/verify-approval.mjs",
+    "src/app/globals.css",
+    "src/app/layout.tsx",
+    "src/app/page.tsx",
+    "src/app/robots.ts",
+    "src/app/sitemap.ts",
+    "src/components/landing-components.js",
+    "src/content/components.json",
+    "src/content/plan.json",
+    "src/content/site.json",
+    "tsconfig.json"
+  ]
+}

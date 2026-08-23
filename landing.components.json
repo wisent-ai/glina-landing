@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "product": "Glina",
+  "decidedBy": "Lukasz Bartoszcze (operator instruction, session 2026-08-22)",
+  "components": [
+    {
+      "id": "landing.header",
+      "export": "LandingHeader",
+      "zone": "chrome",
+      "description": "Product header with wordmark, navigation destinations, and an optional primary-action link.",
+      "content": "site.product, site.nav, site.primaryAction",
+      "status": "required",
+      "reason": "standard page chrome; the operator approved a conventional header"
+    },
+    {
+      "id": "landing.hero",
+      "export": "LandingHero",
+      "zone": "thesis",
+      "description": "First-viewport component with headline plus optional eyebrow, subhead, actions, commitment note, and factual attribute row.",
+      "content": "plan.hero, site.primaryAction, site.secondaryAction, site.commitment",
+      "status": "required",
+      "reason": "the first screen must name Glina, its tagline, and the install action"
+    },
+    {
+      "id": "landing.recognition",
+      "export": "LandingRecognition",
+      "zone": "recognition",
+      "description": "Problem-recognition section that describes the visitor's current failure modes using claims approved in the product brief.",
+      "content": "recognition section heading, lede, and 2-4 items",
+      "status": "optional",
+      "reason": "one short problem statement helps a cold visitor; unverified AI meshes are the failure mode Glina exists to close"
+    },
+    {
+      "id": "landing.mechanism",
+      "export": "LandingMechanism",
+      "zone": "mechanism",
+      "description": "Ordered explanation of how the product creates the promised outcome, with three to five concrete steps.",
+      "content": "mechanism section heading, lede, and numbered items",
+      "status": "required",
+      "reason": "the prompt → Brama → Blender MCP → verification-gate flow is the product; it must be explained step by step"
+    },
+    {
+      "id": "landing.proof",
+      "export": "LandingProof",
+      "zone": "proof",
+      "description": "Evidence section rendering a real terminal transcript, code sample, or factual table backed by the brief's required proof.",
+      "content": "proof section heading, lede, and artifact",
+      "status": "recommended",
+      "reason": "the two gate-verified live assets (kamien.glb 2026-07-27, krasnolud-wojownik.glb 2026-07-28) are the honest artifact for an asset generator"
+    },
+    {
+      "id": "landing.objection",
+      "export": "LandingObjection",
+      "zone": "objection",
+      "description": "Question-and-answer section that resolves adoption, authorization, compatibility, pricing, or risk objections supported by approved claims.",
+      "content": "objection section heading and 3-5 question-answer items",
+      "status": "optional",
+      "reason": "the four hard rules (Skarbiec, Weles MCP, Blender MCP, Brama-only model access) answer the security and control questions developers actually ask"
+    },
+    {
+      "id": "landing.decision",
+      "reason": "one closing repeat of the install action after the proof; this is also where Glina's origin as the extracted simple-rts-unity web/art pipeline belongs",
+      "status": "optional",
+      "zone": "decision",
+      "description": "Closing decision section that restates the value after proof and repeats the same approved primary action without introducing a new promise.",
+      "content": "decision heading, lede, site.primaryAction, site.commitment",
+      "status": "optional",
+      "reason": "one closing repeat of the install action after the proof"
+    },
+    {
+      "id": "landing.footer",
+      "export": "LandingFooter",
+      "zone": "chrome",
+      "description": "Product footer with the approved product description and canonical legal, source, documentation, and community links.",
+      "content": "site.product, site.description, site.footer",
+      "status": "required",
+      "reason": "standard page chrome; links to source, desktop app, MIT license, and community"
+    }
+  ]
+}

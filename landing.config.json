@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "siteName": "Glina",
+  "domain": "https://glina.wisent.com",
+  "repository": "https://github.com/wisent-ai/glina",
+  "sourceUrl": "https://github.com/wisent-ai/glina",
+  "docsUrl": "https://github.com/wisent-ai/glina#readme",
+  "discordUrl": "https://discord.gg/qRjpkthq54",
+  "ogImageAlt": "Glina by Wisent — your AI sculpts your game assets",
+  "navLinks": [
+    {"label": "Install", "href": "https://github.com/wisent-ai/glina#install"},
+    {"label": "CLI", "href": "https://github.com/wisent-ai/glina#use"},
+    {"label": "Source", "href": "https://github.com/wisent-ai/glina"},
+    {"label": "Discord", "href": "https://discord.gg/qRjpkthq54"}
+  ],
+  "footerLinks": [
+    {"label": "Install", "href": "https://github.com/wisent-ai/glina#install"},
+    {"label": "CLI reference", "href": "https://github.com/wisent-ai/glina#use"},
+    {"label": "Source", "href": "https://github.com/wisent-ai/glina"},
+    {"label": "macOS app", "href": "https://github.com/wisent-ai/glina-desktop"},
+    {"label": "License (MIT)", "href": "https://github.com/wisent-ai/glina/blob/main/LICENSE"},
+    {"label": "Discord", "href": "https://discord.gg/qRjpkthq54"},
+    {"label": "Wisent", "href": "https://wisent.ai"}
+  ]
+}

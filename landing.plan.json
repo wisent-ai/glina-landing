@@ -1,0 +1,191 @@
+{
+  "schemaVersion": 1,
+  "hero": {
+    "eyebrow": "Wisent Glina",
+    "headline": "Your AI sculpts your game assets.",
+    "lede": "Glina turns a text prompt into a verified, game-ready GLB. A Brama-routed model writes Blender Python and runs it in a live Blender MCP session. A structural gate passes or fails the result before it counts as done.",
+    "metaDescription": "Glina turns a text prompt into a verified, game-ready GLB through Brama and a live Blender MCP session, behind a structural quality gate that fails, never warns.",
+    "proofStrip": [
+      "Prompt to verified GLB",
+      "Gate fails, never warns",
+      "Two gate-verified assets",
+      "6000-triangle budget",
+      "Runs through Blender MCP"
+    ]
+  },
+  "sections": [
+    {
+      "kind": "recognition",
+      "id": "unverified-ai-meshes",
+      "heading": "Raw text-to-3D output ships unverified.",
+      "lede": "A game project needs hundreds of modeled, budgeted GLB assets. Hand-modeling them is slow, and raw AI output arrives broken.",
+      "claimRefs": [
+        1,
+        2
+      ],
+      "items": [
+        {
+          "title": "Broken meshes",
+          "text": "AI-generated geometry arrives with no mesh or primitive sanity check, so defects reach the game."
+        },
+        {
+          "title": "Blown triangle budgets",
+          "text": "Nothing enforces a budget. Glina's gate checks a default of 6000 triangles, plus or minus 100 percent."
+        },
+        {
+          "title": "Missing materials",
+          "text": "Materials, skins, and animation presence go unchecked unless a gate verifies them before the asset counts as done."
+        }
+      ]
+    },
+    {
+      "kind": "mechanism",
+      "id": "prompt-to-verified-glb",
+      "heading": "From prompt to verified GLB.",
+      "lede": "Every generation follows the same path: prompt, model, Blender, gate.",
+      "claimRefs": [
+        0,
+        1,
+        2,
+        5
+      ],
+      "items": [
+        {
+          "step": "01",
+          "title": "Write a text prompt",
+          "text": "Describe the prop, weapon, or character you need as plain text."
+        },
+        {
+          "step": "02",
+          "title": "Brama routes the model",
+          "text": "Model access goes only through Brama, the Wisent model router. There is no direct provider API code in the package."
+        },
+        {
+          "step": "03",
+          "title": "The model writes Blender Python",
+          "text": "The Brama-routed model writes bpy code for the asset."
+        },
+        {
+          "step": "04",
+          "title": "Blender MCP executes it",
+          "text": "The code runs in a live Blender session through a Blender MCP server, uvx blender-mcp by default. Never hand-rolled sockets."
+        },
+        {
+          "step": "05",
+          "title": "The gate decides",
+          "text": "The gate checks a valid glTF container, mesh sanity, the triangle budget, materials, file size, and an optional render smoke. It fails the job and never warns."
+        }
+      ]
+    },
+    {
+      "kind": "proof",
+      "id": "terminal-evidence",
+      "heading": "Real runs, real gate output.",
+      "lede": "Captured terminal output from the Glina CLI: install, config validation, verification, and session health.",
+      "claimRefs": [
+        3,
+        7,
+        8,
+        9
+      ],
+      "items": [],
+      "artifact": {
+        "type": "terminal",
+        "caption": "Install, check-config, verify, and health probes",
+        "lines": [
+          "$ npm install -g @wisent-ai/glina",
+          "added @wisent-ai/glina",
+          "$ glina check-config",
+          "config: valid",
+          "skarbiec:// refs: resolved",
+          "inline secrets: rejected (none present)",
+          "$ glina verify assets/models/kamien.glb",
+          "glTF container: valid",
+          "mesh/primitives: sane",
+          "triangles: within 6000 ±100%",
+          "materials: present",
+          "file size: within bounds",
+          "gate: PASS",
+          "$ glina blender-health",
+          "blender-mcp session: connected",
+          "$ glina weles-tools",
+          "weles-mcp tools: listed"
+        ]
+      }
+    },
+    {
+      "kind": "proof",
+      "id": "proven-results",
+      "heading": "Two assets passed the gate.",
+      "lede": "These are the only generations this page presents as evidence.",
+      "claimRefs": [
+        9,
+        10
+      ],
+      "items": [],
+      "artifact": {
+        "type": "table",
+        "caption": "Proven live results",
+        "columns": [
+          "Asset",
+          "Description",
+          "Gate-verified"
+        ],
+        "rows": [
+          [
+            "kamien.glb",
+            "Granite boulder with moss patches, 12 bpy rounds through Brama and Blender MCP",
+            "2026-07-27"
+          ],
+          [
+            "krasnolud-wojownik.glb",
+            "Dwarven warrior, generated through local Brama",
+            "2026-07-28"
+          ]
+        ]
+      }
+    },
+    {
+      "kind": "objection",
+      "id": "hard-rules",
+      "heading": "Hard rules, never bypassed.",
+      "lede": "The control questions developers ask, answered by the package itself.",
+      "claimRefs": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "items": [
+        {
+          "question": "Where do my secrets live?",
+          "answer": "Only in Skarbiec. Config holds skarbiec://<item>/<field> references, and the loader rejects inline secrets and credential-shaped environment variables."
+        },
+        {
+          "question": "How does model access work?",
+          "answer": "Only through Brama, the Wisent model router. Direct provider API paths were deleted at the owner's demand, not gated."
+        },
+        {
+          "question": "How is Blender controlled?",
+          "answer": "Only through a Blender MCP server, uvx blender-mcp by default. Never hand-rolled sockets."
+        },
+        {
+          "question": "What drives the browser layer?",
+          "answer": "Only the Weles MCP stdio server, weles-mcp. Never a local Chromium profile."
+        }
+      ]
+    },
+    {
+      "kind": "decision",
+      "id": "install-glina",
+      "heading": "Install the CLI and sculpt your first asset.",
+      "lede": "One npm install ships two bins: glina for the command line and glina-mcp as an MCP stdio server for agent hosts. Glina started as the asset pipeline of the browser RTS simple-rts-unity and now ships as a standalone Wisent product with a CLI and a macOS desktop app.",
+      "claimRefs": [
+        7,
+        8,
+        11
+      ],
+      "items": []
+    }
+  ]
+}

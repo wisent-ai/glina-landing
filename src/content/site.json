@@ -1,0 +1,70 @@
+{
+  "product": "Glina",
+  "siteName": "Glina",
+  "domain": "https://glina.wisent.com",
+  "description": "Your AI sculpts your game assets.",
+  "audience": "Indie game developers and small studios who need game-ready GLB assets but cannot hand-model every prop, weapon, and character.",
+  "sourceUrl": "https://github.com/wisent-ai/glina",
+  "docsUrl": "https://github.com/wisent-ai/glina#readme",
+  "discordUrl": "https://discord.gg/qRjpkthq54",
+  "ogImageAlt": "Glina by Wisent — your AI sculpts your game assets",
+  "commitment": null,
+  "primaryAction": {
+    "label": "Install the CLI",
+    "kind": "url",
+    "target": "https://github.com/wisent-ai/glina#install"
+  },
+  "secondaryAction": {
+    "label": "Browse the CLI reference",
+    "purpose": "Read the exact subcommands and MCP tools before installing anything.",
+    "target": "https://github.com/wisent-ai/glina#use"
+  },
+  "nav": [
+    {
+      "label": "Install",
+      "href": "https://github.com/wisent-ai/glina#install"
+    },
+    {
+      "label": "CLI",
+      "href": "https://github.com/wisent-ai/glina#use"
+    },
+    {
+      "label": "Source",
+      "href": "https://github.com/wisent-ai/glina"
+    },
+    {
+      "label": "Discord",
+      "href": "https://discord.gg/qRjpkthq54"
+    }
+  ],
+  "footer": [
+    {
+      "label": "Install",
+      "href": "https://github.com/wisent-ai/glina#install"
+    },
+    {
+      "label": "CLI reference",
+      "href": "https://github.com/wisent-ai/glina#use"
+    },
+    {
+      "label": "Source",
+      "href": "https://github.com/wisent-ai/glina"
+    },
+    {
+      "label": "macOS app",
+      "href": "https://github.com/wisent-ai/glina-desktop"
+    },
+    {
+      "label": "License (MIT)",
+      "href": "https://github.com/wisent-ai/glina/blob/main/LICENSE"
+    },
+    {
+      "label": "Discord",
+      "href": "https://discord.gg/qRjpkthq54"
+    },
+    {
+      "label": "Wisent",
+      "href": "https://wisent.ai"
+    }
+  ]
+}

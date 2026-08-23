@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "product": "Glina",
+  "audience": "Indie game developers and small studios who need game-ready GLB assets but cannot hand-model every prop, weapon, and character.",
+  "problem": "A game project needs hundreds of modeled, budgeted GLB assets and hand-modeling them is slow; raw AI text-to-3D output does not help because it arrives unverified — broken meshes, blown triangle budgets, missing materials — and ships straight into the game.",
+  "promise": "Your AI sculpts your game assets.",
+  "primaryAction": {
+    "label": "Install the CLI",
+    "kind": "url",
+    "target": "https://github.com/wisent-ai/glina#install"
+  },
+  "secondaryAction": {
+    "label": "Browse the CLI reference",
+    "purpose": "Read the exact subcommands and MCP tools before installing anything.",
+    "target": "https://github.com/wisent-ai/glina#use"
+  },
+  "approvedClaims": [
+    {
+      "claim": "Glina turns a text prompt into a verified, game-ready GLB: a Brama-routed model writes Blender Python and executes it through a live Blender MCP session.",
+      "evidence": "README.md#Glina"
+    },
+    {
+      "claim": "Every result passes a structural quality gate before it counts as done; the gate fails the job and never warns.",
+      "evidence": "README.md#Verification gate"
+    },
+    {
+      "claim": "The gate checks a valid glTF container, mesh/primitive sanity, a triangle budget (default 6000 ±100%), materials/skins/animation presence, file-size bounds, and an optional Blender render smoke.",
+      "evidence": "README.md#Verification gate"
+    },
+    {
+      "claim": "Secrets are handled only through Skarbiec: config holds `skarbiec://<item>/<field>` refs and the loader rejects inline secrets and credential-shaped environment variables.",
+      "evidence": "README.md#Hard rules (never bypass)"
+    },
+    {
+      "claim": "Browser automation runs only through the Weles MCP stdio server (`weles-mcp`), never a local Chromium profile.",
+      "evidence": "README.md#Hard rules (never bypass)"
+    },
+    {
+      "claim": "Blender is driven only through a Blender MCP server (`uvx blender-mcp` by default), never hand-rolled sockets.",
+      "evidence": "README.md#Hard rules (never bypass)"
+    },
+    {
+      "claim": "Model access goes only through Brama, the Wisent model router; there is no direct provider API code in the package — direct paths were deleted at the owner's demand, not gated.",
+      "evidence": "README.md#Hard rules (never bypass)"
+    },
+    {
+      "claim": "Installation is `npm install -g @wisent-ai/glina`, and the package ships two bins: `glina` (CLI) and `glina-mcp` (MCP stdio server for agents).",
+      "evidence": "README.md#Install"
+    },
+    {
+      "claim": "The `glina` CLI covers check-config, sculpt, create, verify, blender-health, and weles-tools, and the `glina-mcp` stdio server exposes the same surface to agent hosts as six tools: glina_create_asset, glina_sculpt, glina_verify_asset, glina_check_config, glina_blender_health, and glina_weles_tools.",
+      "evidence": "README.md#Use"
+    },
+    {
+      "claim": "`kamien.glb`, a granite boulder with moss patches, was generated end-to-end over 12 bpy rounds through Brama and the Blender MCP session and passed the verification gate on 2026-07-27.",
+      "evidence": "README.md#Proven results"
+    },
+    {
+      "claim": "`krasnolud-wojownik.glb`, a dwarven warrior, was generated through local Brama and passed the verification gate on 2026-07-28.",
+      "evidence": "README.md#Proven results"
+    },
+    {
+      "claim": "Born as the asset pipeline of the browser RTS simple-rts-unity (`web/art/`, extracted with full history), Glina now ships as a standalone Wisent product with a CLI package and a macOS desktop app (`wisent-ai/glina-desktop`).",
+      "evidence": "README.md#Glina introduction and README.md#Surfaces"
+    }
+  ],
+  "requiredProof": [
+    "A real terminal transcript of `npm install -g @wisent-ai/glina` followed by `glina check-config` validating the config and its Skarbiec vault references.",
+    "A real terminal transcript of `glina verify assets/models/kamien.glb` passing the structural GLB quality gate.",
+    "A factual table of the proven live results: kamien.glb (granite boulder with moss patches, 2026-07-27) and krasnolud-wojownik.glb (dwarven warrior, 2026-07-28), both gate-verified.",
+    "Real output of `glina blender-health` probing the Blender session and `glina weles-tools` listing the browser-layer tools."
+  ],
+  "brand": {
+    "canonicalAssets": [
+      "assets/models/kamien.glb",
+      "assets/models/krasnolud-wojownik.glb",
+      "assets/models/kamien-preview.png",
+      "assets/models/krasnolud-wojownik-preview.png"
+    ],
+    "rules": [
+      "Type comes from the three families in wisent-components/tokens.json: `font.expanded` ('Hubot Sans Expanded') for display headings, `font.sans` ('Hubot Sans') for body and UI, `font.mono` ('IBM Plex Mono') for every command, transcript, and code artifact. No fourth family.",
+      "One dominant foreground/background relationship: `color.background` #f8fdfb behind `color.ink` #2d3130 body copy, with `color.canvasMuted` #ecf2f0 as the only alternating section band.",
+      "Headings and deep surfaces use `color.forest` / `color.brand900` #273329; supporting copy uses `color.secondaryText` #59605d and `color.mutedText` #8b9290.",
+      "The accent role is restrained and reserved for the single primary action: `color.brand` / `color.brand500` #9ecca0 with `color.brandHover` #8dbb8f, and `color.brandLink` #769978 for inline links. Tints are for quiet surfaces only, never large filled blocks.",
+      "Rules, card edges, and table borders use `color.border` #dee4e2 and `color.borderStrong` #c1c8c6; `color.subtleBorder` #eeeeee for the lightest dividers.",
+      "`color.success`, `color.warning`, and `color.danger` are reserved for real product status — a passed versus failed verification gate — never for decoration.",
+      "Spacing and section rhythm use the `space` scale (2px through 40px); corners use the `radius` scale (6px through 22px); depth uses `shadow.surface` and `shadow.raised` only.",
+      "Motion stays inside `motion.fast` 150ms and `motion.standard` 180ms, must explain state, sequence, or causality, and must respect reduced-motion preferences.",
+      "Terminal evidence is real captured output rendered in `font.mono`, never a drawn window; the two preview PNGs are real captured renders of the proven assets."
+    ],
+    "forbidden": [
+      "Interchangeable AI gradients, floating glass cards, excessive rounded rectangles, and decorative grids.",
+      "Fake terminal chrome or any drawn, dressed-up, or retyped terminal that is not real captured Glina output.",
+      "Motion that does not explain state, sequence, or causality.",
+      "Inventing a new logo, font, palette, or claim because a canonical asset is inconvenient to locate.",
+      "Copying another company's copy, layout, illustration, product UI, or brand assets.",
+      "Invented social proof or performance numbers: no customer names, no adoption counts, no asset-count or time-saved figures beyond the two proven runs.",
+      "Claims of direct provider API access; every model call goes through Brama.",
+      "Generic slogans that omit the product or the outcome.",
+      "Multiple equal-weight primary CTAs.",
+      "Placeholder product screenshots presented as real.",
+      "Desktop-only evaluation.",
+      "Publishing before the CTA destination and analytics ownership are known.",
+      "Treating a visual-model score as proof of functional correctness."
+    ]
+  },
+  "analyticsOwner": "Wisent product and design maintainers",
+  "notes": [
+    "primaryAction.kind is url, so target is the approved absolute URL: the Install section of the wisent-ai/glina repository. Glina publishes no signup or hosted account flow, so no signup URL may be used.",
+    "kamien.glb (2026-07-27) and krasnolud-wojownik.glb (2026-07-28) are the only generations the page may present as evidence; no other runs are claimed.",
+    "Build and deploy settings for the generated site live in landing.config.json, never in this brief."
+  ]
+}
