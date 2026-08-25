@@ -19,6 +19,7 @@
     "package.json",
     "scripts/verify-approval.mjs",
     "src/app/globals.css",
+    "src/app/icon.svg",
     "src/app/layout.tsx",
     "src/app/page.tsx",
     "src/app/robots.ts",
