@@ -1,0 +1,1310 @@
+{
+  "product": {
+    "slug": "glina",
+    "name": "Glina",
+    "category": "Game asset generation",
+    "summary": "AI-sculpted game assets with Brama-modeled Blender authoring and a verified GLB quality gate.",
+    "documentationUrl": "https://github.com/wisent-ai/glina/tree/main/docs",
+    "repositories": [
+      {
+        "repository": "glina",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina"
+      }
+    ],
+    "pageCount": 21,
+    "roadmap": [],
+    "integrations": [
+      {
+        "product": "skarbiec",
+        "name": "Skarbiec",
+        "direction": "outgoing",
+        "description": "Glina acquires generation credentials through Skarbiec.",
+        "source": "glina/README.md:3-32"
+      },
+      {
+        "product": "weles",
+        "name": "Weles",
+        "direction": "outgoing",
+        "description": "Glina delegates browser work to Weles.",
+        "source": "glina/README.md:3-32"
+      },
+      {
+        "product": "brama",
+        "name": "Brama",
+        "direction": "outgoing",
+        "description": "Glina routes model planning through Brama.",
+        "source": "glina/README.md:3-32"
+      },
+      {
+        "product": "probierz",
+        "name": "Probierz",
+        "direction": "outgoing",
+        "description": "Probierz records Glina's game-asset quality journeys.",
+        "source": "glina/README.md:93-95"
+      }
+    ],
+    "surfaces": [
+      {
+        "kind": "cli",
+        "repository": "wisent-ai/glina"
+      },
+      {
+        "kind": "desktop",
+        "repository": "wisent-ai/glina-desktop"
+      }
+    ],
+    "quick_start": [
+      {
+        "surface": "cli",
+        "kind": "npm",
+        "repository": "wisent-ai/glina",
+        "command": "wisent-products install glina --surface cli",
+        "details": {
+          "package": "@wisent-ai/glina",
+          "binaries": [
+            "glina",
+            "glina-mcp"
+          ]
+        }
+      },
+      {
+        "surface": "desktop",
+        "kind": "desktop-release",
+        "repository": "wisent-ai/glina-desktop",
+        "command": "wisent-products install glina --surface desktop",
+        "details": {
+          "manifest": ".wisent-desktop-release.json"
+        }
+      }
+    ],
+    "documentation": {
+      "status": {
+        "summary": "Version 1.3.0 with procedural and model-assisted authoring plus a verification gate.",
+        "maturity": "active",
+        "platforms": [
+          "Node.js 22",
+          "Blender"
+        ],
+        "limitations": [
+          "General-purpose model hosting"
+        ],
+        "source": "wisent-ai/glina/README.md"
+      },
+      "use_cases": [
+        {
+          "title": "Sculpt game assets",
+          "outcome": "Iterate from text through Blender and produce a verified GLB.",
+          "source": "wisent-ai/glina/README.md"
+        },
+        {
+          "title": "Generate runtime art",
+          "outcome": "Build procedural THREE.js assets and animation-ready models.",
+          "source": "wisent-ai/glina/README.md"
+        }
+      ],
+      "security": {
+        "summary": "The product documents its input, storage, external-call and credential boundaries separately.",
+        "data": [
+          "Authoring prompts",
+          "Blender scenes",
+          "source assets"
+        ],
+        "storage": [
+          "GLB models",
+          "render evidence and verification reports"
+        ],
+        "external_calls": [
+          "Brama",
+          "Weles",
+          "Blender MCP",
+          "Skarbiec secret references"
+        ],
+        "secrets": [
+          "Skarbiec secret references"
+        ],
+        "source": "wisent-ai/glina/README.md"
+      },
+      "release": {
+        "summary": "Current documented version or posture: 1.3.0.",
+        "update": "source",
+        "license": "MIT",
+        "support": "GitHub issues",
+        "source": "wisent-ai/glina/README.md"
+      },
+      "troubleshooting": [
+        {
+          "problem": "Authoring cannot start.",
+          "resolution": "Run glina check-config and repair the reported model or vault reference.",
+          "source": "wisent-ai/glina/README.md"
+        },
+        {
+          "problem": "Verification fails.",
+          "resolution": "Inspect both structural checks and the rendered evidence before changing the asset.",
+          "source": "wisent-ai/glina/README.md"
+        }
+      ],
+      "references": [
+        {
+          "label": "CLI reference",
+          "description": "Canonical cli reference for Glina.",
+          "source": "wisent-ai/glina/docs/cli.md"
+        },
+        {
+          "label": "MCP reference",
+          "description": "Canonical mcp reference for Glina.",
+          "source": "wisent-ai/glina/docs/mcp.md"
+        }
+      ],
+      "flow": [
+        {
+          "title": "Step 1",
+          "description": "Load configuration and secret references",
+          "source": "wisent-ai/glina/README.md"
+        },
+        {
+          "title": "Step 2",
+          "description": "Choose procedural or model-assisted authoring",
+          "source": "wisent-ai/glina/README.md"
+        },
+        {
+          "title": "Step 3",
+          "description": "Iterate in Blender when needed",
+          "source": "wisent-ai/glina/README.md"
+        },
+        {
+          "title": "Step 4",
+          "description": "Export the GLB",
+          "source": "wisent-ai/glina/README.md"
+        },
+        {
+          "title": "Step 5",
+          "description": "Run structural and rendered verification",
+          "source": "wisent-ai/glina/README.md"
+        }
+      ]
+    }
+  },
+  "pages": [
+    {
+      "productSlug": "glina",
+      "slug": "index",
+      "title": "Glina documentation",
+      "markdown": "# Glina documentation\n\nGlina is a procedural THREE.js art library and a text-to-3D authoring pipeline whose generated GLBs must pass a structural quality gate.\n\n## Start here\n\n- [What is Glina](what-is-glina.md)\n- [Quick start](quick-start.md)\n- [Architecture and ownership](architecture.md)\n- [Configuration](configuration.md)\n- [Runbook](runbook.md)\n\n## Concepts\n\n- [Sculpt job](concepts/sculpt-job.md)\n- [Studio job](concepts/studio-job.md)\n- [Verification gate](concepts/verification-gate.md)\n- [Blender session](concepts/blender-session.md)\n- [Browser session](concepts/browser-session.md)\n- [Model backend](concepts/model-backend.md)\n- [Runtime art](concepts/runtime-art.md)\n\n## Interfaces\n\n- [CLI reference](cli.md)\n- [MCP reference](mcp.md)\n- [Loopback HTTP reference](http.md)\n- [JavaScript runtime API](runtime-api.md)\n- [macOS desktop companion](desktop.md)\n\n## Executed walkthroughs and examples\n\n- [Verify a GLB and inspect a refusal](walkthrough-verify.md)\n- [Serve the desktop protocol and verify over HTTP](walkthrough-serve.md)\n- [Runnable examples](examples.md)\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "Glina documentation",
+          "id": "glina-documentation"
+        },
+        {
+          "depth": 2,
+          "text": "Start here",
+          "id": "start-here"
+        },
+        {
+          "depth": 2,
+          "text": "Concepts",
+          "id": "concepts"
+        },
+        {
+          "depth": 2,
+          "text": "Interfaces",
+          "id": "interfaces"
+        },
+        {
+          "depth": 2,
+          "text": "Executed walkthroughs and examples",
+          "id": "executed-walkthroughs-and-examples"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "docs/index.md",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/docs/index.md"
+      },
+      "order": 359
+    },
+    {
+      "productSlug": "glina",
+      "slug": "what-is-glina",
+      "title": "What is Glina",
+      "markdown": "# What is Glina\n\nGlina turns a text prompt into a verified, game-ready GLB. An LLM (routed\nthrough Brama, the org model router) writes Blender Python, executes it round\nby round through a live Blender MCP session, and every produced asset must\npass a structural quality gate before it counts as done. The same package also\nships the procedural THREE.js runtime art that the browser RTS\n[Potyczka](https://github.com/lbartoszcze/potyczka) renders in-game — Glina\nwas extracted from that game's `web/art/` with full history.\n\n## The three-part mental model\n\n1. **Two halves, one package.**\n   - *Runtime art* (`src/`) is procedural generation a game imports directly:\n     `makeBody`, `sculptHumanoid`, `cardArtSvg`. No credentials, no network,\n     no Blender — geometry and SVG built in memory.\n   - *Authoring pipeline* (`pipeline/`) is the AI text→3D toolchain: the\n     `glina` CLI, the `glina-mcp` stdio server for agent hosts, and the\n     loopback HTTP backend (`glina serve`) the macOS desktop app drives.\n\n2. **Every capability is delegated through a hard integration boundary.**\n   The pipeline holds no secrets, no browser, no Blender socket, and no\n   provider API of its own:\n   - secrets resolve only from **Skarbiec** (`skarbiec://<item>/<field>` refs\n     in the config; inline secrets are refused at load time),\n   - browser automation goes only through the **Weles** MCP stdio server,\n   - Blender work goes only through a **Blender MCP** server\n     (`uvx blender-mcp` by default),\n   - model access goes through **Brama** by default; the operator may\n     sanction **OpenRouter** in the config as the only alternative. Direct\n     provider APIs (Anthropic, OpenAI, …) do not exist in this package —\n     those code paths were deleted at the owner's demand, not gated.\n\n3. **The verification gate is the definition of done.** Every produced `.glb`\n   passes `pipeline/verify.js`: valid glTF container, mesh/primitive sanity,\n   triangle budget (default 6000 ±100%), materials, animation clips whose\n   channels actually move, file-size bounds, and an optional Blender render\n   smoke. A failed gate fails the job — it never warns.\n\n## What Glina is not\n\n- Not a model router — Brama owns which model answers ([model\n  backend](concepts/model-backend.md)).\n- Not a vault — Skarbiec owns secrets; Glina only carries references.\n- Not a browser — Weles owns page automation.\n- Not a Blender wrapper library — the only Blender surface used is\n  `get_scene_info` and `execute_blender_code`; everything else is Blender\n  Python sent through that one tool.\n\n## Where to go next\n\n- [Quick start](quick-start.md) — install, configure, run the gate.\n- [Concepts](concepts/sculpt-job.md) — sculpt job, studio job, verification\n  gate, Blender session, browser session, model backend, runtime art.\n- [CLI reference](cli.md), [HTTP reference](http.md),\n  [MCP reference](mcp.md), [runtime API](runtime-api.md).\n- [Architecture](architecture.md) — what Glina owns and does not own.\n- [Runbook](runbook.md) — symptom-first failure catalogue.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "What is Glina",
+          "id": "what-is-glina"
+        },
+        {
+          "depth": 2,
+          "text": "The three-part mental model",
+          "id": "the-three-part-mental-model"
+        },
+        {
+          "depth": 2,
+          "text": "What Glina is not",
+          "id": "what-glina-is-not"
+        },
+        {
+          "depth": 2,
+          "text": "Where to go next",
+          "id": "where-to-go-next"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "docs/what-is-glina.md",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/docs/what-is-glina.md"
+      },
+      "order": 360
+    },
+    {
+      "productSlug": "glina",
+      "slug": "quick-start",
+      "title": "Quick start",
+      "markdown": "# Quick start\n\nThe non-mutating evidence blocks below were executed against this repository\nwith Node v22 on macOS. Generation commands are interface examples: they\nrequire configured external systems and operate on the current Blender or\nbrowser session.\n\n## Use a checkout\n\nThis repository is the current artifact; registry availability is not assumed.\nFrom the checkout:\n\n```sh\nnpm install\nnode pipeline/cli.js help\n```\n\nThe package defines two bins for an installed or linked copy: `glina` (the\nCLI, `pipeline/cli.js`) and `glina-mcp` (the MCP stdio server,\n`pipeline/mcp.js`). The rest of this page uses the checkout form where\ncaptured output matters.\n\n## See the surface\n\n```console\n$ node pipeline/cli.js help\nusage: node pipeline/cli.js <command> [args]\n\ncommands:\n  create <prompt> [--race r] [--out dir] [--config path]\n  sculpt <prompt> [--out dir] [--filename f.glb] [--rounds n] [--config path]\n                                  LLM (Opus) iteratively builds the model in Blender\n  preview-anim <file.glb> [--clip name] [--frames n] [--fps n] [--out f.gif]\n                                  render an animated GIF of one clip through Blender\n  animate <file.glb> [--preset dragon] [--out animated.glb]\n                                  apply deterministic, visibly moving actions\n  showcase dragon [--out dragon.glb]\n                                  build a cohesive animated reference asset\n  verify <file.glb> [--config path]   structural + optional render gate\n  check-config [--config path]\n  weles-tools\n  serve [--port n] [--config path]   loopback HTTP/JSON backend for desktop apps\n  blender-health              MCP handshake + execute_blender_code probe\n  setup [--check] [--dry-run] provision Blender + uv + blender-mcp\n```\n\n## Run the quality gate — no config, no vault, no Blender\n\n`verify` works with defaults when the config file is absent:\n\n```console\n$ node pipeline/cli.js verify assets/models/smok.glb --config /nonexistent.json\n{\n  \"ok\": true,\n  \"errors\": [],\n  \"stats\": {\n    \"meshes\": 38,\n    \"primitives\": 38,\n    \"triangles\": 748,\n    \"materials\": 5,\n    \"animations\": 2,\n    \"animationNames\": [ \"flap\", \"idle\" ],\n    ...\n  },\n  \"thresholds\": { \"triTarget\": 6000, \"triTolerancePct\": 100, ... },\n  \"path\": \"assets/models/smok.glb\"\n}\n$ echo $?\n0\n```\n\nA failing gate exits 1 and names every reason in `errors` — see the\n[verify walkthrough](walkthrough-verify.md).\n\n## Check the toolchain\n\n`setup --check` only probes (`which`), never installs:\n\n```console\n$ node pipeline/cli.js setup --check\n{\n  \"healthy\": true,\n  \"steps\": [\n    { \"step\": \"blender\", \"status\": \"present\", \"path\": \"/opt/homebrew/bin/blender\" },\n    { \"step\": \"uv\", \"status\": \"present\", \"path\": \"/opt/homebrew/bin/uvx\" }\n  ]\n}\n```\n\nPlain `setup` provisions Blender + uv (brew on macOS, apt/snap on Linux) and\nresolves the `blender-mcp` package through uvx.\n\n## Configure for generation\n\nSculpting and studio generation need `pipeline.config.json` (default path:\nthe repo/package root; override with `--config`):\n\n```sh\ncp pipeline.config.example.json pipeline.config.json   # then edit\n```\n\nEvery secret in it must be a `skarbiec://<item>/<field>` reference — the\nloader refuses inline values:\n\n```console\n$ node pipeline/cli.js check-config --config inline.json\nerror: config key 'credentials.password' holds an inline value; secrets must be skarbiec://<item>/<field> references\n```\n\nStore studio credentials once in the vault:\n\n```sh\nskarbiec set TEXT2GAME_ACCOUNT --type login \\\n  --field login_email=you@example.com --field login_password=...\n```\n\n`check-config` then validates the file, resolves every reference against the\nvault, and prints the config with resolved secrets replaced by\n`<resolved: ok>`. See [configuration](configuration.md) for every key.\n\n## Generate\n\n```sh\nglina sculpt \"gothic dwarven tower, low-poly\"        # LLM drives Blender\nglina create \"dwarven axe warrior\" --race dwarves    # studio flow via Weles browser\nglina blender-health                                 # probe the Blender session first\n```\n\nBoth flows end in the verification gate; a broken or off-budget asset fails\nthe job. For agent hosts run `glina-mcp` ([MCP reference](mcp.md)); for the\ndesktop app the backend is `glina serve`\n([serve walkthrough](walkthrough-serve.md)).\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "Quick start",
+          "id": "quick-start"
+        },
+        {
+          "depth": 2,
+          "text": "Use a checkout",
+          "id": "use-a-checkout"
+        },
+        {
+          "depth": 2,
+          "text": "See the surface",
+          "id": "see-the-surface"
+        },
+        {
+          "depth": 2,
+          "text": "Run the quality gate — no config, no vault, no Blender",
+          "id": "run-the-quality-gate--no-config-no-vault-no-blender"
+        },
+        {
+          "depth": 2,
+          "text": "Check the toolchain",
+          "id": "check-the-toolchain"
+        },
+        {
+          "depth": 2,
+          "text": "Configure for generation",
+          "id": "configure-for-generation"
+        },
+        {
+          "depth": 2,
+          "text": "Generate",
+          "id": "generate"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "docs/quick-start.md",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/docs/quick-start.md"
+      },
+      "order": 361
+    },
+    {
+      "productSlug": "glina",
+      "slug": "architecture",
+      "title": "Architecture and ownership",
+      "markdown": "# Architecture and ownership\n\nGlina has two deliberately separate halves. `src/` builds procedural runtime art in a JavaScript process. `pipeline/` authors and verifies GLBs by coordinating systems that remain outside Glina.\n\n## Components\n\n```text\nGame / JavaScript importer\n        |\n        +--> src/index.js --> THREE.js geometry or SVG strings\n\nOperator / agent / Glina Desktop\n        |\n        +--> glina CLI --------+\n        +--> glina-mcp --------+--> shared pipeline functions\n        +--> glina serve ------+\n                                  |\n             +--------------------+--------------------+\n             |                    |                    |\n       Skarbiec CLI          Weles MCP            Blender MCP\n       secret reads          browser work         bpy execution\n             |                                         |\n             +--> Brama or sanctioned OpenRouter <-----+\n                  model completion\n                                  |\n                           verify.js quality gate\n                                  |\n                             accepted GLB\n```\n\nThe CLI, MCP server, and loopback HTTP backend are adapters around the same functions. They do not maintain separate implementations of sculpting or verification.\n\n## Runtime-art half\n\n`src/index.js` exports `makeBody`, `buildBlobBody`, `sculptHumanoid`, mesh-building helpers, `cardArtSvg`, and the procedural-only loader compatibility functions. Geometry calls return THREE.js objects or mutate caller-owned vertex/index arrays; card art returns an SVG string. This path does not read config, open a network connection, resolve secrets, or start Blender.\n\nSee [runtime art](concepts/runtime-art.md) and the [JavaScript API](runtime-api.md).\n\n## Authoring-pipeline half\n\n- `config.js` reads one JSON document, rejects inline secret-shaped values in `credentials` and `models`, and resolves `skarbiec://` references.\n- `text2game.js` drives a configured hosted studio through Weles, downloads the GLB, optionally post-processes it, then verifies it.\n- `llm_blender.js` asks a configured model backend for small `bpy` steps, executes them through one Blender MCP session, exports, then verifies.\n- `verify.js` parses GLB structure locally. Its optional render smoke is the only verification mode that needs Blender.\n- `serve.js` exposes the desktop protocol on `127.0.0.1`; streamed jobs are serialized because console capture is process-global.\n\n## External ownership boundaries\n\n| Capability | Owner | What Glina does |\n|---|---|---|\n| Secret storage, policy, audit | Skarbiec | Resolves `skarbiec://<item>/<field>` with `skarbiec get`; retains values only in memory, except the explicit owner-only `export-config` handoff file. |\n| Browser lifecycle and page automation | Weles | Starts one Weles MCP child and calls its browser/page tools. It never reads profiles or cookies itself. |\n| Blender process/add-on bridge | Blender plus `blender-mcp` | Spawns the MCP stdio server and uses `get_scene_info` / `execute_blender_code`. Blender's add-on listens on loopback port 9876. |\n| Serving-time model routing | Brama | Sends OpenAI-compatible chat completions with Brama's bearer plus HMAC agent identity. |\n| Operator-sanctioned alternate model route | OpenRouter | Uses it only when configured; its key still comes from Skarbiec. |\n| Desktop UI | `glina-desktop` companion repository | Lazily starts `glina serve --port 0` and consumes HTTP/NDJSON. |\n\nGlina owns none of the vault, browser, model router, or Blender bridge. It owns the workflow, its integration discipline, the produced artifact, and the acceptance gate.\n\n## Trust and failure boundaries\n\n1. **Config load:** handwritten inline secrets are refused before a job begins.\n2. **Child-process environment:** MCP clients use PATH and HOME by default rather than inheriting the parent environment.\n3. **Model code:** each response must be JSON; each `bpy` body is wrapped so Python exceptions become `GAC-EXEC-ERROR` output instead of escaping through the add-on.\n4. **Artifact boundary:** a downloaded or exported file does not count as success until the gate passes.\n5. **Protocol boundary:** HTTP failures are JSON error envelopes before streaming, or a terminal status-1 NDJSON result after a stream begins. MCP tool failures set `isError: true`.\n\n## Data and lifecycle\n\nGlina has no database or daemon-owned state. Durable output is the downloaded/exported GLB, optional preview GIF/render PNG, and an explicitly requested resolved config file. Browser, Blender MCP, and Weles MCP sessions are scoped to a job and closed in `finally` blocks. `glina serve` is the only long-lived process; the desktop companion terminates it when the app exits.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "Architecture and ownership",
+          "id": "architecture-and-ownership"
+        },
+        {
+          "depth": 2,
+          "text": "Components",
+          "id": "components"
+        },
+        {
+          "depth": 2,
+          "text": "Runtime-art half",
+          "id": "runtime-art-half"
+        },
+        {
+          "depth": 2,
+          "text": "Authoring-pipeline half",
+          "id": "authoring-pipeline-half"
+        },
+        {
+          "depth": 2,
+          "text": "External ownership boundaries",
+          "id": "external-ownership-boundaries"
+        },
+        {
+          "depth": 2,
+          "text": "Trust and failure boundaries",
+          "id": "trust-and-failure-boundaries"
+        },
+        {
+          "depth": 2,
+          "text": "Data and lifecycle",
+          "id": "data-and-lifecycle"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "docs/architecture.md",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/docs/architecture.md"
+      },
+      "order": 362
+    },
+    {
+      "productSlug": "glina",
+      "slug": "configuration",
+      "title": "Configuration reference",
+      "markdown": "# Configuration reference\n\nThe default file is `pipeline.config.json` beside the package root. CLI `--config`, MCP tool argument `config`, and the HTTP server's launch-time `--config` select another path. The file is plain JSON; there is no layer merge and no environment-variable substitution.\n\nStart from `pipeline.config.example.json`. The tables below cover every key read by the pipeline.\n\n## Secret policy\n\nA secret value must be a reference of the exact form `skarbiec://<item>/<field>`. Item characters may be letters, digits, `.`, `_`, `:`, or `-`; field characters may also contain `.`, `_`, or `-`. The loader recursively resolves every such string with `skarbiec get <item>`.\n\nInside the top-level `credentials` and `models` trees, string values under keys matching token, secret, password/passwd, credential, cookie, API key, or private key are refused unless they are Skarbiec references:\n\n```text\nconfig key 'credentials.password' holds an inline value; secrets must be skarbiec://<item>/<field> references\n```\n\n`check-config` prints resolved configuration with secret-shaped `credentials` and `models` fields replaced by `<resolved: ok>`. `SKARBIEC_BIN` is the only operational environment override actually read by this version; it changes the vault CLI binary. `PATH` and `HOME` are forwarded to MCP child processes. Credential environment variables are not a configuration path.\n\n## Browser and studio\n\n| Key | Type | Default | Used by |\n|---|---|---:|---|\n| `browser.engine` | string | `chromium` | Browser name passed to `weles_browser_start`. |\n| `browser.headless` | boolean | `true` | Headless flag passed to Weles. |\n| `credentials.username` | Skarbiec ref | required for `create` | Filled into the login-user selector. |\n| `credentials.password` | Skarbiec ref | required for `create` | Filled into the login-password selector. |\n| `studio.loginUrl` | URL string | required for `create` | First navigation. |\n| `studio.generateUrl` | URL string | required for `create` | Generation page. |\n| `studio.selectors.loginUser` | CSS selector | required | Username field. |\n| `studio.selectors.loginPassword` | CSS selector | required | Password field. |\n| `studio.selectors.loginSubmit` | CSS selector | required | Login submit control. |\n| `studio.selectors.promptInput` | CSS selector | required | Prompt field. |\n| `studio.selectors.generateSubmit` | CSS selector | required | Generation submit control. |\n| `studio.artifact.pollExpression` | JavaScript expression | required | Evaluated until it returns an `http…` string. |\n| `studio.artifact.timeoutMs` | number | `300000` | Maximum artifact wait. |\n| `studio.artifact.intervalMs` | number | `5000` | Poll interval. |\n| `artifact.downloadHeaders` | object of string values | `{}` | Headers added to the final artifact download. This is top-level `artifact`, not `studio.artifact`. |\n\nThe example config targets Hunyuan3D selectors, but the workflow itself has no provider-specific URL or selector.\n\n## Model routing\n\n`models.backend` is `brama` by default. Values are not separately schema-validated; selection depends on the presence rules below.\n\n| Key | Type | Default / requirement |\n|---|---|---|\n| `models.backend` | `brama` or `openrouter` | `brama`; selects preferred backend. |\n| `models.brama.url` | URL string | Required for a ready Brama config; `/v1/chat/completions` is appended. |\n| `models.brama.key` | Skarbiec ref | Required HMAC agent-auth secret. |\n| `models.brama.bearer` | Skarbiec ref | Required bearer token. |\n| `models.brama.agent_id` | Skarbiec ref/string | Used in `x-agent-id` and HMAC input; operationally required. |\n| `models.brama.model` | string | `any`. |\n| `models.brama.attempts` | integer | `4`. |\n| `models.brama.timeoutMs` | number | `120000` per attempt. |\n| `models.openrouter.url` | URL string | `https://openrouter.ai/api/v1`; `/chat/completions` is appended. |\n| `models.openrouter.key` | Skarbiec ref | Presence makes OpenRouter ready. |\n| `models.openrouter.model` | string | No code default; configure it when using OpenRouter. |\n| `models.openrouter.attempts` | integer | `4`. |\n| `models.openrouter.timeoutMs` | number | `180000` per attempt. |\n| `llm.maxRounds` | integer | `12`. |\n| `llm.maxTokens` | integer | `8192` in sculpt jobs. |\n\n`models.anthropic`, `models.openai`, and `models.direct` are reserved refusals, not supported backends. If any is present, model setup fails with the direct-provider refusal documented in [model backend](concepts/model-backend.md).\n\n## Verification\n\n| Key | Type | Default | Meaning |\n|---|---|---:|---|\n| `verify.enabled` | boolean | enabled unless exactly `false` | Controls the gate inside `create` and `sculpt`; standalone `verify` always runs. |\n| `verify.triTarget` | number | `6000` | Nominal triangle target. |\n| `verify.triTolerancePct` | number | `100` | Extra percentage accepted; maximum is target × `(100 + tolerance)/100`. |\n| `verify.requireMaterials` | boolean | `true` | Require at least one material. |\n| `verify.requireAnimations` | boolean | `false` | Require clips and at least one changing float channel. |\n| `verify.minAnimationClips` | integer | `0` | Minimum clip count. |\n| `verify.minBytes` | integer | `100` | Minimum file bytes. |\n| `verify.maxBytes` | integer | `67108864` | Maximum file bytes (64 MiB). |\n| `verify.render` | boolean | `false` | Import through Blender and render a 512×512 smoke frame. |\n| `verify.throwOnFail` | boolean | `false` for direct API use | Internal job mode: turn an `ok:false` report into `VerifyError`. Jobs force it to `true`; operators normally should not set it. |\n\n## Blender\n\n| Key | Type | Default | Meaning |\n|---|---|---:|---|\n| `blender.enabled` | boolean | `false` in example | Enables post-processing for studio (`create`) jobs. Sculpting always needs Blender regardless of this flag. |\n| `blender.processCode` | string | none | Python body after studio GLB import; receives `INPUT_PATH` and `OUTPUT_PATH` globals. Export still happens afterward. |\n| `blender.mcp.command` | string | none | Explicit MCP command. When set, `args` below are used. |\n| `blender.mcp.args` | string array | `[]` | Arguments for explicit `command`. |\n| `blender.mcp.uvx` | boolean | `true` | With no explicit command, `false` selects bare `blender-mcp`; otherwise uvx is used. |\n| `blender.mcp.uvxBin` | string | `uvx` | uvx executable name/path. |\n\nWith defaults, the spawn is `uvx blender-mcp`. There is no config key for the Blender add-on's `127.0.0.1:9876`; that belongs to `blender-mcp`/Blender.\n\n## Resolved handoff files\n\nThe hidden operational command `glina export-config --config input.json --out resolved.json` resolves references locally, adds `\"_resolved\": true`, and writes mode 0600. The marker tells the loader the inline values came from the vault and prevents the inline-secret guard from rejecting that file. The file contains real secrets: use it only as a short-lived worker handoff and delete it after use.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "Configuration reference",
+          "id": "configuration-reference"
+        },
+        {
+          "depth": 2,
+          "text": "Secret policy",
+          "id": "secret-policy"
+        },
+        {
+          "depth": 2,
+          "text": "Browser and studio",
+          "id": "browser-and-studio"
+        },
+        {
+          "depth": 2,
+          "text": "Model routing",
+          "id": "model-routing"
+        },
+        {
+          "depth": 2,
+          "text": "Verification",
+          "id": "verification"
+        },
+        {
+          "depth": 2,
+          "text": "Blender",
+          "id": "blender"
+        },
+        {
+          "depth": 2,
+          "text": "Resolved handoff files",
+          "id": "resolved-handoff-files"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "docs/configuration.md",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/docs/configuration.md"
+      },
+      "order": 363
+    },
+    {
+      "productSlug": "glina",
+      "slug": "cli",
+      "title": "CLI reference",
+      "markdown": "# CLI reference\n\nInstalled binary: `glina`. In a checkout, replace `glina` with `node pipeline/cli.js`. Successful commands print JSON to stdout except `help` and `weles-tools`; operational progress and refusals go to stderr.\n\nArgument parsing is intentionally small: `--name value` becomes a string, a flag without a following value becomes `true`, and remaining words are positional. Unknown options are ignored by commands that do not read them.\n\n## Commands\n\n### `glina help`\n\nPrints usage. No command is equivalent. Exit 0.\n\n### `glina create <prompt> [--race <race>] [--out <dir>] [--config <path>]`\n\nRuns the hosted-studio job through Weles. `--race` prefixes the prompt with the race word and is also returned in the job input; the CLI does not constrain its value. `--out` defaults to `assets/models`. Output is `{outPath, processedPath, artifactUrl, prompt, verification}`. Missing prompt: `error: create requires a prompt`, exit 2.\n\n### `glina sculpt <prompt> [--out <dir>] [--filename <file.glb>] [--rounds <n>] [--config <path>]`\n\nRuns the model→Blender iterative sculpt loop. Defaults: output directory `assets/models`, filename is a 48-character ASCII slug of the prompt, rounds from `llm.maxRounds` then 12. Round thoughts print as `[round N] …` on stderr. Output is `{outPath, verification, rounds}`; the transcript is deliberately omitted. Missing prompt exits 2 with `error: sculpt requires a prompt`.\n\n### `glina verify <file.glb> [--config <path>]`\n\nRuns structural verification and optional render smoke. A missing/unreadable config is ignored and gate defaults apply. Prints the complete report; exit 0 when `ok:true`, 1 when `ok:false`, 2 when the path is missing (`error: verify requires a .glb path`). An unparseable file is an exception and exits 1.\n\n### `glina check-config [--config <path>]`\n\nReads JSON, refuses inline secrets, resolves all `skarbiec://` values, then prints a recursively redacted config. It does not start Weles or Blender. Missing/invalid/unresolvable config exits 1 with `error: <reason>`.\n\n### `glina blender-health`\n\nStarts the default Blender MCP session, lists tools, and executes a trivial Blender probe. Prints `{healthy, tools}` and exits 0/1 according to `healthy`. This command reaches the live Blender bridge; do not use it merely to inspect configuration.\n\n### `glina weles-tools`\n\nStarts `weles-mcp`, performs the MCP handshake, and prints one `name — description` line per exposed tool. Failure exits 1.\n\n### `glina preview-anim <file.glb> [--clip <name>] [--frames <n>] [--fps <n>] [--out <file.gif>] [--config <path>]`\n\nImports the GLB through Blender, selects the named clip (or the longest action), renders up to 24 frames by default at 512×512, and assembles a looping GIF at 10 fps by default. `ffmpeg` is preferred; `uv run --with pillow` is the fallback. Default output is `<stem>-anim[-<clip>].gif`. Prints `{outPath, clip, frames, tool}`. Missing path exits 2.\n\n### `glina animate <file.glb> [--preset dragon] [--out <file.glb>] [--config <path>]`\n\nApplies the deterministic `dragon` animation preset through Blender, exports, and gates with materials, moving animation, and at least two clips required. Default output inserts `-animated` before `.glb`. `dragon` is the only preset; another value fails with `unknown animation preset: <value>`. Missing path exits 2.\n\n### `glina showcase [dragon] [--out <file.glb>] [--config <path>]`\n\nBuilds the deterministic cohesive dragon reference directly in Blender, then applies the strict animated gate. The positional asset defaults to `dragon`; it is the only supported asset. Default output is `assets/models/<asset>-showcase.glb`. Unknown asset: `unknown showcase asset: <asset>`.\n\n### `glina serve [--port <n>] [--config <path>]`\n\nStarts the loopback desktop backend on `127.0.0.1`. Port defaults to 8080; `0` requests an ephemeral port. The first and only stdout protocol line is `{\"ready\":true,\"port\":N}`; the process then serves until terminated. Invalid/non-integer/out-of-range port exits 2 with `error: serve requires --port <n> (0 = ephemeral)`. See [HTTP reference](http.md).\n\n### `glina setup [--check] [--dry-run]`\n\nBuilds the macOS or Linux provisioning plan for Blender and uv. `--check` only uses `which` and never installs. Without it, missing tools are installed (Homebrew on macOS; apt/snap and the uv installer on Linux), then `blender-mcp` is resolved through uvx. `--dry-run` reports would-install/would-resolve. Prints `{healthy, steps}` and exits 0/1.\n\n### `glina export-config --out <path> [--config <path>]`\n\nOperational, intentionally omitted from the friendly help and released surface. Resolves vault references locally, writes a `_resolved:true` JSON file, chmods it to 0600, and prints only `{out, resolved:true}`. Missing `--out` exits 2. The output contains secrets; see [configuration](configuration.md#resolved-handoff-files).\n\n## Exit codes\n\n| Code | Meaning |\n|---:|---|\n| 0 | Command completed, health passed, or gate accepted. |\n| 1 | Runtime/config/integration error, unhealthy probe, or gate refusal. |\n| 2 | CLI usage error or unknown command. |\n\nAn unknown command prints `unknown command: <name>` followed by usage and exits 2.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "CLI reference",
+          "id": "cli-reference"
+        },
+        {
+          "depth": 2,
+          "text": "Commands",
+          "id": "commands"
+        },
+        {
+          "depth": 3,
+          "text": "glina help",
+          "id": "glina-help"
+        },
+        {
+          "depth": 3,
+          "text": "glina create [--race ] [--out ] [--config ]",
+          "id": "glina-create---race----out----config-"
+        },
+        {
+          "depth": 3,
+          "text": "glina sculpt [--out ] [--filename ] [--rounds ] [--config ]",
+          "id": "glina-sculpt---out----filename----rounds----config-"
+        },
+        {
+          "depth": 3,
+          "text": "glina verify [--config ]",
+          "id": "glina-verify---config-"
+        },
+        {
+          "depth": 3,
+          "text": "glina check-config [--config ]",
+          "id": "glina-check-config---config-"
+        },
+        {
+          "depth": 3,
+          "text": "glina blender-health",
+          "id": "glina-blender-health"
+        },
+        {
+          "depth": 3,
+          "text": "glina weles-tools",
+          "id": "glina-weles-tools"
+        },
+        {
+          "depth": 3,
+          "text": "glina preview-anim [--clip ] [--frames ] [--fps ] [--out ] [--config ]",
+          "id": "glina-preview-anim---clip----frames----fps----out----config-"
+        },
+        {
+          "depth": 3,
+          "text": "glina animate [--preset dragon] [--out ] [--config ]",
+          "id": "glina-animate---preset-dragon---out----config-"
+        },
+        {
+          "depth": 3,
+          "text": "glina showcase [dragon] [--out ] [--config ]",
+          "id": "glina-showcase-dragon---out----config-"
+        },
+        {
+          "depth": 3,
+          "text": "glina serve [--port ] [--config ]",
+          "id": "glina-serve---port----config-"
+        },
+        {
+          "depth": 3,
+          "text": "glina setup [--check] [--dry-run]",
+          "id": "glina-setup---check---dry-run"
+        },
+        {
+          "depth": 3,
+          "text": "glina export-config --out [--config ]",
+          "id": "glina-export-config---out---config-"
+        },
+        {
+          "depth": 2,
+          "text": "Exit codes",
+          "id": "exit-codes"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "docs/cli.md",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/docs/cli.md"
+      },
+      "order": 364
+    },
+    {
+      "productSlug": "glina",
+      "slug": "mcp",
+      "title": "MCP reference",
+      "markdown": "# MCP reference\n\n`glina-mcp` (`pipeline/mcp.js`) is a newline-delimited JSON-RPC 2.0 server over stdin/stdout. Stdout contains protocol frames only; diagnostics go to stderr. Protocol version is `2024-11-05`.\n\n## Handshake and methods\n\n`initialize` returns:\n\n```json\n{\n  \"protocolVersion\": \"2024-11-05\",\n  \"capabilities\": { \"tools\": {} },\n  \"serverInfo\": { \"name\": \"glina\", \"version\": \"1.0.0\" }\n}\n```\n\nSupported methods are `initialize`, `ping`, `tools/list`, and `tools/call`. Notifications (requests without a non-null `id`) produce no reply. Other methods return JSON-RPC error `-32601`, `method not found: <method>`. Invalid JSON returns `-32700`, `parse error`; a `tools/call` without a string `params.name` returns `-32602`, `params.name must be a string`.\n\nTool success and product refusal both use a JSON-RPC success envelope. A tool refusal is an MCP result with `isError:true` and one text content block. An exception is formatted `<ErrorName>: <message>` in that block. Tool payloads are pretty-printed JSON inside a text block rather than MCP structured content.\n\n## Tools\n\n### `glina_create_asset`\n\nRuns the [studio job](concepts/studio-job.md).\n\n| Argument | Type | Required | Meaning |\n|---|---|---:|---|\n| `prompt` | string | yes | Asset description; blank is refused with `prompt is required`. |\n| `race` | `humans`, `dwarves`, `elves`, `skeletons` | no | Prefixes the prompt. |\n| `out_dir` | string | no | Output directory; default `assets/models`. |\n| `filename` | string | no | Download filename. |\n| `config` | string | no | Config path; default package `pipeline.config.json`. |\n\nReturns `{outPath, processedPath, artifactUrl, prompt, verification}` as text JSON.\n\n### `glina_sculpt`\n\nRuns the [sculpt job](concepts/sculpt-job.md).\n\n| Argument | Type | Required | Meaning |\n|---|---|---:|---|\n| `prompt` | string | yes | Asset description; blank is refused with `prompt is required`. |\n| `out_dir` | string | no | Output directory. |\n| `filename` | string | no | Output GLB filename. |\n| `max_rounds` | number | no | Overrides configured/default iteration cap. |\n| `config` | string | no | Config path. |\n\nReturns `{outPath, verification, rounds}`; transcript is omitted.\n\n### `glina_verify_asset`\n\n| Argument | Type | Required | Meaning |\n|---|---|---:|---|\n| `path` | string | yes | GLB path; absent/empty is refused with `path is required`. |\n| `config` | string | no | Threshold config. Unreadable config is ignored and defaults apply. |\n\nReturns the full `{ok, errors, stats, thresholds, path}` report. A normal gate rejection is still a successful tool call whose text contains `\"ok\": false`; clients must inspect `ok`. Only parse/I/O exceptions set `isError:true`.\n\n### `glina_check_config`\n\nOptional string `config` selects the file. Resolves Skarbiec references and returns recursively redacted config. It starts neither browser nor Blender.\n\n### `glina_blender_health`\n\nNo arguments. Starts the Blender MCP client, performs an execute probe, returns `{healthy, tools}`. This reaches the live Blender bridge.\n\n### `glina_weles_tools`\n\nNo arguments. Starts Weles MCP and returns `[{name, description}]`.\n\n## Complete raw exchange\n\nThe repository's [MCP example](examples/mcp-verify.sh) sends initialize, initialized notification, tools/list, and `glina_verify_asset`. It was executed against `assets/models/smok.glb`; the tool returned `ok:true`, 38 meshes, 748 triangles, 5 materials, and clips `flap` / `idle`. See the [verification walkthrough](walkthrough-verify.md) for the full report.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "MCP reference",
+          "id": "mcp-reference"
+        },
+        {
+          "depth": 2,
+          "text": "Handshake and methods",
+          "id": "handshake-and-methods"
+        },
+        {
+          "depth": 2,
+          "text": "Tools",
+          "id": "tools"
+        },
+        {
+          "depth": 3,
+          "text": "glina_create_asset",
+          "id": "glina_create_asset"
+        },
+        {
+          "depth": 3,
+          "text": "glina_sculpt",
+          "id": "glina_sculpt"
+        },
+        {
+          "depth": 3,
+          "text": "glina_verify_asset",
+          "id": "glina_verify_asset"
+        },
+        {
+          "depth": 3,
+          "text": "glina_check_config",
+          "id": "glina_check_config"
+        },
+        {
+          "depth": 3,
+          "text": "glina_blender_health",
+          "id": "glina_blender_health"
+        },
+        {
+          "depth": 3,
+          "text": "glina_weles_tools",
+          "id": "glina_weles_tools"
+        },
+        {
+          "depth": 2,
+          "text": "Complete raw exchange",
+          "id": "complete-raw-exchange"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "docs/mcp.md",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/docs/mcp.md"
+      },
+      "order": 365
+    },
+    {
+      "productSlug": "glina",
+      "slug": "http",
+      "title": "Loopback HTTP reference",
+      "markdown": "# Loopback HTTP reference\n\n`glina serve` is the local backend used by Glina Desktop. It binds only `127.0.0.1`, defaults to port 8080, and accepts port 0 for an ephemeral port. Once bound it prints exactly one stdout line:\n\n```json\n{\"ready\":true,\"port\":62357}\n```\n\nThe actual port varies. All endpoints are under `/v1`.\n\n## Response protocols\n\nOrdinary endpoints return `application/json`. Pre-stream errors use a non-2xx status and:\n\n```json\n{ \"error\": \"one product refusal sentence\" }\n```\n\nLong jobs return HTTP 200 with `application/x-ndjson` once preparation succeeds. Zero or more log events are followed by exactly one result event:\n\n```json\n{\"type\":\"log\",\"stream\":\"stdout\",\"chunk\":\"...\\n\"}\n{\"type\":\"log\",\"stream\":\"stderr\",\"chunk\":\"error: ...\\n\"}\n{\"type\":\"result\",\"status\":0,\"json\":{\"ok\":true}}\n```\n\n`status` mirrors the corresponding CLI exit status. A runtime failure after streaming starts emits a stderr log and then `{\"type\":\"result\",\"status\":1,\"json\":{\"error\":\"...\"}}`. Do not infer job success from HTTP 200; read the terminal result.\n\nRequest bodies are JSON objects, at most 1 MiB. Invalid JSON: HTTP 400 `request body is not valid JSON`. Oversize body: HTTP 400 `request body too large`. Unknown route: HTTP 404 `unknown endpoint: <METHOD> <path>`.\n\nStreamed jobs are queued and run one at a time because the backend redirects process-global console methods into the active response.\n\n## Endpoints\n\n### `GET /v1/health`\n\nReturns HTTP 200 `{ \"status\": \"ok\" }`. It does not probe Blender, Weles, the vault, or configuration.\n\n### `GET /v1/config`\n\nLoads the launch-time config, resolves its vault references, redacts secret-shaped fields, and returns the object. Failure is HTTP 500. Unlike optional-config workflow endpoints, this endpoint does not fall back to `{}`.\n\n### `GET /v1/blender-health`\n\nStarts the configured/default Blender MCP session and performs the real execute probe. It always returns HTTP 200:\n\n- success: `{ \"ok\": true, \"detail\": \"Blender MCP handshake and execute probe succeeded; tools: …\" }`\n- failure: `{ \"ok\": false, \"error\": \"…\" }`\n\nThis endpoint reaches the live Blender bridge.\n\n### `GET /v1/weles-tools`\n\nStarts Weles MCP and returns `{ \"tools\": [{\"name\":\"…\",\"description\":\"…\"}] }`. Failure is HTTP 500.\n\n### `POST /v1/sculpt`\n\nBody:\n\n| Field | Type | Required | Meaning |\n|---|---|---:|---|\n| `prompt` | string | yes | Trimmed asset prompt. Missing/blank: HTTP 400 `sculpt requires a prompt`. |\n| `outDir` | string or null | no | Output directory; null/absent uses default. |\n| `rounds` | number/string or null | no | Converted with `Number`; null/absent uses config/default. |\n\nConfig must load before the stream starts. The NDJSON result JSON is `{outPath, verification, rounds}`.\n\n### `POST /v1/verify`\n\nBody: `{ \"path\": \"/path/to/file.glb\" }`. Missing/non-string/empty path is HTTP 400 `verify requires a .glb path`. Config is best-effort; load failure falls back to verification defaults. The terminal result contains the full report and status 0/1 according to `report.ok`.\n\n### `POST /v1/preview-anim`\n\nBody: `{ \"path\": \"/path/to/file.glb\", \"clip\": \"idle\" }`; `clip` is optional. Missing path is HTTP 400 `preview-anim requires a .glb path`. Config is best-effort. The terminal result is `{outPath, clip, frames, tool}`.\n\n## Executed evidence\n\n[The HTTP example](examples/serve-verify.sh) was executed with an ephemeral port. `GET /v1/health` returned `{\"status\":\"ok\"}` and `POST /v1/verify` emitted one status-0 result for the 748-triangle reference dragon. The full exchange is in [the serve walkthrough](walkthrough-serve.md).\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "Loopback HTTP reference",
+          "id": "loopback-http-reference"
+        },
+        {
+          "depth": 2,
+          "text": "Response protocols",
+          "id": "response-protocols"
+        },
+        {
+          "depth": 2,
+          "text": "Endpoints",
+          "id": "endpoints"
+        },
+        {
+          "depth": 3,
+          "text": "GET /v1/health",
+          "id": "get-v1health"
+        },
+        {
+          "depth": 3,
+          "text": "GET /v1/config",
+          "id": "get-v1config"
+        },
+        {
+          "depth": 3,
+          "text": "GET /v1/blender-health",
+          "id": "get-v1blender-health"
+        },
+        {
+          "depth": 3,
+          "text": "GET /v1/weles-tools",
+          "id": "get-v1weles-tools"
+        },
+        {
+          "depth": 3,
+          "text": "POST /v1/sculpt",
+          "id": "post-v1sculpt"
+        },
+        {
+          "depth": 3,
+          "text": "POST /v1/verify",
+          "id": "post-v1verify"
+        },
+        {
+          "depth": 3,
+          "text": "POST /v1/preview-anim",
+          "id": "post-v1preview-anim"
+        },
+        {
+          "depth": 2,
+          "text": "Executed evidence",
+          "id": "executed-evidence"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "docs/http.md",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/docs/http.md"
+      },
+      "order": 366
+    },
+    {
+      "productSlug": "glina",
+      "slug": "runtime-api",
+      "title": "JavaScript runtime API",
+      "markdown": "# JavaScript runtime API\n\nPackage: `@wisent-ai/glina` (ES modules). `three >= 0.160.0` is a peer dependency. The root export re-exports every function below; subpaths are `./anatomy`, `./sculpt`, `./sculpt-gear`, `./card-art`, and `./loader`.\n\n`./anatomy` imports a host-side `../../lib/weapons.js` and uses `document.createElement('canvas')` for blob textures. It is intended for the original game layout/browser runtime. The other listed subpaths are self-contained apart from their THREE.js peer where noted.\n\n## High-level geometry\n\n### `makeBody(team, raceKey, armorTier = 0, weaponTier = 0, klass = 'infantry', magicType = null, weaponStyle = null)`\n\nFrom `./anatomy`. Returns a `THREE.Group` containing the full procedural unit body. `team` must provide `livery` and `accent` THREE-compatible colors. Known `raceKey` values are `humans`, `dwarves`, `elves`, and `skeletons`; unknown values use human visual constants. `klass` affects scale and weapon construction. The returned group exposes `userData.weaponArm`, `userData.shieldArm`, and `userData.twoHand`, uses `YXZ` rotation order, and is scaled for race/class proportions.\n\n### `buildBlobBody(skinHex, accentHex, resolution = 96, isolation = 80)`\n\nFrom `./anatomy`. Builds and returns a THREE `MarchingCubes` object, with a generated canvas skin texture, fixed body field, cast shadows, and scalar size 2.32. Requires browser DOM canvas support.\n\n### `sculptHumanoid(opts = {})`\n\nFrom `./sculpt`. Returns one `THREE.Mesh` with indexed `BufferGeometry`, vertex colors, computed normals/bounds, cast/receive shadow enabled, and the fixed stylized warrior geometry. Color options accept THREE-compatible numeric hex values:\n\n- palette: `skin` (`0xd9b48a`), `armor` (`0xc9a44a`), `helmet` (`0x9a9aa6`), `pants` (`0x4a3a2a`), `boot` (`0x2a1f15`), `belt` (`0x33231a`), `collar` (`0xb8843e`), `gauntlet` (`0x8a8a98`)\n- details: `cape` (`0x8a1a1a`), `tabard` (falls back to cape), `emblem` (`0xfff5b8`), `shield` (`0x8a1a1a`), `eyeGlow` (`0xffaa30`), `beardColor` (`0x6e3f1f`), `furColor` (`0xe8e0d0`)\n- toggles: `beard` (off by default), `noHorns` (false), `noSpikes` (false), `fur` (enabled unless exactly false)\n\n## Card art\n\n### `cardArtSvg(card, race)`\n\nFrom `./card-art`; no THREE.js or DOM dependency. Returns a complete 100×100 SVG string with invocation-unique definition IDs. `race` chooses `humans`, `dwarves`, `elves`, or `skeletons`; unknown values fall back to humans. `card.tier` recognizes `common`, `combo`, and `rare`, otherwise neutral gray. Glyph selection examines `card.id`, then `card.klass`, then `card.kind`, then falls back to sword. Glyph images use `glina/assets/cards` unless browser global `window.CARD_ART_BASE` is set before module evaluation.\n\nSee [the executable card example](examples/card-art.mjs).\n\n## Low-level sculpt-gear builders\n\nThese functions mutate caller-owned flat arrays and return `undefined`. `verts` and `colors` are packed XYZ/RGB number arrays; `idx` is a triangle-index array. Colors/palette members are `THREE.Color` instances.\n\n- `addBox(verts, colors, idx, color, cx, cy, cz, hx, hy, hz)` appends an axis-aligned box centered at `(cx,cy,cz)` with half-extents `(hx,hy,hz)`.\n- `buildAxe(verts, colors, idx, haftCol, bladeCol)` appends the fixed warrior axe.\n- `buildArmorDetails(verts, colors, idx, palette, opts)` appends emblem, greaves, pauldrons, trim, rivets, and armor plates; reads `opts.armor` and `opts.emblem`.\n- `buildBodyDetails(verts, colors, idx, palette, opts)` appends helmet/visor, boots, belt, tabard, scabbard, gauntlets, and chest details; reads `opts.tabard` and `opts.cape`.\n- `buildExtraDetails(verts, colors, idx, palette, opts)` appends optional spikes/fur plus cape stripes and weapon/body accents; reads `noSpikes`, `fur`, `furColor`, and `cape`.\n- `buildCape(verts, colors, idx, opts)` appends two-sided cape triangles; reads `opts.cape`.\n\n## Procedural-only loader compatibility API\n\n`./loader` preserves former call sites but does not load GLBs:\n\n| Function | Result |\n|---|---|\n| `loadHumanoid()` | `Promise.resolve(null)` |\n| `isHumanoidReady()` | `false` |\n| `isRaceReady()` | `false` |\n| `loadAllRaces()` | `Promise.resolve([])` |\n| `loadRaceModel()` | rejected Promise with `Error('procedural-only')` |\n| `buildRaceUnit()` | `null` |\n| `buildHumanoidUnit()` | `null` |\n| `playClip()` | `null` |\n| `crossFadeTo(unitGltf, currentAction)` | returns `currentAction` unchanged |\n\nThese are compatibility stubs, not an asynchronous loading subsystem.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "JavaScript runtime API",
+          "id": "javascript-runtime-api"
+        },
+        {
+          "depth": 2,
+          "text": "High-level geometry",
+          "id": "high-level-geometry"
+        },
+        {
+          "depth": 3,
+          "text": "makeBody(team, raceKey, armorTier = 0, weaponTier = 0, klass = 'infantry', magicType = null, weaponStyle = null)",
+          "id": "makebodyteam-racekey-armortier--0-weapontier--0-klass--infantry-magictype--null-weaponstyle--null"
+        },
+        {
+          "depth": 3,
+          "text": "buildBlobBody(skinHex, accentHex, resolution = 96, isolation = 80)",
+          "id": "buildblobbodyskinhex-accenthex-resolution--96-isolation--80"
+        },
+        {
+          "depth": 3,
+          "text": "sculptHumanoid(opts = {})",
+          "id": "sculpthumanoidopts--"
+        },
+        {
+          "depth": 2,
+          "text": "Card art",
+          "id": "card-art"
+        },
+        {
+          "depth": 3,
+          "text": "cardArtSvg(card, race)",
+          "id": "cardartsvgcard-race"
+        },
+        {
+          "depth": 2,
+          "text": "Low-level sculpt-gear builders",
+          "id": "low-level-sculpt-gear-builders"
+        },
+        {
+          "depth": 2,
+          "text": "Procedural-only loader compatibility API",
+          "id": "procedural-only-loader-compatibility-api"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "docs/runtime-api.md",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/docs/runtime-api.md"
+      },
+      "order": 367
+    },
+    {
+      "productSlug": "glina",
+      "slug": "desktop",
+      "title": "macOS desktop companion",
+      "markdown": "# macOS desktop companion\n\nGlina Desktop is a separate SwiftUI client in the `glina-desktop` repository. It does not reimplement pipeline jobs. It lazily starts the installed `glina` binary as `glina serve --port 0`, reads the ready line, then uses the [loopback HTTP API](http.md).\n\n## Backend lifecycle\n\n`GlinaBackendProcess` searches PATH first, then:\n\n1. `~/.stado/bin/glina`\n2. `~/.local/bin/glina`\n3. `/opt/homebrew/bin/glina`\n4. `/usr/local/bin/glina`\n\nIt starts one process for the app lifetime, expects `{ready:true,port:N}` within 20 seconds, binds the client to `http://127.0.0.1:N`, respawns after a death, and terminates the process when the app exits. Start failure retains the backend's stderr tail.\n\n## Client mappings\n\n| Desktop operation | Backend exchange |\n|---|---|\n| Config | `GET /v1/config` |\n| Weles tools | `GET /v1/weles-tools` |\n| Blender health | `GET /v1/blender-health`; `{ok:false}` is converted to a failed outcome even though HTTP status is 200. |\n| Sculpt | `POST /v1/sculpt` with `prompt`, `rounds`, and null `outDir`; NDJSON stream. |\n| Verify | `POST /v1/verify` with `path`; NDJSON stream. |\n| Animation preview | `POST /v1/preview-anim` with `path` and `clip`; NDJSON stream. |\n\nFor streams, every log chunk is delivered to the live log in arrival order. Stderr chunks are also accumulated. The single result event supplies status and display JSON. A stream ending without a result becomes `The Glina backend closed the stream before reporting a result.`\n\nThe client extracts artifact paths only from top-level `outPath`, `file`, or `path` result keys. It uses the backend's own stderr sentence as the refusal when status is nonzero; it does not invent a second product error vocabulary.\n\n## Operator guidance\n\n- Install `glina` in one of the discovered locations before launching the app.\n- Treat the HTTP process health and Blender health as separate states.\n- A Blender health action executes a real probe in the current Blender session.\n- Keep the backend local. It has no authentication and is intentionally bound to loopback only.\n- If startup fails, resolve the executable or ready-line error before retrying a job; the app terminates a process that misses the handshake.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "macOS desktop companion",
+          "id": "macos-desktop-companion"
+        },
+        {
+          "depth": 2,
+          "text": "Backend lifecycle",
+          "id": "backend-lifecycle"
+        },
+        {
+          "depth": 2,
+          "text": "Client mappings",
+          "id": "client-mappings"
+        },
+        {
+          "depth": 2,
+          "text": "Operator guidance",
+          "id": "operator-guidance"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "docs/desktop.md",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/docs/desktop.md"
+      },
+      "order": 368
+    },
+    {
+      "productSlug": "glina",
+      "slug": "runbook",
+      "title": "Operations runbook",
+      "markdown": "# Operations runbook\n\nStart with the smallest probe that does not mutate operator state. `glina check-config` touches only the config and Skarbiec. `glina verify <file> --config <absent>` parses locally when render smoke is off. `glina setup --check` only locates binaries. `glina blender-health`, animated preview, sculpting, animation, showcase, and render smoke all reach the live Blender bridge.\n\n## Config and vault\n\n### `pipeline config is not valid JSON: <path>`\n\nThe selected file could be read but not parsed. Validate JSON syntax and that `--config` names the intended file.\n\n### `config key '…' holds an inline value; secrets must be skarbiec://<item>/<field> references`\n\nMove the value into Skarbiec and replace it with a reference. Do not move it to an environment variable. Run `glina check-config` again; output should show `<resolved: ok>` for secret-shaped fields.\n\n### `malformed skarbiec reference: \"…\"`\n\nUse exactly `skarbiec://<item>/<field>` and allowed identifier characters. There must be one item and one field.\n\n### `skarbiec CLI failed: …`\n\nConfirm `skarbiec` (or `SKARBIEC_BIN`) is executable and the local vault can satisfy policy. The nested CLI stderr is retained after the prefix.\n\n### `skarbiec item '<item>' has no non-empty field '<field>'`\n\nInspect the item schema and fix the field name/value. The refusal also appends `(at config path …)` during deep resolution.\n\n## Model backend\n\n### `no model backend configured — set models.brama.url+key+bearer or models.openrouter.key …`\n\nSupply a complete Brama tuple or an OpenRouter key, using Skarbiec refs. Include Brama `agent_id` as well; it is used to sign every request.\n\n### `backend=brama requested but models.brama.url/key/bearer are not configured`\n\nThis occurs in the selection edge where OpenRouter is requested but not ready and Brama is also incomplete. Complete the intended backend rather than relying on fallback.\n\n### `direct provider APIs are not supported …`\n\nRemove `models.anthropic`, `models.openai`, or `models.direct`. Use Brama or the explicitly configured OpenRouter backend.\n\n### `brama HTTP N: …` / `openrouter HTTP N: …`\n\nAuthentication/routing 4xx errors are final (OpenRouter 429 is retried). Fix identity, model, or policy from the named response. Brama 502/503 and OpenRouter 429/5xx are retried automatically.\n\n### `brama unreachable after N attempts: …` / `openrouter unreachable after N attempts: …`\n\nAll transport attempts failed or timed out. Check router reachability and configured URL, then retry after the external service recovers. Do not increase attempts before addressing the cause.\n\n### `model reply not usable in round N: …`\n\nThe model did not provide parseable step JSON. The nested cause distinguishes malformed fenced JSON from no JSON object. The job stops; revise model route/prompt policy rather than executing the text manually.\n\n### `model did not finish within N rounds`\n\nThe sculpt loop exhausted its cap. Inspect stderr round thoughts, then raise `llm.maxRounds` only if the asset is making progress; otherwise simplify the prompt or repair repeated execution errors.\n\n## Blender and animation\n\n### `blender MCP server failed to start (…) … Run 'node pipeline/setup.js' …`\n\nRun `glina setup --check` first. If Blender and uvx are present, inspect the nested Weles/MCP process error. A started stdio server is not proof that Blender's add-on bridge is alive.\n\n### Health returns `healthy:false`\n\nThe server listed tools but `execute_blender_code` did not round-trip. Start/repair the Blender GUI add-on bridge on `127.0.0.1:9876`, then use `glina blender-health` only when it is safe to probe the operator session. `scripts/ensure-blender.sh` waits up to 60 seconds and otherwise says `ensure-blender: bridge did not come up`.\n\n### `Blender bridge is down after 3 consecutive failures: …`\n\nThe sculpt loop intentionally stopped instead of spending more model rounds. Repair the bridge and start a new job; the failed session is closed.\n\n### `export produced no file at <path>: …`\n\nCheck output directory existence/permissions and the preceding `GAC-EXEC-ERROR` text. The export call ran but no non-empty file landed.\n\n### `no animation clips in this GLB`\n\n`preview-anim` found no Blender Actions. Generate/repair animations first or verify without animation requirements.\n\n### `clip '<name>' not found; have […]`\n\nChoose an exact action name/base name from the list or omit `--clip` to select the longest action.\n\n### `GIF assembly failed (ffmpeg and uv+Pillow): …`\n\nInstall a working `ffmpeg`, or uv with access to Pillow, and confirm the output directory is writable. Rendered temporary frames are removed in all outcomes.\n\n### `unknown animation preset: …` / `unknown showcase asset: …`\n\nOnly `dragon` is implemented for each deterministic command.\n\n## Weles and studio jobs\n\n### `weles MCP process failed to start: …` / `weles MCP process exited (code N)`\n\nEnsure `weles-mcp` is on PATH and starts under a PATH/HOME-only environment. A mid-session exit fails every pending request.\n\n### `weles MCP request timed out: <method>`\n\nThe request had no response in 120 seconds. Inspect the named Weles method and browser worker; the Glina session will still be closed.\n\n### `weles tool <name> failed: …`\n\nThe named Weles tool returned `isError`. Preserve its text and investigate the browser-side refusal.\n\n### `text2game step '<step>' failed: <reason>`\n\nUse the step name to localize failure: login selectors, generation selectors, artifact polling, download, Blender postprocess, or verify. Selector and URL changes belong in config.\n\n### `artifact not ready within Nms`\n\nThe configured poll expression never returned an HTTP URL before `studio.artifact.timeoutMs`. Check the page expression and remote job state before raising the timeout.\n\n### `download failed: HTTP N`\n\nThe artifact URL or `artifact.downloadHeaders` was rejected. Glina does not silently retain a bad response as a GLB.\n\n## Verification\n\nA normal gate rejection is not a parser crash. Read every entry in `errors`. Common exact reasons include `no meshes`, `no triangles`, `no materials`, `no animation clips`, `too few animation clips: N < M [names]`, `animation clips contain no changing channels: N channel(s), all static`, `over triangle budget: N > MAX (target T)`, and byte limits.\n\nParser failures are exceptions: `file too small to be a GLB`, `not a GLB (bad magic)`, `truncated before first chunk`, `first GLB chunk is not JSON`, or `GLB JSON chunk does not parse: …`. Recover the source artifact; do not loosen thresholds for malformed data.\n\nA render-only problem appears as `render smoke failed: <reason>` alongside structural errors. Fix the Blender/import/render path; structural acceptance alone does not override a requested render smoke.\n\n## Loopback backend\n\n- Invalid port: `error: serve requires --port <n> (0 = ephemeral)`.\n- HTTP 400: fix `request body is not valid JSON`, `request body too large`, or the endpoint's missing field.\n- HTTP 404: fix the exact method/path named by `unknown endpoint: …`.\n- HTTP 200 NDJSON with terminal status 1: this is a job failure, not server success. Preserve preceding stderr log events.\n- Stream closes before a result: backend exchange is incomplete; restart the owned backend process and retry only if the operation is safe to repeat.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "Operations runbook",
+          "id": "operations-runbook"
+        },
+        {
+          "depth": 2,
+          "text": "Config and vault",
+          "id": "config-and-vault"
+        },
+        {
+          "depth": 3,
+          "text": "pipeline config is not valid JSON:",
+          "id": "pipeline-config-is-not-valid-json"
+        },
+        {
+          "depth": 3,
+          "text": "config key '…' holds an inline value; secrets must be skarbiec:// / references",
+          "id": "config-key--holds-an-inline-value-secrets-must-be-skarbiec--references"
+        },
+        {
+          "depth": 3,
+          "text": "malformed skarbiec reference: \"…\"",
+          "id": "malformed-skarbiec-reference-"
+        },
+        {
+          "depth": 3,
+          "text": "skarbiec CLI failed: …",
+          "id": "skarbiec-cli-failed-"
+        },
+        {
+          "depth": 3,
+          "text": "skarbiec item ' ' has no non-empty field ' '",
+          "id": "skarbiec-item---has-no-non-empty-field--"
+        },
+        {
+          "depth": 2,
+          "text": "Model backend",
+          "id": "model-backend"
+        },
+        {
+          "depth": 3,
+          "text": "no model backend configured — set models.brama.url+key+bearer or models.openrouter.key …",
+          "id": "no-model-backend-configured--set-modelsbramaurlkeybearer-or-modelsopenrouterkey-"
+        },
+        {
+          "depth": 3,
+          "text": "backend=brama requested but models.brama.url/key/bearer are not configured",
+          "id": "backendbrama-requested-but-modelsbramaurlkeybearer-are-not-configured"
+        },
+        {
+          "depth": 3,
+          "text": "direct provider APIs are not supported …",
+          "id": "direct-provider-apis-are-not-supported-"
+        },
+        {
+          "depth": 3,
+          "text": "brama HTTP N: … / openrouter HTTP N: …",
+          "id": "brama-http-n---openrouter-http-n-"
+        },
+        {
+          "depth": 3,
+          "text": "brama unreachable after N attempts: … / openrouter unreachable after N attempts: …",
+          "id": "brama-unreachable-after-n-attempts---openrouter-unreachable-after-n-attempts-"
+        },
+        {
+          "depth": 3,
+          "text": "model reply not usable in round N: …",
+          "id": "model-reply-not-usable-in-round-n-"
+        },
+        {
+          "depth": 3,
+          "text": "model did not finish within N rounds",
+          "id": "model-did-not-finish-within-n-rounds"
+        },
+        {
+          "depth": 2,
+          "text": "Blender and animation",
+          "id": "blender-and-animation"
+        },
+        {
+          "depth": 3,
+          "text": "blender MCP server failed to start (…) … Run 'node pipeline/setup.js' …",
+          "id": "blender-mcp-server-failed-to-start---run-node-pipelinesetupjs-"
+        },
+        {
+          "depth": 3,
+          "text": "Health returns healthy:false",
+          "id": "health-returns-healthyfalse"
+        },
+        {
+          "depth": 3,
+          "text": "Blender bridge is down after 3 consecutive failures: …",
+          "id": "blender-bridge-is-down-after-3-consecutive-failures-"
+        },
+        {
+          "depth": 3,
+          "text": "export produced no file at : …",
+          "id": "export-produced-no-file-at--"
+        },
+        {
+          "depth": 3,
+          "text": "no animation clips in this GLB",
+          "id": "no-animation-clips-in-this-glb"
+        },
+        {
+          "depth": 3,
+          "text": "clip ' ' not found; have […]",
+          "id": "clip---not-found-have-"
+        },
+        {
+          "depth": 3,
+          "text": "GIF assembly failed (ffmpeg and uv+Pillow): …",
+          "id": "gif-assembly-failed-ffmpeg-and-uvpillow-"
+        },
+        {
+          "depth": 3,
+          "text": "unknown animation preset: … / unknown showcase asset: …",
+          "id": "unknown-animation-preset---unknown-showcase-asset-"
+        },
+        {
+          "depth": 2,
+          "text": "Weles and studio jobs",
+          "id": "weles-and-studio-jobs"
+        },
+        {
+          "depth": 3,
+          "text": "weles MCP process failed to start: … / weles MCP process exited (code N)",
+          "id": "weles-mcp-process-failed-to-start---weles-mcp-process-exited-code-n"
+        },
+        {
+          "depth": 3,
+          "text": "weles MCP request timed out:",
+          "id": "weles-mcp-request-timed-out"
+        },
+        {
+          "depth": 3,
+          "text": "weles tool failed: …",
+          "id": "weles-tool-failed-"
+        },
+        {
+          "depth": 3,
+          "text": "text2game step ' ' failed:",
+          "id": "text2game-step---failed"
+        },
+        {
+          "depth": 3,
+          "text": "artifact not ready within Nms",
+          "id": "artifact-not-ready-within-nms"
+        },
+        {
+          "depth": 3,
+          "text": "download failed: HTTP N",
+          "id": "download-failed-http-n"
+        },
+        {
+          "depth": 2,
+          "text": "Verification",
+          "id": "verification"
+        },
+        {
+          "depth": 2,
+          "text": "Loopback backend",
+          "id": "loopback-backend"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "docs/runbook.md",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/docs/runbook.md"
+      },
+      "order": 369
+    },
+    {
+      "productSlug": "glina",
+      "slug": "examples",
+      "title": "Runnable examples",
+      "markdown": "# Runnable examples\n\nAll examples run from any working directory by finding the repository relative to their own file. The shell scripts use temporary directories and clean them on exit.\n\n| Example | What it demonstrates | External systems |\n|---|---|---|\n| [`examples/verify-asset.sh`](examples/verify-asset.sh) | Passing defaults and a deliberate multi-reason gate refusal. | None; local file parser only. |\n| [`examples/check-config.sh`](examples/check-config.sh) | A non-secret config and an inline-password refusal. | None; the samples contain no Skarbiec refs. |\n| [`examples/serve-verify.sh`](examples/serve-verify.sh) | Ephemeral loopback backend, health JSON, and a terminal NDJSON verify result. | Local Node process and curl; no Blender/Weles/vault. |\n| [`examples/mcp-verify.sh`](examples/mcp-verify.sh) | Raw MCP initialize, tools/list, and `glina_verify_asset`. | Local `glina-mcp`; no Blender/Weles/vault. |\n| [`examples/card-art.mjs`](examples/card-art.mjs) | Generate a dwarven rare forge SVG through `cardArtSvg`. | None. |\n\n## Run them\n\nFrom the repository root:\n\n```sh\nsh docs/examples/verify-asset.sh\nsh docs/examples/check-config.sh\nsh docs/examples/serve-verify.sh\nsh docs/examples/mcp-verify.sh\nnode docs/examples/card-art.mjs /tmp/glina-card.svg\n```\n\nThese five examples were executed during documentation authoring. Observed evidence:\n\n- reference dragon: 38 meshes, 748 triangles, 5 materials, two clips (`flap`, `idle`), 8 moving channels;\n- strict gate: `over triangle budget: 748 > 450 (target 300)` and `too few animation clips: 2 < 3 [flap, idle]`;\n- inline config secret: exact refusal `config key 'credentials.password' holds an inline value; secrets must be skarbiec://<item>/<field> references`;\n- HTTP: `GET /v1/health` returned status `ok`; verification returned terminal NDJSON status 0;\n- MCP: protocol `2024-11-05`, six tools listed, verify tool returned the same accepted report;\n- card art: the example wrote a complete SVG (the reported path depends on the supplied output argument).\n\nFor annotated output, follow [the verify walkthrough](walkthrough-verify.md) and [the serve walkthrough](walkthrough-serve.md).\n\n## Safety boundary\n\nNone of these examples contacts the live Blender bridge. Commands that do — `sculpt`, `blender-health`, `animate`, `showcase`, `preview-anim`, or verification with `verify.render:true` — are intentionally not presented as unattended examples because they operate through the current Blender GUI/add-on session.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "Runnable examples",
+          "id": "runnable-examples"
+        },
+        {
+          "depth": 2,
+          "text": "Run them",
+          "id": "run-them"
+        },
+        {
+          "depth": 2,
+          "text": "Safety boundary",
+          "id": "safety-boundary"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "docs/examples.md",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/docs/examples.md"
+      },
+      "order": 370
+    },
+    {
+      "productSlug": "glina",
+      "slug": "walkthrough-verify",
+      "title": "Walkthrough: verify a GLB and inspect a refusal",
+      "markdown": "# Walkthrough: verify a GLB and inspect a refusal\n\nThis walkthrough uses only Glina's local GLB parser. It does not load config secrets, start Weles, or contact the live Blender bridge. The exact script is [`examples/verify-asset.sh`](examples/verify-asset.sh); it was executed against this checkout with Node v22 on macOS.\n\n## 1. Run with built-in defaults\n\nThe script points `--config` at an absent temporary file. `verify` treats config as optional and uses its built-in thresholds:\n\n```console\n$ node pipeline/cli.js verify assets/models/smok.glb --config /tmp/absent.json\n{\n  \"ok\": true,\n  \"errors\": [],\n  \"stats\": {\n    \"meshes\": 38,\n    \"primitives\": 38,\n    \"triangles\": 748,\n    \"materials\": 5,\n    \"animations\": 2,\n    \"animationNames\": [\"flap\", \"idle\"],\n    \"textures\": 0,\n    \"nodes\": 48,\n    \"animationChannels\": 54,\n    \"movingAnimationChannels\": 8,\n    \"staticAnimationChannels\": 46\n  },\n  \"thresholds\": {\n    \"triTarget\": 6000,\n    \"triTolerancePct\": 100,\n    \"requireMaterials\": true,\n    \"requireAnimations\": false,\n    \"minAnimationClips\": 0,\n    \"minBytes\": 100,\n    \"maxBytes\": 67108864\n  },\n  \"path\": \"assets/models/smok.glb\"\n}\n```\n\nThe captured process exited 0. The important animation distinction is visible: 54 channels exist, but only 8 change. If animation were required and all 54 were static, the gate would refuse the model.\n\n## 2. Deliberately tighten the contract\n\nThe script writes:\n\n```json\n{\n  \"verify\": {\n    \"triTarget\": 300,\n    \"triTolerancePct\": 50,\n    \"requireAnimations\": true,\n    \"minAnimationClips\": 3\n  }\n}\n```\n\nThat allows at most 450 triangles and requires three clips. The same asset produced:\n\n```console\n{\n  \"ok\": false,\n  \"errors\": [\n    \"over triangle budget: 748 > 450 (target 300)\",\n    \"too few animation clips: 2 < 3 [flap, idle]\"\n  ],\n  \"stats\": {\n    \"meshes\": 38,\n    \"triangles\": 748,\n    \"materials\": 5,\n    \"animations\": 2,\n    \"animationNames\": [\"flap\", \"idle\"],\n    \"animationChannels\": 54,\n    \"movingAnimationChannels\": 8,\n    \"staticAnimationChannels\": 46\n  },\n  \"thresholds\": {\n    \"triTarget\": 300,\n    \"triTolerancePct\": 50,\n    \"requireMaterials\": true,\n    \"requireAnimations\": true,\n    \"minAnimationClips\": 3,\n    \"minBytes\": 100,\n    \"maxBytes\": 67108864\n  },\n  \"path\": \"assets/models/smok.glb\"\n}\nstrict gate refused as expected\n```\n\nThe inner `glina verify` exited 1. The example catches that expected status so the walkthrough script itself completes successfully.\n\n## 3. Use the verdict correctly\n\n- Treat `ok`, not the presence of a JSON report, as acceptance.\n- Display every `errors` entry; failures are cumulative.\n- Preserve the threshold block with evidence so a later reader knows which contract ran.\n- In a generation job, Glina sets `throwOnFail:true`, turning the same reasons into `asset failed verification: …` and failing the whole job.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "Walkthrough: verify a GLB and inspect a refusal",
+          "id": "walkthrough-verify-a-glb-and-inspect-a-refusal"
+        },
+        {
+          "depth": 2,
+          "text": "1. Run with built-in defaults",
+          "id": "1-run-with-built-in-defaults"
+        },
+        {
+          "depth": 2,
+          "text": "2. Deliberately tighten the contract",
+          "id": "2-deliberately-tighten-the-contract"
+        },
+        {
+          "depth": 2,
+          "text": "3. Use the verdict correctly",
+          "id": "3-use-the-verdict-correctly"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "docs/walkthrough-verify.md",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/docs/walkthrough-verify.md"
+      },
+      "order": 371
+    },
+    {
+      "productSlug": "glina",
+      "slug": "walkthrough-serve",
+      "title": "Walkthrough: serve the desktop protocol and verify over HTTP",
+      "markdown": "# Walkthrough: serve the desktop protocol and verify over HTTP\n\nThis walkthrough starts only Glina's loopback Node backend and runs the local structural gate. It does not call `/v1/blender-health`, start a Blender MCP process, or touch the live Blender bridge. The exact script is [`examples/serve-verify.sh`](examples/serve-verify.sh); it was executed with Node v22 on macOS.\n\n## 1. Start on an ephemeral port\n\nThe script writes a temporary non-secret config, then launches:\n\n```sh\nnode pipeline/cli.js serve --port 0 --config \"$WORK/plain.json\"\n```\n\n`serve` bound `127.0.0.1` and printed one ready line. The script extracted the port; the captured run reported:\n\n```console\nbackend ready on 127.0.0.1:62357\n```\n\nThe number is intentionally ephemeral and will differ on another run. A desktop client must read the ready JSON instead of assuming 62357.\n\n## 2. Probe process health\n\n```console\n$ curl -s http://127.0.0.1:62357/v1/health\n{\n  \"status\": \"ok\"\n}\n```\n\nThis proves only that the HTTP process is answering. Blender health is a separate, stateful probe.\n\n## 3. Stream a verification job\n\nThe script posts the reference dragon path:\n\n```sh\ncurl -s -X POST \"http://127.0.0.1:$PORT/v1/verify\" \\\n  -H 'content-type: application/json' \\\n  -d '{\"path\":\"…/assets/models/smok.glb\"}'\n```\n\nThe exact captured protocol payload (path shortened here) was one terminal NDJSON event:\n\n```json\n{\"type\":\"result\",\"status\":0,\"json\":{\"ok\":true,\"errors\":[],\"stats\":{\"meshes\":38,\"primitives\":38,\"triangles\":748,\"materials\":5,\"animations\":2,\"animationNames\":[\"flap\",\"idle\"],\"textures\":0,\"nodes\":48,\"animationChannels\":54,\"movingAnimationChannels\":8,\"staticAnimationChannels\":46},\"thresholds\":{\"triTarget\":6000,\"triTolerancePct\":100,\"requireMaterials\":true,\"requireAnimations\":false,\"minAnimationClips\":0,\"minBytes\":100,\"maxBytes\":67108864,\"enabled\":true},\"path\":\"…/assets/models/smok.glb\"}}\n```\n\nNo log events preceded it because structural verification is quiet. Sculpt and preview jobs may emit any number of log events before the single result.\n\n## 4. Implement a consumer safely\n\n1. Spawn `glina serve --port 0` and parse the first stdout line as `{ready:true,port}`.\n2. Keep stderr separate; stdout is the startup protocol.\n3. For an NDJSON endpoint, parse one JSON object per line and append `log.chunk` in arrival order.\n4. Do not equate HTTP 200 with success. Wait for `type:\"result\"` and inspect `status` plus the result document.\n5. If the stream closes without a result, treat it as an incomplete exchange.\n6. Terminate the backend when the owning app exits.\n\nThat is the same lifecycle implemented by the [macOS desktop companion](desktop.md).\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "Walkthrough: serve the desktop protocol and verify over HTTP",
+          "id": "walkthrough-serve-the-desktop-protocol-and-verify-over-http"
+        },
+        {
+          "depth": 2,
+          "text": "1. Start on an ephemeral port",
+          "id": "1-start-on-an-ephemeral-port"
+        },
+        {
+          "depth": 2,
+          "text": "2. Probe process health",
+          "id": "2-probe-process-health"
+        },
+        {
+          "depth": 2,
+          "text": "3. Stream a verification job",
+          "id": "3-stream-a-verification-job"
+        },
+        {
+          "depth": 2,
+          "text": "4. Implement a consumer safely",
+          "id": "4-implement-a-consumer-safely"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "docs/walkthrough-serve.md",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/docs/walkthrough-serve.md"
+      },
+      "order": 372
+    },
+    {
+      "productSlug": "glina",
+      "slug": "concepts/sculpt-job",
+      "title": "Sculpt job",
+      "markdown": "# Sculpt job\n\nA sculpt job (`pipeline/llm_blender.js`, `sculptWithLlm`) is the LLM-driven\nbuild loop: prompt → the model writes `bpy` code → execute through the\n[Blender session](blender-session.md) → iterate → export GLB → run the\n[verification gate](verification-gate.md). The model is the brain; every\nexecution still goes through the Blender MCP layer, and the model key comes\nfrom Skarbiec like every other secret.\n\nEntry points: `glina sculpt <prompt>`, MCP tool `glina_sculpt`, HTTP\n`POST /v1/sculpt`.\n\n## Definition and shape\n\nJob inputs: `prompt`, `outDir` (default `assets/models`), `filename`\n(default: slugified prompt + `.glb`), `maxRounds` (default\n`llm.maxRounds`, 12). Result: `{ outPath, verification, rounds }` — the CLI\nstrips the transcript from what it prints.\n\nEach model reply must be one JSON object:\n\n```json\n{ \"thought\": \"one short sentence\", \"code\": \"python bpy code\", \"done\": false }\n```\n\nThe reply parser tolerates fences and surrounding prose (first balanced JSON\nobject wins) but a round with no usable JSON fails the job:\n`model reply not usable in round N: <reason>`.\n\n## The system prompt's execution contract\n\nThe model is told, verbatim in spirit (see `SYSTEM_PROMPT`):\n\n- each block executes in a **fresh namespace** containing only `bpy` —\n  nothing persists between calls except Blender data itself,\n- never use `bpy.context` for object access; work through `bpy.data`,\n- never call `bpy.ops.wm.read_factory_settings` — it kills the bridge,\n- flat shading, material colors only, ~6000-triangle budget\n  (Thronefall-style chunky low-poly),\n- when animations are required: one armature, automatic weights, at least\n  two named actions (`idle` plus one characteristic motion) keyframed over\n  24–64 frames,\n- reply `done: true` with empty code when finished.\n\nAnimations become **required** in the job when `verify.requireAnimations` is\ntrue or `verify.minAnimationClips` > 0 — the requirement is injected into the\nfirst user message, since the gate will refuse static meshes anyway.\n\n## Round loop\n\n1. Ask the model (`llm.maxTokens`, default 8192).\n2. Execute `step.code` if non-empty. Execution errors are fed back to the\n   model as `ERROR: <message>` — the model gets a chance to repair its own\n   bug.\n3. **Bridge-down rule**: three *consecutive* transport failures end the run —\n   `Blender bridge is down after 3 consecutive failures: <reason>` — because\n   the model cannot heal a dead bridge; probing through the LLM only burns\n   rounds.\n4. If the Blender MCP server exposes `get_viewport_screenshot`, a screenshot\n   is attached to the next round (best-effort; the loop works text-only).\n5. `done: true` breaks the loop. Running out of rounds fails the job:\n   `model did not finish within N rounds`.\n\n## Export and gate\n\nThe scene is exported with `exportGlb` and then, unless\n`verify.enabled: false`, gated with `throwOnFail` — a failing asset raises\n`asset failed verification: <reasons>` and the job fails. The Blender session\nis closed in a `finally` either way.\n\n## Proven runs\n\nGenerated end-to-end and gate-verified on live runs (per the README):\n`kamien.glb` (granite boulder, 12 bpy rounds, Brama → Blender MCP,\n2026-07-27) and `krasnolud-wojownik.glb` (dwarven warrior, local Brama,\n2026-07-28). Both files live in `assets/models/`.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "Sculpt job",
+          "id": "sculpt-job"
+        },
+        {
+          "depth": 2,
+          "text": "Definition and shape",
+          "id": "definition-and-shape"
+        },
+        {
+          "depth": 2,
+          "text": "The system prompt's execution contract",
+          "id": "the-system-prompts-execution-contract"
+        },
+        {
+          "depth": 2,
+          "text": "Round loop",
+          "id": "round-loop"
+        },
+        {
+          "depth": 2,
+          "text": "Export and gate",
+          "id": "export-and-gate"
+        },
+        {
+          "depth": 2,
+          "text": "Proven runs",
+          "id": "proven-runs"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "docs/concepts/sculpt-job.md",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/docs/concepts/sculpt-job.md"
+      },
+      "order": 373
+    },
+    {
+      "productSlug": "glina",
+      "slug": "concepts/studio-job",
+      "title": "Studio job",
+      "markdown": "# Studio job\n\nA studio job (`pipeline/text2game.js`, `runTextToGameJob`) generates an asset\nthrough a hosted text-to-3D studio's web UI, driven end-to-end through\nSkarbiec (credentials) and Weles (browser). Nothing platform-specific is\nhardcoded: endpoints and selectors come from the pipeline config, so swapping\nstudios is a config change, not a code change.\n\nEntry points: `glina create <prompt> [--race r]`, MCP tool\n`glina_create_asset`. (`--race` prefixes the prompt; the MCP schema limits it\nto `humans | dwarves | elves | skeletons`.)\n\n## Steps\n\nEvery step is named, and a failure carries its name:\n`text2game step '<name>' failed: <reason>`.\n\n1. `open-session` — start a [browser session](browser-session.md)\n   (`browser.headless`, `browser.engine` from config) and open a page.\n2. `login:goto` / `login:user` / `login:pass` / `login:submit` — navigate to\n   `studio.loginUrl`, fill `studio.selectors.loginUser` /\n   `loginPassword` with the resolved `credentials.username` / `password`,\n   click `loginSubmit`.\n3. `studio:goto` / `studio:prompt` / `studio:submit` — open\n   `studio.generateUrl`, fill `promptInput`, click `generateSubmit`.\n4. `studio:wait-artifact` — poll `studio.artifact.pollExpression` (a page\n   JavaScript expression) every `intervalMs` (default 5 s) until it yields an\n   `http…` string, up to `timeoutMs` (default 300 s); on timeout:\n   `artifact not ready within Nms`.\n5. `artifact:download` — fetch the artifact URL (optional\n   `artifact.downloadHeaders`); non-2xx: `download failed: HTTP N`. The file\n   lands at `<outDir>/<slug>.glb` (default `assets/models`).\n6. `blender:postprocess` (only when `blender.enabled`) — import → run\n   `blender.processCode` (which sees `INPUT_PATH` and `OUTPUT_PATH` as\n   injected globals) → export `<name>.processed.glb`. See\n   [Blender session](blender-session.md).\n7. `verify` (unless `verify.enabled: false`) — the\n   [verification gate](verification-gate.md) with `throwOnFail`, run against\n   the processed file when one exists, else the download.\n\nResult: `{ outPath, processedPath, artifactUrl, prompt, verification }`.\n\n## Invariants\n\n- The browser session closes in a `finally`; a failed job never leaks a\n  browser slot.\n- Credentials exist only in process memory, resolved from\n  `skarbiec://` references at config load — never logged, never written.\n- The example config (`pipeline.config.example.json`) targets Hunyuan3D's\n  studio and stores its login as vault item `TEXT2GAME_ACCOUNT` with fields\n  `login_email` / `login_password`.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "Studio job",
+          "id": "studio-job"
+        },
+        {
+          "depth": 2,
+          "text": "Steps",
+          "id": "steps"
+        },
+        {
+          "depth": 2,
+          "text": "Invariants",
+          "id": "invariants"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "docs/concepts/studio-job.md",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/docs/concepts/studio-job.md"
+      },
+      "order": 374
+    },
+    {
+      "productSlug": "glina",
+      "slug": "concepts/verification-gate",
+      "title": "Verification gate",
+      "markdown": "# Verification gate\n\nThe gate (`pipeline/verify.js`) is the pipeline's definition of done: every\nproduced `.glb` must pass it, and a failed gate fails the job. It never warns.\n\n## Definition\n\nTwo layers:\n\n1. **Structural** (always): parse the GLB container and check it against\n   thresholds from the pipeline config.\n2. **Render smoke** (optional, `verify.render: true`): import the file into\n   an empty Blender scene through the [Blender session](blender-session.md)\n   and render one 512×512 frame — proves Blender can actually open the\n   artifact.\n\n## Report shape\n\n`verifyAsset(path, config)` returns one report and the CLI prints it:\n\n```json\n{\n  \"ok\": true,\n  \"errors\": [],\n  \"stats\": {\n    \"meshes\": 38, \"primitives\": 38, \"triangles\": 748,\n    \"materials\": 5, \"animations\": 2, \"animationNames\": [\"flap\", \"idle\"],\n    \"textures\": 0, \"nodes\": 48,\n    \"animationChannels\": 54, \"movingAnimationChannels\": 8,\n    \"staticAnimationChannels\": 46\n  },\n  \"thresholds\": { \"triTarget\": 6000, \"triTolerancePct\": 100, \"...\": \"...\" },\n  \"path\": \"assets/models/smok.glb\"\n}\n```\n\n`triangles` counts TRIANGLES-mode primitives via their index accessor (or\nPOSITION count when unindexed). `movingAnimationChannels` counts channels\nwhose float output samples actually differ by more than `0.00001` from the\nfirst sample — a clip that exists but never moves is detected.\n\n## Thresholds and defaults\n\n| Threshold | Default | Failure sentence |\n|---|---|---|\n| `triTarget` | `6000` | `over triangle budget: N > MAX (target T)` — MAX = target × (100 + tolerance)/100 |\n| `triTolerancePct` | `100` | (folds into the budget above) |\n| `requireMaterials` | `true` | `no materials` |\n| `requireAnimations` | `false` | `no animation clips`, and `animation clips contain no changing channels: N channel(s), all static` |\n| `minAnimationClips` | `0` | `too few animation clips: N < M [names]` |\n| `minBytes` | `100` | `file too small: NB < MB` |\n| `maxBytes` | `64 MiB` | `file too large: NB > MB` |\n| always | — | `no meshes`, `no triangles`, `length mismatch: header says N, file is M` |\n\n## Lifecycle\n\n- `glina verify <file>` runs the gate standalone; exit 0 on pass, 1 on fail.\n  Config is optional — defaults apply when the file is absent or unreadable.\n- Inside a [sculpt job](sculpt-job.md) or [studio job](studio-job.md) the\n  gate runs with `throwOnFail`, so a failing report becomes\n  `asset failed verification: <reasons joined with '; '>` and fails the job.\n- `verify.enabled: false` opts a job out of the gate (not recommended);\n  standalone `glina verify` always runs.\n\n## Invariants and refusals\n\n- A gate *failure* is a report (`ok: false` plus reasons), never a throw.\n  Only an unparseable file throws, with one of these exact sentences:\n  - `file too small to be a GLB`\n  - `not a GLB (bad magic)`\n  - `truncated before first chunk`\n  - `first GLB chunk is not JSON`\n  - `GLB JSON chunk does not parse: <reason>`\n- Render smoke failures append `render smoke failed: <reason>` to the report\n  and set `ok: false`; the structural verdict is never masked by them.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "Verification gate",
+          "id": "verification-gate"
+        },
+        {
+          "depth": 2,
+          "text": "Definition",
+          "id": "definition"
+        },
+        {
+          "depth": 2,
+          "text": "Report shape",
+          "id": "report-shape"
+        },
+        {
+          "depth": 2,
+          "text": "Thresholds and defaults",
+          "id": "thresholds-and-defaults"
+        },
+        {
+          "depth": 2,
+          "text": "Lifecycle",
+          "id": "lifecycle"
+        },
+        {
+          "depth": 2,
+          "text": "Invariants and refusals",
+          "id": "invariants-and-refusals"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "docs/concepts/verification-gate.md",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/docs/concepts/verification-gate.md"
+      },
+      "order": 375
+    },
+    {
+      "productSlug": "glina",
+      "slug": "concepts/blender-session",
+      "title": "Blender session",
+      "markdown": "# Blender session\n\nA Blender session (`pipeline/blender.js`, class `BlenderSession`) is the only\nway the pipeline touches Blender: a Blender MCP server spoken to over stdio\nJSON-RPC — never hand-rolled sockets, never a hand-managed Blender subprocess.\n\n## Shape\n\n- **Spawn**: `uvx blender-mcp` by default. `blender.mcp.command` +\n  `blender.mcp.args` override the executable; `blender.mcp.uvx: false` falls\n  back to a bare `blender-mcp` binary; `blender.mcp.uvxBin` renames the uvx\n  executable.\n- **Tool surface used**: exactly `get_scene_info` and\n  `execute_blender_code`. Everything else — import, export, decimate, rig —\n  is Blender Python (`bpy`) sent through `execute_blender_code`.\n- **Environment**: the MCP child gets a scrubbed environment (PATH/HOME\n  only), so no credential can leak through env inheritance.\n\n## Lifecycle\n\n1. `BlenderSession.start(options)` spawns the server and performs the MCP\n   handshake. A failed start throws:\n   `blender MCP server failed to start (<command> <args>): <reason>. Run\n   'node pipeline/setup.js' to provision Blender + blender-mcp.`\n2. `execute(code)` wraps the code in `try/except` **before** sending. The\n   addon's execute path has a nasty failure mode: an exception escaping the\n   executed block kills the addon's server thread (every subsequent call gets\n   \"connection refused\"). Wrapping turns bugs into captured\n   `GAC-EXEC-ERROR: <traceback>` output instead — the error still reaches the\n   caller, but the session survives.\n3. `importModel(path)` resets the scene through the data API only (objects,\n   actions, meshes, armatures, materials) and imports the GLB.\n   `bpy.ops.wm.read_factory_settings` is never used — it would wipe the\n   addon's scene properties and kill the MCP server thread. Stale actions are\n   removed too: leaving an old `flap` action made previews pick a stale clip\n   after repeated imports.\n4. `exportGlb(path)` exports the whole scene and stats the file; an absent\n   or empty file throws `export produced no file at <path>: <reason>`.\n5. `close()` ends the MCP process.\n\n## Health\n\n`isHealthy()` is three checks, because the MCP server starts fine even when\nthe Blender side of the bridge is dead — tool listing alone lies:\n\n1. the server answers `tools/list`,\n2. `execute_blender_code` is among the tools,\n3. a trivial `print(\"health-probe\")` actually round-trips into Blender.\n\n`glina blender-health` prints `{ healthy, tools }` and exits 0/1 on it.\n\n## The bridge itself\n\nThe MCP server bridges into Blender's own addon listening on\n`127.0.0.1:9876`. The addon requires a GUI Blender session.\n`scripts/ensure-blender.sh` guards invocations: if port 9876 is not\nanswering it launches Blender (`$BLENDER_BIN`, default\n`/opt/homebrew/bin/blender`), waits up to 60 s for the bridge, then execs the\nreal command — or fails with `ensure-blender: bridge did not come up`.\n\n## Invariants\n\n- One session per job; sessions are always closed in a `finally`, even on\n  failure.\n- Consumers that see three consecutive execute failures stop probing — see\n  the [sculpt job](sculpt-job.md) bridge-down rule.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "Blender session",
+          "id": "blender-session"
+        },
+        {
+          "depth": 2,
+          "text": "Shape",
+          "id": "shape"
+        },
+        {
+          "depth": 2,
+          "text": "Lifecycle",
+          "id": "lifecycle"
+        },
+        {
+          "depth": 2,
+          "text": "Health",
+          "id": "health"
+        },
+        {
+          "depth": 2,
+          "text": "The bridge itself",
+          "id": "the-bridge-itself"
+        },
+        {
+          "depth": 2,
+          "text": "Invariants",
+          "id": "invariants"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "docs/concepts/blender-session.md",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/docs/concepts/blender-session.md"
+      },
+      "order": 376
+    },
+    {
+      "productSlug": "glina",
+      "slug": "concepts/browser-session",
+      "title": "Browser session",
+      "markdown": "# Browser session\n\nA browser session (`pipeline/weles.js`) is the pipeline's only path to a web\npage. The pipeline never launches its own browser and never touches a local\nbrowser profile — no Chrome cookie DBs, no user-data-dir scraping. All page\nautomation goes through the Weles MCP stdio server (`weles-mcp`).\n\n## Shape\n\nTwo layers:\n\n- **`McpStdioClient`** — a minimal JSON-RPC 2.0 client over a spawned MCP\n  stdio server (also reused by the [Blender session](blender-session.md)).\n  Per-request timeout: 120 s (`weles MCP request timed out: <method>`). The\n  child process gets a scrubbed environment (PATH/HOME only).\n- **`WelesBrowserSession`** — owns one browser slot end-to-end:\n  `start({ headless, browser })` → `weles_browser_start`;\n  `newPage()` → `weles_page_new`; `close()` → `weles_browser_close` plus\n  process shutdown.\n\nThe Weles tool surface the pipeline drives (captured from a live\n`glina weles-tools` run):\n\n```\nweles_browser_start — Launch a Weles browser context via AsyncNewBrowser and return a browserId.\nweles_browser_close — Close a Weles browser context and all tracked pages for it.\nweles_page_new — Create a new page in a Weles browser context and return a pageId.\nweles_page_goto — Navigate a tracked Weles page to a URL.\nweles_page_text — Read visible text from a Weles page or selector.\nweles_page_click — Click a CSS selector on a Weles page.\nweles_page_fill — Fill a CSS selector on a Weles page.\nweles_page_screenshot — Capture a Weles page screenshot. Saves to path when provided, otherwise returns base64 PNG.\nweles_page_evaluate — Evaluate a JavaScript expression in a Weles page and return the JSON-serializable result.\n```\n\n`WelesPage` wraps the page tools: `goto`, `text`, `click(selector)`,\n`fill(selector, value)`, `screenshot(path)`, `evaluate(expression)`.\n\n## Lifecycle\n\nOnly the [studio job](studio-job.md) opens browser sessions. The session is\nclosed in a `finally` — a failed job never leaks a browser slot.\n\n## Refusals\n\n- `weles MCP process failed to start: <reason>` — `weles-mcp` is not on\n  PATH or died at spawn.\n- `weles MCP process exited (code N)` — the server died mid-session; every\n  pending request fails with this.\n- `weles tool <name> failed: <text>` — the tool answered `isError`.\n- `weles MCP request timed out: <method>` — no answer within 120 s.\n- `could not parse id from weles MCP reply: <text>` — the server's reply\n  named no browser/page id.\n- `MCP client not started` — a request was issued before `start()`.\n\n## Environment\n\nThe Weles child receives only `PATH` and `HOME` by default. `WELES_BIN` and\n`WELES_MCP_ARGS` appear in the config module's non-secret allowlist but this\nversion does not read or apply them; place `weles-mcp` on PATH. Credential\nenvironment variables are not a supported configuration path — see\n[configuration](../configuration.md).\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "Browser session",
+          "id": "browser-session"
+        },
+        {
+          "depth": 2,
+          "text": "Shape",
+          "id": "shape"
+        },
+        {
+          "depth": 2,
+          "text": "Lifecycle",
+          "id": "lifecycle"
+        },
+        {
+          "depth": 2,
+          "text": "Refusals",
+          "id": "refusals"
+        },
+        {
+          "depth": 2,
+          "text": "Environment",
+          "id": "environment"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "docs/concepts/browser-session.md",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/docs/concepts/browser-session.md"
+      },
+      "order": 377
+    },
+    {
+      "productSlug": "glina",
+      "slug": "concepts/model-backend",
+      "title": "Model backend",
+      "markdown": "# Model backend\n\nThe model backend (`pipeline/llm.js`) is the sculpt loop's one transport:\n`complete({ system, messages, maxTokens }) → { text, stopReason }`. There are\nexactly two backends, both OpenAI-compatible `/v1/chat/completions`:\n\n- **Brama** — the org model router. The default and the only fleet path.\n- **OpenRouter** — an operator-sanctioned alternative, enabled only by\n  explicit config (`models.openrouter` present, `models.backend:\n  \"openrouter\"` to prefer it). The key still comes from Skarbiec.\n\nDirect provider APIs (Anthropic, OpenAI, …) intentionally do not exist in\nthis package. Configuring one is refused outright:\n\n> `direct provider APIs are not supported in this package — model access goes\n> through Brama (models.brama) or, when the operator sanctions it in the\n> config, OpenRouter (models.openrouter)`\n\nThat sentence fires when `models.anthropic`, `models.openai`, or\n`models.direct` appears in the config. The code paths were deleted at the\nowner's demand, not gated.\n\n## Selection\n\n`models.backend` (default `\"brama\"`) chooses a preference, with the following\nactual selection order:\n\n- Brama is ready only when `models.brama.url`, `key`, and `bearer` are all\n  present. With the default/`brama` preference, a ready Brama is selected.\n- Otherwise, a configured `models.openrouter.key` selects OpenRouter — even\n  when the preference says `brama`. This lets an incomplete Brama tuple fall\n  back to the sanctioned alternative.\n- With `openrouter` preferred but no OpenRouter key, a ready Brama is used.\n  If Brama is incomplete too, setup fails with\n  `backend=brama requested but models.brama.url/key/bearer are not configured`\n  (the wording is inherited from the implementation).\n- With neither backend usable:\n  `no model backend configured — set models.brama.url+key+bearer or\n  models.openrouter.key (skarbiec:// references in pipeline.config.json)`.\n\n## Brama transport\n\n- URL: `models.brama.url` + `/v1/chat/completions`; model `models.brama.model`\n  (default `any`).\n- Auth: `authorization: Bearer <bearer>` plus the HMAC agent identity —\n  `x-agent-id`, `x-agent-timestamp`, and `x-agent-signature =\n  HMAC-SHA256(key, \"<agent_id>:<ts>:<sha256(body)>\")`.\n- Retries: `attempts` (default 4) on transport failures and HTTP 502/503,\n  with linear backoff; a signed refusal (401/403) or routing error never\n  retries. Each attempt has a hard deadline (`timeoutMs`, default 120 s) so a\n  black-holed connection can never hang the sculpt loop.\n- A 200 with empty content (reasoning routes burning the token cap on hidden\n  thinking) retries like a 502.\n- Exhaustion: `brama unreachable after N attempts: <reason>`; a final HTTP\n  error is `brama HTTP <status>: <message>`.\n\n## OpenRouter transport\n\n- URL: `models.openrouter.url` (default `https://openrouter.ai/api/v1`) +\n  `/chat/completions`; plain bearer key; `timeoutMs` default 180 s;\n  `attempts` default 4.\n- 429 and 5xx retry; other 4xx are final (`openrouter HTTP N: <message>`).\n  Empty content retries. Exhaustion:\n  `openrouter unreachable after N attempts: …` /\n  `openrouter exhausted N attempts: …`.\n\n## Message shape\n\nAnthropic-style content blocks are flattened to plain OpenAI messages;\nimage blocks (viewport screenshots) are replaced by the note\n`[viewport screenshot attached]` — neither backend receives raw image bytes.\n\n## Reply parsing\n\n`parseJsonFrom(text)` extracts the sculpt step: a fenced ```json block first,\nelse a balanced-brace scan that takes the first object that parses. Refusals:\n`model reply JSON does not parse: <reason>` and\n`model reply contained no JSON object: <prefix>`.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "Model backend",
+          "id": "model-backend"
+        },
+        {
+          "depth": 2,
+          "text": "Selection",
+          "id": "selection"
+        },
+        {
+          "depth": 2,
+          "text": "Brama transport",
+          "id": "brama-transport"
+        },
+        {
+          "depth": 2,
+          "text": "OpenRouter transport",
+          "id": "openrouter-transport"
+        },
+        {
+          "depth": 2,
+          "text": "Message shape",
+          "id": "message-shape"
+        },
+        {
+          "depth": 2,
+          "text": "Reply parsing",
+          "id": "reply-parsing"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "docs/concepts/model-backend.md",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/docs/concepts/model-backend.md"
+      },
+      "order": 378
+    },
+    {
+      "productSlug": "glina",
+      "slug": "concepts/runtime-art",
+      "title": "Runtime art",
+      "markdown": "# Runtime art\n\nThe runtime-art half (`src/`) is what a game imports: procedural THREE.js\ngeometry and SVG card art, built entirely in memory. No credentials, no\nnetwork calls at generation time, no Blender — this half never touches the\nauthoring pipeline's integration boundaries.\n\nIt is the extracted asset layer of the browser RTS Potyczka (races: humans /\ndwarves / elves / skeletons), and its APIs keep that game's vocabulary.\n\n## Modules\n\n| Module | Subpath | What it builds |\n|---|---|---|\n| `anatomy.js` | `./anatomy` | `makeBody(team, raceKey, armorTier, weaponTier, klass, magicType, weaponStyle)` — lathe-profile humanoid bodies with race visuals (skin/helmet colors, proportions, beard/ears/skull accessories); `buildBlobBody` — marching-cubes blob bodies with generated skin textures |\n| `sculpt.js` | `./sculpt` | `sculptHumanoid(opts)` — a single-geometry vertex-colored warrior (torso/head/limb rings, face features, axe, armor details, cape, horns); palette via `opts.skin/armor/helmet/pants/boot/belt/collar/gauntlet`, plus `beard`, `eyeGlow`, `noHorns` |\n| `sculpt-gear.js` | `./sculpt-gear` | low-level mesh helpers: `addBox`, `buildAxe`, `buildArmorDetails`, `buildBodyDetails`, `buildExtraDetails`, `buildCape` |\n| `card-art.js` | `./card-art` | `cardArtSvg(card, race)` — a complete `<svg>` string; dependency-free |\n| `loader.js` | `./loader` | procedural-only stubs of a former GLB loader API (see below) |\n\n`three` (>= 0.160.0) is a peer dependency of the geometry modules.\n`anatomy.js` additionally imports `MarchingCubes` from the three examples CDN\nand `../../lib/weapons.js` — a game-side file, so `./anatomy` resolves as an\nimport only inside a host that provides that layout; `sculpt.js`,\n`sculpt-gear.js`, `card-art.js`, and `loader.js` are self-contained.\n\n## Card art\n\n`cardArtSvg(card, race)` is pure string assembly (no DOM, runs in Node):\n\n- `race` picks a palette and background scene (`castle`, `peaks`, `forest`,\n  `ruins`); unknown races fall back to `humans`.\n- `card.tier` picks the glow (`common`, `combo`, `rare`; anything else gets\n  a neutral grey).\n- The glyph is chosen from `card.id` / `card.klass` / `card.kind` by\n  `pickGlyph` (e.g. `d_forge → anvil`, `klass: archer → bow`,\n  `kind: building → tower`; final fallback `sword`) and referenced as an\n  `<image href=\"<ART_BASE>/<glyph>.svg\">` from `assets/cards/` — overridable\n  in a browser via `window.CARD_ART_BASE`.\n\nExecuted evidence: `node docs/examples/card-art.mjs` writes a 5.6 kB SVG.\n\n## Loader stubs\n\n`loader.js` keeps the old GLB-loading API alive as explicit no-ops, because\nall character geometry is procedural now: `loadHumanoid()` resolves `null`,\n`isHumanoidReady()`/`isRaceReady()` return `false`, `loadRaceModel()` rejects\nwith `procedural-only`, `buildRaceUnit`/`buildHumanoidUnit`/`playClip` return\n`null`, `crossFadeTo` returns the current action unchanged.\n\nFull export list: [runtime API reference](../runtime-api.md).\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "Runtime art",
+          "id": "runtime-art"
+        },
+        {
+          "depth": 2,
+          "text": "Modules",
+          "id": "modules"
+        },
+        {
+          "depth": 2,
+          "text": "Card art",
+          "id": "card-art"
+        },
+        {
+          "depth": 2,
+          "text": "Loader stubs",
+          "id": "loader-stubs"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "docs/concepts/runtime-art.md",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/docs/concepts/runtime-art.md"
+      },
+      "order": 379
+    }
+  ]
+}

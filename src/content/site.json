@@ -5,7 +5,7 @@
   "description": "Your AI sculpts your game assets.",
   "audience": "Indie game developers and small studios who need game-ready GLB assets but cannot hand-model every prop, weapon, and character.",
   "sourceUrl": "https://github.com/wisent-ai/glina",
-  "docsUrl": "https://github.com/wisent-ai/glina#readme",
+  "docsUrl": "https://glina.wisent.com/docs",
   "discordUrl": "https://discord.gg/qRjpkthq54",
   "ogImageAlt": "Glina by Wisent — your AI sculpts your game assets",
   "commitment": null,
@@ -15,9 +15,9 @@
     "target": "https://github.com/wisent-ai/glina#install"
   },
   "secondaryAction": {
-    "label": "Browse the CLI reference",
-    "purpose": "Read the exact subcommands and MCP tools before installing anything.",
-    "target": "https://github.com/wisent-ai/glina#use"
+    "label": "Browse the documentation",
+    "purpose": "Read the exact workflows, commands, interfaces, and operating contracts.",
+    "target": "/docs"
   },
   "nav": [
     {
@@ -25,8 +25,8 @@
       "href": "https://github.com/wisent-ai/glina#install"
     },
     {
-      "label": "CLI",
-      "href": "https://github.com/wisent-ai/glina#use"
+      "label": "Docs",
+      "href": "/docs"
     },
     {
       "label": "Source",
