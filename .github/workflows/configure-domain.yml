@@ -1,0 +1,24 @@
+name: Configure product domain
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/configure-domain.mjs"
+      - ".github/workflows/configure-domain.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: glina-domain
+  cancel-in-progress: false
+
+jobs:
+  configure:
+    runs-on: [self-hosted, stado-publisher]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure the canonical product domain
+        run: node scripts/configure-domain.mjs

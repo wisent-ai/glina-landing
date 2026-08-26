@@ -5,8 +5,8 @@ const domain = "wisent.com";
 const host = "glina";
 const address = "76.76.21.21";
 
-function credential(id) {
-  return execFileSync("stado", ["credentials", "get", id, "--field", "value"], {
+function credential(field) {
+  return execFileSync("stado", ["credentials", "get", "namecheap_auto", "--field", field], {
     encoding: "utf8",
     stdio: ["ignore", "pipe", "inherit"],
   }).trim();
