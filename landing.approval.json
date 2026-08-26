@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "product": "Glina",
+  "approvedBy": "Łukasz Bartoszcze",
+  "approvedAt": "2026-08-26T02:26:43.898Z",
+  "approvalReference": "current conversation: product documentation domain correction",
+  "approvalStatement": "do roboty",
+  "manifestDigest": "c65a9844c1fc64a4dcf965f2ce622181d52e48fa814879de5a081b87161377b4",
+  "siteDigest": "54b74257a4643406a713aa12710b5bdc715182874e119bbfb01808c29a8be35c",
+  "briefDigest": "8eb8628283fe1b8584948c46d62a660f3d480ae7238b3cfbff2cfdb9a7668e8f",
+  "componentPlanDigest": "da244951a53d8eef49ace4fb48bf256efe2cbfe963b51ae4e69e46d7f84d79b2",
+  "contentPlanDigest": "879fe66e9d1e717eee4e1882cc47efbcb528a7765ca851760b755529683322c8"
+}
