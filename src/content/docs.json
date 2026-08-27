@@ -415,7 +415,7 @@
       "productSlug": "glina",
       "slug": "cli",
       "title": "CLI reference",
-      "markdown": "# CLI reference\n\nInstalled binary: `glina`. In a checkout, replace `glina` with `node pipeline/cli.js`. Successful commands print JSON to stdout except `help` and `weles-tools`; operational progress and refusals go to stderr.\n\nArgument parsing is intentionally small: `--name value` becomes a string, a flag without a following value becomes `true`, and remaining words are positional. Unknown options are ignored by commands that do not read them.\n\n## Commands\n\n### `glina help`\n\nPrints usage. No command is equivalent. Exit 0.\n\n### `glina create <prompt> [--race <race>] [--out <dir>] [--config <path>]`\n\nRuns the hosted-studio job through Weles. `--race` prefixes the prompt with the race word and is also returned in the job input; the CLI does not constrain its value. `--out` defaults to `assets/models`. Output is `{outPath, processedPath, artifactUrl, prompt, verification}`. Missing prompt: `error: create requires a prompt`, exit 2.\n\n### `glina sculpt <prompt> [--out <dir>] [--filename <file.glb>] [--rounds <n>] [--config <path>]`\n\nRuns the model→Blender iterative sculpt loop. Defaults: output directory `assets/models`, filename is a 48-character ASCII slug of the prompt, rounds from `llm.maxRounds` then 12. Round thoughts print as `[round N] …` on stderr. Output is `{outPath, verification, rounds}`; the transcript is deliberately omitted. Missing prompt exits 2 with `error: sculpt requires a prompt`.\n\n### `glina verify <file.glb> [--config <path>]`\n\nRuns structural verification and optional render smoke. A missing/unreadable config is ignored and gate defaults apply. Prints the complete report; exit 0 when `ok:true`, 1 when `ok:false`, 2 when the path is missing (`error: verify requires a .glb path`). An unparseable file is an exception and exits 1.\n\n### `glina check-config [--config <path>]`\n\nReads JSON, refuses inline secrets, resolves all `skarbiec://` values, then prints a recursively redacted config. It does not start Weles or Blender. Missing/invalid/unresolvable config exits 1 with `error: <reason>`.\n\n### `glina blender-health`\n\nStarts the default Blender MCP session, lists tools, and executes a trivial Blender probe. Prints `{healthy, tools}` and exits 0/1 according to `healthy`. This command reaches the live Blender bridge; do not use it merely to inspect configuration.\n\n### `glina weles-tools`\n\nStarts `weles-mcp`, performs the MCP handshake, and prints one `name — description` line per exposed tool. Failure exits 1.\n\n### `glina preview-anim <file.glb> [--clip <name>] [--frames <n>] [--fps <n>] [--out <file.gif>] [--config <path>]`\n\nImports the GLB through Blender, selects the named clip (or the longest action), renders up to 24 frames by default at 512×512, and assembles a looping GIF at 10 fps by default. `ffmpeg` is preferred; `uv run --with pillow` is the fallback. Default output is `<stem>-anim[-<clip>].gif`. Prints `{outPath, clip, frames, tool}`. Missing path exits 2.\n\n### `glina animate <file.glb> [--preset dragon] [--out <file.glb>] [--config <path>]`\n\nApplies the deterministic `dragon` animation preset through Blender, exports, and gates with materials, moving animation, and at least two clips required. Default output inserts `-animated` before `.glb`. `dragon` is the only preset; another value fails with `unknown animation preset: <value>`. Missing path exits 2.\n\n### `glina showcase [dragon] [--out <file.glb>] [--config <path>]`\n\nBuilds the deterministic cohesive dragon reference directly in Blender, then applies the strict animated gate. The positional asset defaults to `dragon`; it is the only supported asset. Default output is `assets/models/<asset>-showcase.glb`. Unknown asset: `unknown showcase asset: <asset>`.\n\n### `glina serve [--port <n>] [--config <path>]`\n\nStarts the loopback desktop backend on `127.0.0.1`. Port defaults to 8080; `0` requests an ephemeral port. The first and only stdout protocol line is `{\"ready\":true,\"port\":N}`; the process then serves until terminated. Invalid/non-integer/out-of-range port exits 2 with `error: serve requires --port <n> (0 = ephemeral)`. See [HTTP reference](http.md).\n\n### `glina setup [--check] [--dry-run]`\n\nBuilds the macOS or Linux provisioning plan for Blender and uv. `--check` only uses `which` and never installs. Without it, missing tools are installed (Homebrew on macOS; apt/snap and the uv installer on Linux), then `blender-mcp` is resolved through uvx. `--dry-run` reports would-install/would-resolve. Prints `{healthy, steps}` and exits 0/1.\n\n### `glina export-config --out <path> [--config <path>]`\n\nOperational, intentionally omitted from the friendly help and released surface. Resolves vault references locally, writes a `_resolved:true` JSON file, chmods it to 0600, and prints only `{out, resolved:true}`. Missing `--out` exits 2. The output contains secrets; see [configuration](configuration.md#resolved-handoff-files).\n\n## Exit codes\n\n| Code | Meaning |\n|---:|---|\n| 0 | Command completed, health passed, or gate accepted. |\n| 1 | Runtime/config/integration error, unhealthy probe, or gate refusal. |\n| 2 | CLI usage error or unknown command. |\n\nAn unknown command prints `unknown command: <name>` followed by usage and exits 2.\n",
+      "markdown": "# CLI reference\n\nInstalled binary: `glina`. In a checkout, replace `glina` with `node pipeline/cli.js`. Successful commands print JSON to stdout except `help` and `weles-tools`; operational progress and refusals go to stderr.\n\nArgument parsing is intentionally small: `--name value` becomes a string, a flag without a following value becomes `true`, and remaining words are positional. Unknown options are ignored by commands that do not read them.\n\n## Command tree\n\n- [`glina help`](/docs/cli/help) — Help.\n- [`glina create <prompt> [--race <race>] [--out <dir>] [--config <path>]`](/docs/cli/create) — Create.\n- [`glina sculpt <prompt> [--out <dir>] [--filename <file.glb>] [--rounds <n>] [--config <path>]`](/docs/cli/sculpt) — Sculpt.\n- [`glina verify <file.glb> [--config <path>]`](/docs/cli/verify) — Verify.\n- [`glina check-config [--config <path>]`](/docs/cli/check-config) — Check config.\n- [`glina weles-tools`](/docs/cli/weles-tools) — Weles tools.\n- [`glina blender-health`](/docs/cli/blender-health) — Blender health.\n- [`glina preview-anim <file.glb> [--clip <name>] [--frames <n>] [--fps <n>] [--out <file.gif>] [--config <path>]`](/docs/cli/preview-anim) — Preview animation.\n- [`glina animate <file.glb> [--preset dragon] [--out <file.glb>] [--config <path>]`](/docs/cli/animate) — Animate.\n- [`glina showcase [dragon] [--out <file.glb>] [--config <path>]`](/docs/cli/showcase) — Showcase.\n- [`glina serve [--port <n>] [--config <path>]`](/docs/cli/serve) — Serve.\n- [`glina setup [--check] [--dry-run]`](/docs/cli/setup) — Setup.\n- [`glina export-config --out <path> [--config <path>]`](/docs/cli/export-config) — Export config.\n\nMCP protocol method names and MCP tool names are documented separately; they are not human Glina CLI command paths.\n\n## Exit codes\n\n| Code | Meaning |\n|---:|---|\n| 0 | Command completed, health passed, or gate accepted. |\n| 1 | Runtime/config/integration error, unhealthy probe, or gate refusal. |\n| 2 | CLI usage error or unknown command. |\n\nAn unknown command prints `unknown command: <name>` followed by usage and exits 2.\n",
       "headings": [
         {
           "depth": 1,
@@ -424,73 +424,8 @@
         },
         {
           "depth": 2,
-          "text": "Commands",
-          "id": "commands"
-        },
-        {
-          "depth": 3,
-          "text": "glina help",
-          "id": "glina-help"
-        },
-        {
-          "depth": 3,
-          "text": "glina create [--race ] [--out ] [--config ]",
-          "id": "glina-create---race----out----config-"
-        },
-        {
-          "depth": 3,
-          "text": "glina sculpt [--out ] [--filename ] [--rounds ] [--config ]",
-          "id": "glina-sculpt---out----filename----rounds----config-"
-        },
-        {
-          "depth": 3,
-          "text": "glina verify [--config ]",
-          "id": "glina-verify---config-"
-        },
-        {
-          "depth": 3,
-          "text": "glina check-config [--config ]",
-          "id": "glina-check-config---config-"
-        },
-        {
-          "depth": 3,
-          "text": "glina blender-health",
-          "id": "glina-blender-health"
-        },
-        {
-          "depth": 3,
-          "text": "glina weles-tools",
-          "id": "glina-weles-tools"
-        },
-        {
-          "depth": 3,
-          "text": "glina preview-anim [--clip ] [--frames ] [--fps ] [--out ] [--config ]",
-          "id": "glina-preview-anim---clip----frames----fps----out----config-"
-        },
-        {
-          "depth": 3,
-          "text": "glina animate [--preset dragon] [--out ] [--config ]",
-          "id": "glina-animate---preset-dragon---out----config-"
-        },
-        {
-          "depth": 3,
-          "text": "glina showcase [dragon] [--out ] [--config ]",
-          "id": "glina-showcase-dragon---out----config-"
-        },
-        {
-          "depth": 3,
-          "text": "glina serve [--port ] [--config ]",
-          "id": "glina-serve---port----config-"
-        },
-        {
-          "depth": 3,
-          "text": "glina setup [--check] [--dry-run]",
-          "id": "glina-setup---check---dry-run"
-        },
-        {
-          "depth": 3,
-          "text": "glina export-config --out [--config ]",
-          "id": "glina-export-config---out---config-"
+          "text": "Command tree",
+          "id": "command-tree"
         },
         {
           "depth": 2,
@@ -505,6 +440,591 @@
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/cli.md"
       },
       "order": 364
+    },
+    {
+      "productSlug": "glina",
+      "slug": "cli/help",
+      "title": "glina help",
+      "markdown": "# `glina help`\n\n## Invocation\n\n```sh\nglina help\n```\n\nRunning `glina` with no command has the same effect.\n\n## Purpose\n\nPrint the human CLI usage and the public command list. It does not load configuration or contact Weles or Blender.\n\n## Inputs and options\n\nNone.\n\n## Output and state\n\nWrites usage text to stdout, exits 0, and changes no state.\n\n## Refusals\n\n`help` has no command-specific refusal. An unrecognized command instead writes `unknown command: <name>` followed by the same usage text to stderr and exits 2.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "glina help",
+          "id": ""
+        },
+        {
+          "depth": 2,
+          "text": "Invocation",
+          "id": "invocation"
+        },
+        {
+          "depth": 2,
+          "text": "Purpose",
+          "id": "purpose"
+        },
+        {
+          "depth": 2,
+          "text": "Inputs and options",
+          "id": "inputs-and-options"
+        },
+        {
+          "depth": 2,
+          "text": "Output and state",
+          "id": "output-and-state"
+        },
+        {
+          "depth": 2,
+          "text": "Refusals",
+          "id": "refusals"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "pipeline/cli.js",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/cli.js"
+      },
+      "order": 365
+    },
+    {
+      "productSlug": "glina",
+      "slug": "cli/create",
+      "title": "glina create",
+      "markdown": "# `glina create`\n\n## Invocation\n\n```sh\nglina create <prompt> [--race <race>] [--out <dir>] [--config <path>]\n```\n\n## Purpose\n\nRun the hosted-studio text-to-game job through Weles and produce a verified game asset.\n\n## Inputs and options\n\n- `<prompt>` is required; all positional words are joined with spaces.\n- `--race <race>` prefixes the prompt with the race word and records the race in the job input. The CLI does not constrain the value.\n- `--out <dir>` selects the output directory; the pipeline default is `assets/models`.\n- `--config <path>` selects the pipeline JSON; otherwise the repository's `pipeline.config.json` is used.\n\n## Output and state\n\nDrives the configured browser workflow through Weles, downloads and processes the asset, runs verification, writes asset files, and prints `{outPath, processedPath, artifactUrl, prompt, verification}` as JSON.\n\n## Refusals\n\nAn empty prompt writes exactly `error: create requires a prompt` to stderr and exits 2. Configuration, Weles, download, processing, or verification errors are printed as `error: <message>` and exit 1.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "glina create",
+          "id": ""
+        },
+        {
+          "depth": 2,
+          "text": "Invocation",
+          "id": "invocation"
+        },
+        {
+          "depth": 2,
+          "text": "Purpose",
+          "id": "purpose"
+        },
+        {
+          "depth": 2,
+          "text": "Inputs and options",
+          "id": "inputs-and-options"
+        },
+        {
+          "depth": 2,
+          "text": "Output and state",
+          "id": "output-and-state"
+        },
+        {
+          "depth": 2,
+          "text": "Refusals",
+          "id": "refusals"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "pipeline/cli.js",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/cli.js"
+      },
+      "order": 366
+    },
+    {
+      "productSlug": "glina",
+      "slug": "cli/sculpt",
+      "title": "glina sculpt",
+      "markdown": "# `glina sculpt`\n\n## Invocation\n\n```sh\nglina sculpt <prompt> [--out <dir>] [--filename <file.glb>] [--rounds <n>] [--config <path>]\n```\n\n## Purpose\n\nRun the model-to-Blender iterative sculpt loop and gate the exported GLB.\n\n## Inputs and options\n\n- `<prompt>` is required; all positional words are joined with spaces.\n- `--out <dir>` selects the output directory; the default is `assets/models`.\n- `--filename <file.glb>` selects the output name; the default is a 48-character ASCII slug of the prompt.\n- `--rounds <n>` overrides `llm.maxRounds`; without either value the loop uses 12 rounds.\n- `--config <path>` selects the pipeline JSON.\n\n## Output and state\n\nExecutes model-written Blender Python through the Blender MCP session, exports and verifies a GLB, writes round thoughts as `[round N] …` to stderr, and prints `{outPath, verification, rounds}` as JSON. The transcript is deliberately omitted.\n\n## Refusals\n\nAn empty prompt writes exactly `error: sculpt requires a prompt` and exits 2. Model, Blender, export, or gate errors are printed as `error: <message>` and exit 1.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "glina sculpt",
+          "id": ""
+        },
+        {
+          "depth": 2,
+          "text": "Invocation",
+          "id": "invocation"
+        },
+        {
+          "depth": 2,
+          "text": "Purpose",
+          "id": "purpose"
+        },
+        {
+          "depth": 2,
+          "text": "Inputs and options",
+          "id": "inputs-and-options"
+        },
+        {
+          "depth": 2,
+          "text": "Output and state",
+          "id": "output-and-state"
+        },
+        {
+          "depth": 2,
+          "text": "Refusals",
+          "id": "refusals"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "pipeline/cli.js",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/cli.js"
+      },
+      "order": 367
+    },
+    {
+      "productSlug": "glina",
+      "slug": "cli/verify",
+      "title": "glina verify",
+      "markdown": "# `glina verify`\n\n## Invocation\n\n```sh\nglina verify <file.glb> [--config <path>]\n```\n\n## Purpose\n\nRun Glina's structural quality gate and, when configured, the Blender render-smoke gate.\n\n## Inputs and options\n\n- `<file.glb>` is required.\n- `--config <path>` selects verification thresholds and render-smoke settings. A missing or unreadable config is ignored and built-in gate defaults apply.\n\n## Output and state\n\nReads the GLB, may import it into Blender when render smoke is enabled, and prints the complete verification report. It exits 0 for `ok: true` and 1 for a completed report with `ok: false`.\n\n## Refusals\n\nA missing path writes exactly `error: verify requires a .glb path` and exits 2. An unparseable file or runtime integration error is printed as `error: <message>` and exits 1.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "glina verify",
+          "id": ""
+        },
+        {
+          "depth": 2,
+          "text": "Invocation",
+          "id": "invocation"
+        },
+        {
+          "depth": 2,
+          "text": "Purpose",
+          "id": "purpose"
+        },
+        {
+          "depth": 2,
+          "text": "Inputs and options",
+          "id": "inputs-and-options"
+        },
+        {
+          "depth": 2,
+          "text": "Output and state",
+          "id": "output-and-state"
+        },
+        {
+          "depth": 2,
+          "text": "Refusals",
+          "id": "refusals"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "pipeline/cli.js",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/cli.js"
+      },
+      "order": 368
+    },
+    {
+      "productSlug": "glina",
+      "slug": "cli/check-config",
+      "title": "glina check-config",
+      "markdown": "# `glina check-config`\n\n## Invocation\n\n```sh\nglina check-config [--config <path>]\n```\n\n## Purpose\n\nValidate pipeline configuration, enforce the vault-reference policy, resolve `skarbiec://` values, and show a safe resolved view without starting Weles or Blender.\n\n## Inputs and options\n\n- `--config <path>` selects the JSON file; otherwise the repository's `pipeline.config.json` is used.\n\n## Output and state\n\nReads configuration and Skarbiec, recursively replaces resolved secret fields with `<resolved: ok>`, and prints the redacted config as JSON. It does not rewrite the config.\n\n## Refusals\n\nMissing files, invalid JSON, inline secret values, invalid `skarbiec://` references, and resolution failures are printed exactly through the CLI envelope as `error: <reason>` and exit 1.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "glina check-config",
+          "id": ""
+        },
+        {
+          "depth": 2,
+          "text": "Invocation",
+          "id": "invocation"
+        },
+        {
+          "depth": 2,
+          "text": "Purpose",
+          "id": "purpose"
+        },
+        {
+          "depth": 2,
+          "text": "Inputs and options",
+          "id": "inputs-and-options"
+        },
+        {
+          "depth": 2,
+          "text": "Output and state",
+          "id": "output-and-state"
+        },
+        {
+          "depth": 2,
+          "text": "Refusals",
+          "id": "refusals"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "pipeline/cli.js",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/cli.js"
+      },
+      "order": 369
+    },
+    {
+      "productSlug": "glina",
+      "slug": "cli/weles-tools",
+      "title": "glina weles-tools",
+      "markdown": "# `glina weles-tools`\n\n## Invocation\n\n```sh\nglina weles-tools\n```\n\n## Purpose\n\nInspect the tools exposed by the configured Weles MCP server. This is a human CLI command; the individual MCP method names are not Glina CLI command routes.\n\n## Inputs and options\n\nNone.\n\n## Output and state\n\nStarts `weles-mcp`, performs the MCP handshake, prints one `name — description` line per exposed tool, then closes the client. It does not invoke any listed tool.\n\n## Refusals\n\nA process-start, handshake, listing, or shutdown error is printed as `error: <message>` and exits 1.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "glina weles-tools",
+          "id": ""
+        },
+        {
+          "depth": 2,
+          "text": "Invocation",
+          "id": "invocation"
+        },
+        {
+          "depth": 2,
+          "text": "Purpose",
+          "id": "purpose"
+        },
+        {
+          "depth": 2,
+          "text": "Inputs and options",
+          "id": "inputs-and-options"
+        },
+        {
+          "depth": 2,
+          "text": "Output and state",
+          "id": "output-and-state"
+        },
+        {
+          "depth": 2,
+          "text": "Refusals",
+          "id": "refusals"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "pipeline/cli.js",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/cli.js"
+      },
+      "order": 370
+    },
+    {
+      "productSlug": "glina",
+      "slug": "cli/blender-health",
+      "title": "glina blender-health",
+      "markdown": "# `glina blender-health`\n\n## Invocation\n\n```sh\nglina blender-health\n```\n\n## Purpose\n\nProbe the live Blender MCP bridge by completing the handshake and executing a trivial Blender operation.\n\n## Inputs and options\n\nNone.\n\n## Output and state\n\nStarts the default Blender MCP session, lists its tools, runs the health probe, prints `{healthy, tools}` as JSON, closes the session, and exits 0 when healthy or 1 when unhealthy. It reaches the live Blender bridge.\n\n## Refusals\n\nSession-start, MCP, or probe exceptions are printed as `error: <message>` and exit 1. A completed unhealthy probe is represented by `healthy: false` and exit 1 rather than a usage error.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "glina blender-health",
+          "id": ""
+        },
+        {
+          "depth": 2,
+          "text": "Invocation",
+          "id": "invocation"
+        },
+        {
+          "depth": 2,
+          "text": "Purpose",
+          "id": "purpose"
+        },
+        {
+          "depth": 2,
+          "text": "Inputs and options",
+          "id": "inputs-and-options"
+        },
+        {
+          "depth": 2,
+          "text": "Output and state",
+          "id": "output-and-state"
+        },
+        {
+          "depth": 2,
+          "text": "Refusals",
+          "id": "refusals"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "pipeline/cli.js",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/cli.js"
+      },
+      "order": 371
+    },
+    {
+      "productSlug": "glina",
+      "slug": "cli/preview-anim",
+      "title": "glina preview-anim",
+      "markdown": "# `glina preview-anim`\n\n## Invocation\n\n```sh\nglina preview-anim <file.glb> [--clip <name>] [--frames <n>] [--fps <n>] [--out <file.gif>] [--config <path>]\n```\n\n## Purpose\n\nRender a Blender animation clip from a GLB to a looping GIF.\n\n## Inputs and options\n\n- `<file.glb>` is required.\n- `--clip <name>` selects an action; otherwise the longest action is used.\n- `--frames <n>` controls sampled frames; the default maximum is 24.\n- `--fps <n>` controls GIF playback; the default is 10.\n- `--out <file.gif>` selects the result; the default is `<stem>-anim[-<clip>].gif`.\n- `--config <path>` selects Blender MCP settings; an unreadable config is ignored and bridge defaults apply.\n\n## Output and state\n\nImports the GLB into Blender, renders 512×512 frames, assembles the GIF with `ffmpeg` or the `uv run --with pillow` fallback, writes the file, and prints `{outPath, clip, frames, tool}` as JSON.\n\n## Refusals\n\nA missing path writes exactly `error: preview-anim requires a .glb path` and exits 2. Import, missing-action, rendering, or GIF-tool errors are printed as `error: <message>` and exit 1.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "glina preview-anim",
+          "id": ""
+        },
+        {
+          "depth": 2,
+          "text": "Invocation",
+          "id": "invocation"
+        },
+        {
+          "depth": 2,
+          "text": "Purpose",
+          "id": "purpose"
+        },
+        {
+          "depth": 2,
+          "text": "Inputs and options",
+          "id": "inputs-and-options"
+        },
+        {
+          "depth": 2,
+          "text": "Output and state",
+          "id": "output-and-state"
+        },
+        {
+          "depth": 2,
+          "text": "Refusals",
+          "id": "refusals"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "pipeline/cli.js",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/cli.js"
+      },
+      "order": 372
+    },
+    {
+      "productSlug": "glina",
+      "slug": "cli/animate",
+      "title": "glina animate",
+      "markdown": "# `glina animate`\n\n## Invocation\n\n```sh\nglina animate <file.glb> [--preset dragon] [--out <file.glb>] [--config <path>]\n```\n\n## Purpose\n\nApply Glina's deterministic animation preset to a GLB and gate the animated result.\n\n## Inputs and options\n\n- `<file.glb>` is required.\n- `--preset dragon` selects the preset; `dragon` is the only supported value and is the default.\n- `--out <file.glb>` selects the result; by default `-animated` is inserted before `.glb`.\n- `--config <path>` selects Blender MCP settings; an unreadable config is ignored and bridge defaults apply.\n\n## Output and state\n\nImports the source into Blender, adds visibly moving actions, exports the output, runs the strict gate requiring materials, moving animation, and at least two clips, and prints the result as JSON.\n\n## Refusals\n\nA missing path writes exactly `error: animate requires a .glb path` and exits 2. Any other preset refuses with exactly `unknown animation preset: <value>` inside the CLI's `error: <message>` envelope and exits 1. Blender, export, and gate errors also exit 1.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "glina animate",
+          "id": ""
+        },
+        {
+          "depth": 2,
+          "text": "Invocation",
+          "id": "invocation"
+        },
+        {
+          "depth": 2,
+          "text": "Purpose",
+          "id": "purpose"
+        },
+        {
+          "depth": 2,
+          "text": "Inputs and options",
+          "id": "inputs-and-options"
+        },
+        {
+          "depth": 2,
+          "text": "Output and state",
+          "id": "output-and-state"
+        },
+        {
+          "depth": 2,
+          "text": "Refusals",
+          "id": "refusals"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "pipeline/cli.js",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/cli.js"
+      },
+      "order": 373
+    },
+    {
+      "productSlug": "glina",
+      "slug": "cli/showcase",
+      "title": "glina showcase",
+      "markdown": "# `glina showcase`\n\n## Invocation\n\n```sh\nglina showcase [dragon] [--out <file.glb>] [--config <path>]\n```\n\n## Purpose\n\nBuild Glina's deterministic cohesive animated reference asset directly in Blender.\n\n## Inputs and options\n\n- The optional asset name defaults to `dragon`; `dragon` is the only supported asset.\n- `--out <file.glb>` selects the result; the default is `assets/models/<asset>-showcase.glb`.\n- `--config <path>` selects Blender MCP settings; an unreadable config is ignored and bridge defaults apply.\n\n## Output and state\n\nCreates the reference scene in Blender, exports it, applies the strict animated quality gate, writes the GLB, and prints the result as JSON.\n\n## Refusals\n\nAny asset other than `dragon` refuses with exactly `unknown showcase asset: <asset>` inside the CLI's `error: <message>` envelope and exits 1. Blender, export, and gate errors also exit 1.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "glina showcase",
+          "id": ""
+        },
+        {
+          "depth": 2,
+          "text": "Invocation",
+          "id": "invocation"
+        },
+        {
+          "depth": 2,
+          "text": "Purpose",
+          "id": "purpose"
+        },
+        {
+          "depth": 2,
+          "text": "Inputs and options",
+          "id": "inputs-and-options"
+        },
+        {
+          "depth": 2,
+          "text": "Output and state",
+          "id": "output-and-state"
+        },
+        {
+          "depth": 2,
+          "text": "Refusals",
+          "id": "refusals"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "pipeline/cli.js",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/cli.js"
+      },
+      "order": 374
+    },
+    {
+      "productSlug": "glina",
+      "slug": "cli/serve",
+      "title": "glina serve",
+      "markdown": "# `glina serve`\n\n## Invocation\n\n```sh\nglina serve [--port <n>] [--config <path>]\n```\n\n## Purpose\n\nRun the loopback HTTP/JSON backend used by Glina Desktop.\n\n## Inputs and options\n\n- `--port <n>` selects an integer from 0 through 65535. The default is 8080; `0` requests an ephemeral port.\n- `--config <path>` selects the pipeline configuration for backend operations.\n\n## Output and state\n\nBinds only `127.0.0.1`, prints one readiness line `{\"ready\":true,\"port\":N}`, and then serves until terminated. Requests can drive pipeline operations and mutate their documented asset state.\n\n## Refusals\n\nA non-integer, negative, or greater-than-65535 port writes exactly `error: serve requires --port <n> (0 = ephemeral)` and exits 2. Bind, configuration, and runtime errors are printed as `error: <message>` and exit 1.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "glina serve",
+          "id": ""
+        },
+        {
+          "depth": 2,
+          "text": "Invocation",
+          "id": "invocation"
+        },
+        {
+          "depth": 2,
+          "text": "Purpose",
+          "id": "purpose"
+        },
+        {
+          "depth": 2,
+          "text": "Inputs and options",
+          "id": "inputs-and-options"
+        },
+        {
+          "depth": 2,
+          "text": "Output and state",
+          "id": "output-and-state"
+        },
+        {
+          "depth": 2,
+          "text": "Refusals",
+          "id": "refusals"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "pipeline/cli.js",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/cli.js"
+      },
+      "order": 375
+    },
+    {
+      "productSlug": "glina",
+      "slug": "cli/setup",
+      "title": "glina setup",
+      "markdown": "# `glina setup`\n\n## Invocation\n\n```sh\nglina setup [--check] [--dry-run]\n```\n\n## Purpose\n\nProvision or inspect the Blender, uv, and `blender-mcp` dependencies used by Glina.\n\n## Inputs and options\n\n- `--check` reports installed or missing dependencies without installing them.\n- `--dry-run` reports `would-install` and `would-resolve` steps without executing installers.\n\n## Output and state\n\nOn macOS it plans Homebrew installs; on Linux it plans apt/snap and the uv installer. Without `--check` or `--dry-run`, missing dependencies may be installed and `blender-mcp` resolved through `uvx`. It prints `{healthy, steps}` and exits 0/1 according to `healthy`.\n\n## Refusals\n\nOther operating systems refuse with `unsupported platform: <os> (install Blender + uv manually)` inside the CLI's `error: <message>` envelope. Install failures use `failed to install <step>: <message>`. Both exit 1. A check that finds missing tools returns `healthy: false` and exit 1.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "glina setup",
+          "id": ""
+        },
+        {
+          "depth": 2,
+          "text": "Invocation",
+          "id": "invocation"
+        },
+        {
+          "depth": 2,
+          "text": "Purpose",
+          "id": "purpose"
+        },
+        {
+          "depth": 2,
+          "text": "Inputs and options",
+          "id": "inputs-and-options"
+        },
+        {
+          "depth": 2,
+          "text": "Output and state",
+          "id": "output-and-state"
+        },
+        {
+          "depth": 2,
+          "text": "Refusals",
+          "id": "refusals"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "pipeline/cli.js",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/cli.js"
+      },
+      "order": 376
+    },
+    {
+      "productSlug": "glina",
+      "slug": "cli/export-config",
+      "title": "glina export-config",
+      "markdown": "# `glina export-config`\n\n## Invocation\n\n```sh\nglina export-config --out <path> [--config <path>]\n```\n\n## Purpose\n\nCreate an owner-only resolved configuration handoff for remote workers. This operational command is callable in the dispatcher but intentionally omitted from friendly help and the released product surface.\n\n## Inputs and options\n\n- `--out <path>` is required.\n- `--config <path>` selects the source JSON; otherwise the repository's `pipeline.config.json` is used.\n\n## Output and state\n\nResolves every `skarbiec://` reference locally, writes JSON with `_resolved: true`, chmods the file to mode `0600`, and prints only `{out, resolved:true}`. The written file contains secrets.\n\n## Refusals\n\nA missing output path writes exactly `error: export-config requires --out <path>` and exits 2. Configuration, vault-resolution, write, and chmod errors are printed as `error: <message>` and exit 1.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "glina export-config",
+          "id": ""
+        },
+        {
+          "depth": 2,
+          "text": "Invocation",
+          "id": "invocation"
+        },
+        {
+          "depth": 2,
+          "text": "Purpose",
+          "id": "purpose"
+        },
+        {
+          "depth": 2,
+          "text": "Inputs and options",
+          "id": "inputs-and-options"
+        },
+        {
+          "depth": 2,
+          "text": "Output and state",
+          "id": "output-and-state"
+        },
+        {
+          "depth": 2,
+          "text": "Refusals",
+          "id": "refusals"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "pipeline/cli.js",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/cli.js"
+      },
+      "order": 377
     },
     {
       "productSlug": "glina",
@@ -569,7 +1089,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/mcp.md"
       },
-      "order": 365
+      "order": 378
     },
     {
       "productSlug": "glina",
@@ -639,7 +1159,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/http.md"
       },
-      "order": 366
+      "order": 379
     },
     {
       "productSlug": "glina",
@@ -699,7 +1219,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/runtime-api.md"
       },
-      "order": 367
+      "order": 380
     },
     {
       "productSlug": "glina",
@@ -734,7 +1254,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/desktop.md"
       },
-      "order": 368
+      "order": 381
     },
     {
       "productSlug": "glina",
@@ -914,7 +1434,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/runbook.md"
       },
-      "order": 369
+      "order": 382
     },
     {
       "productSlug": "glina",
@@ -944,7 +1464,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/examples.md"
       },
-      "order": 370
+      "order": 383
     },
     {
       "productSlug": "glina",
@@ -979,7 +1499,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/walkthrough-verify.md"
       },
-      "order": 371
+      "order": 384
     },
     {
       "productSlug": "glina",
@@ -1019,7 +1539,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/walkthrough-serve.md"
       },
-      "order": 372
+      "order": 385
     },
     {
       "productSlug": "glina",
@@ -1064,7 +1584,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/concepts/sculpt-job.md"
       },
-      "order": 373
+      "order": 386
     },
     {
       "productSlug": "glina",
@@ -1094,7 +1614,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/concepts/studio-job.md"
       },
-      "order": 374
+      "order": 387
     },
     {
       "productSlug": "glina",
@@ -1139,7 +1659,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/concepts/verification-gate.md"
       },
-      "order": 375
+      "order": 388
     },
     {
       "productSlug": "glina",
@@ -1184,7 +1704,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/concepts/blender-session.md"
       },
-      "order": 376
+      "order": 389
     },
     {
       "productSlug": "glina",
@@ -1224,7 +1744,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/concepts/browser-session.md"
       },
-      "order": 377
+      "order": 390
     },
     {
       "productSlug": "glina",
@@ -1269,7 +1789,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/concepts/model-backend.md"
       },
-      "order": 378
+      "order": 391
     },
     {
       "productSlug": "glina",
@@ -1304,7 +1824,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/concepts/runtime-art.md"
       },
-      "order": 379
+      "order": 392
     }
   ]
 }
