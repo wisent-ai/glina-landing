@@ -7,6 +7,7 @@
   "sourceUrl": "https://github.com/wisent-ai/glina",
   "docsUrl": "https://glina.wisent.com/docs",
   "discordUrl": "https://discord.gg/qRjpkthq54",
+  "analytics": null,
   "ogImageAlt": "Glina by Wisent — your AI sculpts your game assets",
   "commitment": null,
   "primaryAction": {
@@ -15,9 +16,9 @@
     "target": "https://github.com/wisent-ai/glina#install"
   },
   "secondaryAction": {
-    "label": "Browse the documentation",
-    "purpose": "Read the exact workflows, commands, interfaces, and operating contracts.",
-    "target": "/docs"
+    "label": "Browse the CLI reference",
+    "purpose": "Read the exact subcommands and MCP tools before installing anything.",
+    "target": "https://github.com/wisent-ai/glina#use"
   },
   "nav": [
     {
@@ -43,8 +44,8 @@
       "href": "https://github.com/wisent-ai/glina#install"
     },
     {
-      "label": "CLI reference",
-      "href": "https://github.com/wisent-ai/glina#use"
+      "label": "Documentation",
+      "href": "/docs"
     },
     {
       "label": "Source",

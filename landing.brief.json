@@ -4,6 +4,11 @@
   "audience": "Indie game developers and small studios who need game-ready GLB assets but cannot hand-model every prop, weapon, and character.",
   "problem": "A game project needs hundreds of modeled, budgeted GLB assets and hand-modeling them is slow; raw AI text-to-3D output does not help because it arrives unverified — broken meshes, blown triangle budgets, missing materials — and ships straight into the game.",
   "promise": "Your AI sculpts your game assets.",
+  "hero": {
+    "headline": "Your AI sculpts your game assets.",
+    "lede": "Glina turns a text prompt into a verified, game-ready GLB. A Brama-routed model writes Blender Python and runs it in a live Blender MCP session. A structural gate passes or fails the result before it counts as done.",
+    "decidedBy": "adopted from plan 879fe66e9d1e717e"
+  },
   "primaryAction": {
     "label": "Install the CLI",
     "kind": "url",

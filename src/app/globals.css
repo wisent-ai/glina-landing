@@ -28,6 +28,9 @@
   --color-success: #15803d;
   --color-warning: #b45309;
   --color-danger: #b91c1c;
+  --color-gray700: #424846;
+  --color-gray950: #121212;
+  --color-bone: #f4f4f4;
   --font-sans: 'Hubot Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-expanded: 'Hubot Sans Expanded', 'Hubot Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -48,6 +51,8 @@
   --radius-2xl: 22px;
   --shadow-surface: 0 4px 12px rgba(10, 13, 18, 0.04);
   --shadow-raised: 0 12px 30px rgba(10, 13, 18, 0.08);
+  --shadow-control: 0 1px 2px rgba(10, 13, 18, 0.05);
+  --shadow-toast: -1px 4px 4px rgba(10, 13, 18, 0.04);
   --motion-fast: 150ms;
   --motion-standard: 180ms;
 
@@ -140,8 +145,7 @@ a {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: color-mix(in srgb, var(--color-background) 88%, transparent);
-  backdrop-filter: saturate(1.2) blur(8px);
+  background: var(--color-background);
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -187,6 +191,15 @@ a {
 }
 
 .site-nav a:hover {
+  color: var(--color-almost-black);
+}
+
+/* The .site-nav a rule would otherwise paint the header's copy of the primary
+   action in secondary ink, and the page-scale 48 px button would fill a 66 px row. */
+.site-nav__cta {
+  min-height: 34px;
+  padding: 0 var(--space-xl);
+  font-size: var(--step--1);
   color: var(--color-almost-black);
 }
 
@@ -349,6 +362,56 @@ h3 code,
   background: var(--color-brand);
 }
 
+/* ---------- hero forms: split and terminal ---------- */
+
+/* The statement hero is one wide sentence at --step-4. Both other forms give
+   half the first viewport to an artifact, so the headline steps down one size
+   and takes a wider measure instead of a wider column. */
+.hero--split .hero__split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 64px);
+  align-items: center;
+}
+
+.hero__column,
+.hero__aside {
+  min-width: 0;
+}
+
+.hero--split .hero__headline,
+.hero--terminal .hero__headline {
+  font-size: var(--step-3);
+  max-width: 22ch;
+}
+
+.hero--split .hero__lede {
+  margin-top: var(--space-3xl);
+}
+
+.hero--split .hero__actions {
+  margin-top: var(--space-4xl);
+}
+
+.hero--split .hero__aside .artifact,
+.hero__artifact .artifact {
+  margin: 0;
+}
+
+.hero__artifact {
+  margin-top: var(--space-5xl);
+}
+
+@media (max-width: 900px) {
+  .hero--split .hero__split {
+    grid-template-columns: 1fr;
+  }
+
+  .hero--split .hero__aside {
+    margin-top: var(--space-5xl);
+  }
+}
+
 /* ---------- recognition ---------- */
 
 .card-grid {
@@ -371,6 +434,32 @@ h3 code,
 }
 
 .card p {
+  margin-top: var(--space-lg);
+  color: var(--color-secondary-text);
+}
+
+/* ---------- recognition form: columns ---------- */
+
+/* The card grid draws four boxes. This draws four columns: no surface, no
+   shadow, one ink rule over each, which is a different silhouette at the same
+   zone with the same typed content. */
+.columns {
+  margin-top: var(--space-5xl);
+  display: grid;
+  gap: var(--space-4xl) clamp(20px, 4vw, 48px);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+}
+
+.columns__item {
+  padding-top: var(--space-3xl);
+  border-top: 2px solid var(--color-almost-black);
+}
+
+.columns__title {
+  font-size: var(--step-1);
+}
+
+.columns__item p {
   margin-top: var(--space-lg);
   color: var(--color-secondary-text);
 }
@@ -418,6 +507,59 @@ h3 code,
   .steps li {
     grid-template-columns: 1fr;
     gap: var(--space-md);
+  }
+}
+
+/* ---------- mechanism form: pairs ---------- */
+
+/* Two columns at every width. The pair of column headings is written once, at
+   the top, and every row below sits under it; collapsing to one column on a
+   phone would leave each sentence with no column to belong to. */
+.pairs {
+  margin-top: var(--space-5xl);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(20px, 4vw, 48px);
+  align-items: start;
+}
+
+.pairs__label {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--color-brand700);
+  padding-bottom: var(--space-xl);
+}
+
+.pairs__title {
+  grid-column: 1 / -1;
+  font-size: var(--step-1);
+  padding-top: var(--space-4xl);
+  border-top: 1px solid var(--color-border);
+}
+
+.pairs__cell {
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-4xl);
+}
+
+.pairs__cell--before {
+  color: var(--color-muted-text);
+}
+
+.pairs__cell--after {
+  color: var(--color-ink);
+}
+
+@media (max-width: 720px) {
+  .pairs__cell,
+  .pairs__title {
+    font-size: var(--step--1);
+  }
+
+  .pairs__title {
+    line-height: 1.2;
   }
 }
 
@@ -501,6 +643,76 @@ h3 code,
   font-size: var(--step--1);
   color: var(--color-muted-text);
   margin-top: var(--space-lg);
+}
+
+/* ---------- proof forms: quote and screenshot ---------- */
+
+/* The transcript frame is dark because a transcript is a terminal. A sentence
+   and an image are not, so both sit on the page's own surface and keep only
+   the frame. Order matters: these override the .artifact rules above. */
+.artifact--quote {
+  background: var(--color-white);
+  border-color: var(--color-border);
+  padding: var(--space-5xl);
+}
+
+.artifact__quote {
+  margin: 0;
+  border-left: 2px solid var(--color-brand);
+  padding-left: var(--space-4xl);
+}
+
+.artifact__quote p {
+  font-family: var(--font-expanded);
+  font-size: var(--step-2);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--color-almost-black);
+  max-width: 40ch;
+  text-wrap: balance;
+}
+
+.artifact--quote figcaption {
+  margin-top: var(--space-3xl);
+  padding: 0;
+  border-top: 0;
+  background: transparent;
+  color: var(--color-secondary-text);
+  font-size: var(--step--1);
+}
+
+.artifact__source {
+  font-family: var(--font-mono);
+  font-style: normal;
+  color: var(--color-brand700);
+}
+
+.artifact--screenshot {
+  background: var(--color-white);
+  border-color: var(--color-border);
+}
+
+.artifact__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.artifact--screenshot figcaption {
+  border-top: 0;
+  background: transparent;
+  color: var(--color-secondary-text);
+}
+
+@media (max-width: 620px) {
+  .artifact--quote {
+    padding: var(--space-4xl);
+  }
+
+  .artifact__quote {
+    padding-left: var(--space-3xl);
+  }
 }
 
 /* ---------- objection ---------- */
@@ -598,178 +810,5 @@ h3 code,
 
   .button:hover {
     transform: none;
-  }
-}
-
-/* ---------- product documentation ---------- */
-
-.docs-shell {
-  width: min(100% - 2 * var(--gutter), 1120px);
-  margin-inline: auto;
-  padding-block: clamp(56px, 8vw, 112px);
-}
-
-.docs-hero {
-  max-width: 760px;
-  margin-bottom: 48px;
-}
-
-.docs-kicker {
-  margin-bottom: 12px;
-  color: var(--color-brand700);
-  font-family: var(--font-mono);
-  font-size: var(--step--1);
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.docs-hero h1 {
-  margin-bottom: 20px;
-  font-size: var(--step-4);
-}
-
-.docs-hero > p:last-child {
-  max-width: 640px;
-  color: var(--color-secondary-text);
-  font-size: var(--step-1);
-}
-
-.docs-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 12px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.docs-grid a {
-  display: grid;
-  min-height: 160px;
-  padding: 20px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  background: var(--color-white);
-  text-decoration: none;
-  transition: border-color var(--motion-fast), transform var(--motion-fast);
-}
-
-.docs-grid a:hover {
-  border-color: var(--color-brand600);
-  transform: translateY(-2px);
-}
-
-.docs-grid span,
-.docs-grid small {
-  color: var(--color-muted-text);
-  font-family: var(--font-mono);
-  font-size: var(--step--1);
-}
-
-.docs-grid strong {
-  align-self: end;
-  font-family: var(--font-expanded);
-  font-size: var(--step-1);
-}
-
-.docs-grid small {
-  margin-top: 6px;
-}
-
-.docs-page-shell {
-  max-width: 920px;
-}
-
-.docs-breadcrumbs {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 40px;
-  color: var(--color-secondary-text);
-  font-size: var(--step--1);
-}
-
-.docs-breadcrumbs a {
-  color: var(--color-brand700);
-}
-
-.docs-article {
-  max-width: 760px;
-}
-
-.docs-article h1 {
-  margin-bottom: 28px;
-  font-size: var(--step-3);
-}
-
-.docs-article h2 {
-  margin: 56px 0 18px;
-  padding-top: 24px;
-  border-top: 1px solid var(--color-border);
-  font-size: var(--step-2);
-}
-
-.docs-article h3 {
-  margin: 36px 0 14px;
-  font-size: var(--step-1);
-}
-
-.docs-article p,
-.docs-article ul,
-.docs-article ol,
-.docs-article pre,
-.docs-article table,
-.docs-article blockquote {
-  margin: 18px 0;
-}
-
-.docs-article ul,
-.docs-article ol {
-  padding-left: 24px;
-}
-
-.docs-article code {
-  font-family: var(--font-mono);
-  font-size: 0.9em;
-}
-
-.docs-article :not(pre) > code {
-  padding: 2px 5px;
-  border-radius: 4px;
-  background: var(--color-canvas-muted);
-}
-
-.docs-article pre {
-  overflow-x: auto;
-  padding: 18px;
-  border-radius: var(--radius-md);
-  background: var(--color-forest);
-  color: var(--color-brand100);
-}
-
-.docs-article table {
-  display: block;
-  overflow-x: auto;
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.docs-article th,
-.docs-article td {
-  padding: 10px 12px;
-  border: 1px solid var(--color-border);
-  text-align: left;
-  vertical-align: top;
-}
-
-.docs-article blockquote {
-  padding-left: 18px;
-  border-left: 3px solid var(--color-brand);
-  color: var(--color-secondary-text);
-}
-
-@media (max-width: 640px) {
-  .docs-grid {
-    grid-template-columns: 1fr;
   }
 }

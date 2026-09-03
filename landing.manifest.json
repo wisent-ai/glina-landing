@@ -1,22 +1,50 @@
 {
   "schemaVersion": 2,
-  "generator": "@wisent-ai/landing-cli@0.2.0",
-  "generatedAt": "2026-08-23T03:36:10.925Z",
+  "generator": "@wisent-ai/landing-cli@0.3.0",
+  "generatedAt": "2026-09-03T05:26:48.860Z",
   "product": "Glina",
-  "briefDigest": "8eb8628283fe1b8584948c46d62a660f3d480ae7238b3cfbff2cfdb9a7668e8f",
-  "componentPlanDigest": "da244951a53d8eef49ace4fb48bf256efe2cbfe963b51ae4e69e46d7f84d79b2",
-  "componentCatalogDigest": "c62215f848ceb620b452776fc948b6f27bf7b5c638102735b3216a007497aa4c",
-  "componentRuntimeDigest": "5d97516048ab931c7ea026e068f11a1bf3c15f208e0e3cad8d7e9554ad3b926a",
+  "briefDigest": "186c598ee6079982430c6b855e5ad4d484992956e3669cf0198a0a15a24bb01b",
+  "componentPlanDigest": "01ee7ceec123bbb1256582b89e5f5901ab79a30d28613071202259ebdd41ee4a",
+  "componentCatalogDigest": "fcb3af64b8ed5859f7788b331ab17fddd1bbc2f2ebcc4a124dbf21d836a5fa96",
+  "componentRuntimeDigest": "c98c6be2b81f3440d7e9737e9d9d323f8d970c1f166b3cb08b1ad52fbbcd619e",
   "planDigest": "879fe66e9d1e717eee4e1882cc47efbcb528a7765ca851760b755529683322c8",
+  "forms": {
+    "hero": "statement",
+    "recognition": "list",
+    "mechanism": "steps",
+    "proof": [
+      "terminal",
+      "table"
+    ],
+    "objection": "qa",
+    "decision": "panel"
+  },
   "tokens": {
     "path": "/Users/lukaszbartoszcze/Documents/CodingProjects/Wisent/wisent-components/tokens.json",
-    "digest": "29a00929f58750f9c7a2f59936bdd59bd22e439f76b5575ca57a0f20513db9df"
+    "digest": "3ef8b82cf3bc6119e0768dbf201b4fc842ebe6af5523d494921013b89d4e2343"
+  },
+  "components": {
+    "name": "@wisent-ai/components",
+    "version": "0.8.1",
+    "commit": "f74a726f5de0da0ea41a0894368194e7df5c7d7b",
+    "tarball": "vendor/wisent-components/f74a726f5de0da0ea41a0894368194e7df5c7d7b/wisent-ai-components-0.8.1.tgz",
+    "dependency": "file:vendor/wisent-components/f74a726f5de0da0ea41a0894368194e7df5c7d7b/wisent-ai-components-0.8.1.tgz",
+    "digest": "145b924f0982ef3f6a9460940fcec46a3ed1422b01aae5d4547e2402ad29c04c"
+  },
+  "designLint": {
+    "config": ".wisent-design-lint.json",
+    "configDigest": "00503785769d350fe5686366b36315762e1a53fddad093cd3070a056a9d52ee2"
   },
   "fonts": [],
+  "proofImages": [],
+  "lockfile": "package-lock.json",
   "files": [
     ".gitignore",
+    ".wisent-design-lint.json",
     "next.config.ts",
+    "package-lock.json",
     "package.json",
+    "scripts/design-lint.mjs",
     "scripts/verify-approval.mjs",
     "src/app/globals.css",
     "src/app/icon.svg",
@@ -24,10 +52,12 @@
     "src/app/page.tsx",
     "src/app/robots.ts",
     "src/app/sitemap.ts",
+    "src/components/echo-analytics.tsx",
     "src/components/landing-components.js",
     "src/content/components.json",
     "src/content/plan.json",
     "src/content/site.json",
-    "tsconfig.json"
+    "tsconfig.json",
+    "vendor/wisent-components/f74a726f5de0da0ea41a0894368194e7df5c7d7b/wisent-ai-components-0.8.1.tgz"
   ]
 }

@@ -4,15 +4,16 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build:review": "next build",
-    "build": "node scripts/verify-approval.mjs && next build",
+    "build:review": "node scripts/design-lint.mjs && next build",
+    "build": "node scripts/verify-approval.mjs && node scripts/design-lint.mjs && next build",
     "start": "next start"
   },
   "dependencies": {
     "marked": "^16.4.2",
     "next": "16.3.0",
     "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react-dom": "19.2.0",
+    "@wisent-ai/components": "file:vendor/wisent-components/f74a726f5de0da0ea41a0894368194e7df5c7d7b/wisent-ai-components-0.8.1.tgz"
   },
   "devDependencies": {
     "@types/node": "^20",

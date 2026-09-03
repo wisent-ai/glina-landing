@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { EchoAnalytics } from "@/components/echo-analytics";
 import { LandingFooter, LandingHeader } from "@/components/landing-components.js";
 import componentPlan from "@/content/components.json";
 import plan from "@/content/plan.json";
@@ -37,6 +38,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     {chosen("landing.header") ? <LandingHeader site={site} /> : null}
     <main id="main">{children}</main>
     {chosen("landing.footer") ? <LandingFooter site={site} /> : null}
+    <EchoAnalytics />
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
   </body></html>;
 }

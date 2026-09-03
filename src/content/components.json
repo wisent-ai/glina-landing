@@ -46,7 +46,11 @@
       "description": "Evidence section rendering a real terminal transcript, code sample, or factual table backed by the brief's required proof.",
       "content": "proof section heading, lede, and artifact",
       "status": "recommended",
-      "reason": "the two gate-verified live assets (kamien.glb 2026-07-27, krasnolud-wojownik.glb 2026-07-28) are the honest artifact for an asset generator"
+      "reason": "the two gate-verified live assets (kamien.glb 2026-07-27, krasnolud-wojownik.glb 2026-07-28) are the honest artifact for an asset generator. The approved content plan of 2026-08-26 (plan 879fe66e9d1e717e) carries two proofs in this order: a transcript of a real run, then the table of two assets that passed the gate.",
+      "form": [
+        "terminal",
+        "table"
+      ]
     },
     {
       "id": "landing.objection",
