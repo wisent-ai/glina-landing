@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build:review": "node scripts/design-lint.mjs && next build",
-    "build": "node scripts/verify-approval.mjs && node scripts/design-lint.mjs && next build",
+    "build:review": "node src/cli.mjs review",
+    "build": "node src/cli.mjs build",
     "start": "next start"
   },
   "dependencies": {
