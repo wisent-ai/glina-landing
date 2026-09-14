@@ -13,7 +13,7 @@
     "next": "16.3.0",
     "react": "19.2.0",
     "react-dom": "19.2.0",
-    "@wisent-ai/components": "file:vendor/wisent-components/734d9e49e9abc54bd4e396df87a8cc2762f7dbbf/wisent-ai-components-0.8.1.tgz"
+    "@wisent-ai/components": "file:vendor/wisent-components/5a76fd8d020cda8a37b66bdae1b6528e79b80340/wisent-ai-components-0.8.1.tgz"
   },
   "devDependencies": {
     "@types/node": "^20",
