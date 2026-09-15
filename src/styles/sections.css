@@ -1,0 +1,258 @@
+/* ---------- hero ---------- */
+
+.hero {
+  padding-block: clamp(56px, 8vw, 112px) var(--rhythm);
+}
+
+.hero__headline {
+  margin-top: var(--space-2xl);
+  font-size: var(--step-4);
+  max-width: 16ch;
+}
+
+.hero__lede {
+  margin-top: var(--space-3xl);
+  max-width: var(--measure);
+  font-size: var(--step-1);
+  color: var(--color-secondary-text);
+}
+
+.hero__actions {
+  margin-top: var(--space-5xl);
+}
+
+.hero__commitment {
+  margin-top: var(--space-lg);
+}
+
+.proof-strip {
+  margin: var(--space-5xl) 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.proof-strip li {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--color-secondary-text);
+  padding: var(--space-xl) var(--space-3xl) var(--space-xl) 0;
+  margin-right: var(--space-3xl);
+  border-bottom: 1px solid transparent;
+  position: relative;
+}
+
+.proof-strip li::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 22px;
+  height: 2px;
+  background: var(--color-brand);
+}
+
+/* ---------- hero forms: split and terminal ---------- */
+
+/* The statement hero is one wide sentence at --step-4. Both other forms give
+   half the first viewport to an artifact, so the headline steps down one size
+   and takes a wider measure instead of a wider column. */
+.hero--split .hero__split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 64px);
+  align-items: center;
+}
+
+.hero__column,
+.hero__aside {
+  min-width: 0;
+}
+
+.hero--split .hero__headline,
+.hero--terminal .hero__headline {
+  font-size: var(--step-3);
+  max-width: 22ch;
+}
+
+.hero--split .hero__lede {
+  margin-top: var(--space-3xl);
+}
+
+.hero--split .hero__actions {
+  margin-top: var(--space-4xl);
+}
+
+.hero--split .hero__aside .artifact,
+.hero__artifact .artifact {
+  margin: 0;
+}
+
+.hero__artifact {
+  margin-top: var(--space-5xl);
+}
+
+@media (max-width: 900px) {
+  .hero--split .hero__split {
+    grid-template-columns: 1fr;
+  }
+
+  .hero--split .hero__aside {
+    margin-top: var(--space-5xl);
+  }
+}
+
+/* ---------- recognition ---------- */
+
+.card-grid {
+  margin-top: var(--space-5xl);
+  display: grid;
+  gap: var(--space-3xl);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+}
+
+.card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-white);
+  padding: var(--space-4xl);
+  box-shadow: var(--shadow-surface);
+}
+
+.card h3 {
+  font-size: var(--step-1);
+}
+
+.card p {
+  margin-top: var(--space-lg);
+  color: var(--color-secondary-text);
+}
+
+/* ---------- recognition form: columns ---------- */
+
+/* The card grid draws four boxes. This draws four columns: no surface, no
+   shadow, one ink rule over each, which is a different silhouette at the same
+   zone with the same typed content. */
+.columns {
+  margin-top: var(--space-5xl);
+  display: grid;
+  gap: var(--space-4xl) clamp(20px, 4vw, 48px);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+}
+
+.columns__item {
+  padding-top: var(--space-3xl);
+  border-top: 2px solid var(--color-almost-black);
+}
+
+.columns__title {
+  font-size: var(--step-1);
+}
+
+.columns__item p {
+  margin-top: var(--space-lg);
+  color: var(--color-secondary-text);
+}
+
+/* ---------- mechanism ---------- */
+
+.steps {
+  margin: var(--space-5xl) 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0;
+}
+
+.steps li {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: var(--space-3xl);
+  padding-block: var(--space-4xl);
+  border-top: 1px solid var(--color-border);
+  align-items: start;
+}
+
+.steps li:last-child {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.steps__number {
+  font-family: var(--font-mono);
+  font-size: var(--step-1);
+  color: var(--color-brand600);
+}
+
+.steps h3 {
+  font-size: var(--step-1);
+}
+
+.steps p {
+  margin-top: var(--space-md);
+  color: var(--color-secondary-text);
+  max-width: var(--measure);
+}
+
+@media (max-width: 620px) {
+  .steps li {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+}
+
+/* ---------- mechanism form: pairs ---------- */
+
+/* Two columns at every width. The pair of column headings is written once, at
+   the top, and every row below sits under it; collapsing to one column on a
+   phone would leave each sentence with no column to belong to. */
+.pairs {
+  margin-top: var(--space-5xl);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(20px, 4vw, 48px);
+  align-items: start;
+}
+
+.pairs__label {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--color-brand700);
+  padding-bottom: var(--space-xl);
+}
+
+.pairs__title {
+  grid-column: 1 / -1;
+  font-size: var(--step-1);
+  padding-top: var(--space-4xl);
+  border-top: 1px solid var(--color-border);
+}
+
+.pairs__cell {
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-4xl);
+}
+
+.pairs__cell--before {
+  color: var(--color-muted-text);
+}
+
+.pairs__cell--after {
+  color: var(--color-ink);
+}
+
+@media (max-width: 720px) {
+  .pairs__cell,
+  .pairs__title {
+    font-size: var(--step--1);
+  }
+
+  .pairs__title {
+    line-height: 1.2;
+  }
+}
+

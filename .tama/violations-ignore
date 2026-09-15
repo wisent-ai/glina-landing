@@ -1,0 +1,11 @@
+# Written by @wisent-ai/landing-cli with the site. Audit exclusions for
+# `tama find-violations`: paths fixed by something outside this project.
+#
+# The repository root. npm reads package.json and package-lock.json, tsc
+# reads tsconfig.json, Next reads next.config.ts and rewrites next-env.d.ts
+# on every build, the design lint reads .wisent-design-lint.json, git reads
+# .gitignore, GitHub reads README.md, and landing-cli reads the brief, the
+# config, the component plan, the plan and the manifest as landing.*.json in
+# the site root. The stylesheet is emitted as parts under src/styles and the
+# page code under src/app, so nothing here is a module that could move.
+.

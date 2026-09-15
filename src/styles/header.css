@@ -1,0 +1,70 @@
+/* ---------- header ---------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--color-background);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3xl);
+  min-height: 66px;
+}
+
+.wordmark {
+  font-family: var(--font-expanded);
+  font-weight: 700;
+  font-size: var(--step-0);
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wordmark::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--color-brand);
+  box-shadow: 0 0 0 1px var(--color-brand700) inset;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3xl);
+  margin-left: auto;
+  font-size: var(--step--1);
+}
+
+.site-nav a {
+  text-decoration: none;
+  color: var(--color-secondary-text);
+  transition: color var(--motion-fast) ease;
+}
+
+.site-nav a:hover {
+  color: var(--color-almost-black);
+}
+
+/* The .site-nav a rule would otherwise paint the header's copy of the primary
+   action in secondary ink, and the page-scale 48 px button would fill a 66 px row. */
+.site-nav__cta {
+  min-height: 34px;
+  padding: 0 var(--space-xl);
+  font-size: var(--step--1);
+  color: var(--color-almost-black);
+}
+
+@media (max-width: 720px) {
+  .site-nav__optional {
+    display: none;
+  }
+}
+

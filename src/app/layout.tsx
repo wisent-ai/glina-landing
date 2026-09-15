@@ -5,7 +5,11 @@ import { LandingFooter, LandingHeader } from "@/components/landing-components.js
 import componentPlan from "@/content/components.json";
 import plan from "@/content/plan.json";
 import site from "@/content/site.json";
-import "./globals.css";
+import "@/styles/base.css";
+import "@/styles/header.css";
+import "@/styles/shared.css";
+import "@/styles/sections.css";
+import "@/styles/proof.css";
 
 const chosen = (id: string) => componentPlan.components.some((entry) => entry.id === id && entry.status !== "excluded");
 const headline = plan.hero.headline;
