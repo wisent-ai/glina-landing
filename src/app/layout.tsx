@@ -12,9 +12,11 @@ import "@/styles/sections.css";
 import "@/styles/proof.css";
 
 const chosen = (id: string) => componentPlan.components.some((entry) => entry.id === id && entry.status !== "excluded");
+// A result page shows about this many characters of a title before cutting it.
+const TITLE_LENGTH_LIMIT = 65;
 const headline = plan.hero.headline;
 const prefixed = site.product + " — " + headline;
-const pageTitle = headline.toLowerCase().includes(site.product.toLowerCase()) ? headline : prefixed.length <= 65 ? prefixed : headline;
+const pageTitle = headline.toLowerCase().includes(site.product.toLowerCase()) ? headline : prefixed.length <= TITLE_LENGTH_LIMIT ? prefixed : headline;
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.domain),

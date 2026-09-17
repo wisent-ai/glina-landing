@@ -73,8 +73,8 @@ function verifyPublicationApproval() {
   console.log(`Landing approved by ${approval.approvedBy} at ${approval.approvedAt}`);
 }
 
-const command = process.argv[2];
-if (!new Set(["build", "review"]).has(command) || process.argv.length !== 3) {
+const [command, ...extraArguments] = process.argv.slice(2);
+if (!new Set(["build", "review"]).has(command) || extraArguments.length > 0) {
   console.error("Usage: glina-landing build|review");
   process.exit(2);
 }
