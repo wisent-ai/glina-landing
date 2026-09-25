@@ -59,7 +59,7 @@
         "surface": "cli",
         "kind": "npm",
         "repository": "wisent-ai/glina",
-        "command": "wisent-products install glina --surface cli",
+        "command": "stado product install glina --surface cli",
         "details": {
           "package": "@wisent-ai/glina",
           "binaries": [
@@ -72,7 +72,7 @@
         "surface": "desktop",
         "kind": "desktop-release",
         "repository": "wisent-ai/glina-desktop",
-        "command": "wisent-products install glina --surface desktop",
+        "command": "stado product install glina --surface desktop",
         "details": {
           "manifest": ".wisent-desktop-release.json"
         }
