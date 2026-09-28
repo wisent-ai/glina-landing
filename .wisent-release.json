@@ -27,6 +27,9 @@
           "build"
         ]
       },
+      "tests": [
+        {"name": "smoke", "argv": ["stado", "web", "smoke"]}
+      ],
       "stage": {
         "dist/glina-landing-web.tar.gz": "glina-landing-web.tar.gz",
         "dist/glina-landing-web.tar.gz.sha256": "glina-landing-web.tar.gz.sha256",
