@@ -20,7 +20,7 @@
     "decision": "panel"
   },
   "tokens": {
-    "path": "/Users/lukaszbartoszcze/Documents/CodingProjects/Wisent/wisent-components/tokens.json",
+    "path": "../wisent-components/tokens.json",
     "digest": "0a1e7b1374c0483df48cdcbf506c2288342b5962ba3e60784bc595770271cf34"
   },
   "components": {
