@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build:review": "node scripts/design-lint.mjs && next build",
-    "build": "node scripts/design-lint.mjs && next build",
+    "build:review": "node scripts/check-command-coverage.mjs && node scripts/design-lint.mjs && next build",
+    "build": "node scripts/check-command-coverage.mjs && node scripts/design-lint.mjs && next build",
     "start": "next start"
   },
   "dependencies": {

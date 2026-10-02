@@ -425,7 +425,7 @@
       "productSlug": "glina",
       "slug": "cli",
       "title": "CLI reference",
-      "markdown": "# CLI reference\n\nInstalled binary: `glina`. In a checkout, replace `glina` with `node pipeline/cli.js`. Successful commands print JSON to stdout except `help`, or the same fields as `path: value` lines with `--text`; operational progress and refusals go to stderr.\n\nArgument parsing is intentionally small: `--name value` becomes a string, a flag without a following value becomes `true`, and remaining words are positional. Unknown options are ignored by commands that do not read them.\n\n## Command tree\n\n- [`glina onboarding [--reset] [--asset <file.glb>] [--name <id>]`](/docs/cli/onboarding) — Run first use and optionally accept an existing GLB.\n- [`glina import <file.glb> [--name <id>] [--config <path>]`](/docs/cli/import) — Validate, persist, and activate an asset.\n- [`glina workspace`](/docs/cli/workspace) — Inspect imported assets and the active default.\n- [`glina help`](/docs/cli/help) — Help.\n- [`glina create <prompt> [--race <race>] [--out <dir>] [--config <path>]`](/docs/cli/create) — Create.\n- [`glina sculpt <prompt> [--out <dir>] [--filename <file.glb>] [--rounds <n>] [--config <path>]`](/docs/cli/sculpt) — Sculpt.\n- [`glina verify [<file.glb>] [--config <path>]`](/docs/cli/verify) — Verify.\n- [`glina check-config [--config <path>]`](/docs/cli/check-config) — Check config.\n- [`glina doctor [--config <path>]`](/docs/cli/doctor) — Check the config, the Blender bridge and the browser layer; exit 1 when any check fails.\n- [`glina preview-anim [<file.glb>] [--clip <name>] [--frames <n>] [--fps <n>] [--out <file.gif>] [--config <path>]`](/docs/cli/preview-anim) — Preview animation.\n- [`glina animate [<file.glb>] [--preset dragon] [--out <file.glb>] [--config <path>]`](/docs/cli/animate) — Animate.\n- [`glina showcase [dragon] [--out <file.glb>] [--config <path>]`](/docs/cli/showcase) — Showcase.\n- [`glina setup [--check] [--dry-run]`](/docs/cli/setup) — Setup.\n- [`glina export-config --out <path> [--config <path>]`](/docs/cli/export-config) — Export config.\n\nMCP protocol method names and MCP tool names are documented separately; they are not human Glina CLI command paths.\n\n## Exit codes\n\n| Code | Meaning |\n|---:|---|\n| 0 | Command completed, health passed, or gate accepted. |\n| 1 | Runtime/config/integration error, a failed doctor check, or gate refusal. |\n| 2 | CLI usage error or unknown command. |\n\nAn unknown command prints `unknown command: <name>` followed by usage and exits 2.\n",
+      "markdown": "# CLI reference\n\nInstalled binary: `glina`. In a checkout, replace `glina` with `node pipeline/cli.js`. Successful commands print JSON to stdout except `help`, or the same fields as `path: value` lines with `--text`; operational progress and refusals go to stderr.\n\nArgument parsing is intentionally small: `--name value` becomes a string, a flag without a following value becomes `true`, and remaining words are positional. Unknown options are ignored by commands that do not read them.\n\n## Command tree\n\n- [`glina onboarding [--reset] [--asset <file.glb>] [--name <id>]`](/docs/cli/onboarding) — Run first use and optionally accept an existing GLB.\n- [`glina import <file.glb> [--name <id>] [--config <path>]`](/docs/cli/import) — Validate, persist, and activate an asset.\n- [`glina workspace`](/docs/cli/workspace) — Inspect imported assets and the active default.\n- [`glina help`](/docs/cli/help) — Help.\n- [`glina create <prompt> [--race <race>] [--out <dir>] [--config <path>]`](/docs/cli/create) — Create.\n- [`glina sculpt <prompt> [--out <dir>] [--filename <file.glb>] [--rounds <n>] [--config <path>]`](/docs/cli/sculpt) — Sculpt.\n- [`glina verify [<file.glb>] [--config <path>]`](/docs/cli/verify) — Verify.\n- [`glina check-config [--config <path>]`](/docs/cli/check-config) — Check config.\n- [`glina doctor [--config <path>]`](/docs/cli/doctor) — Check the config, the Blender bridge and the browser layer; exit 1 when any check fails.\n- [`glina preview-anim [<file.glb>] [--clip <name>] [--frames <n>] [--fps <n>] [--out <file.gif>] [--config <path>]`](/docs/cli/preview-anim) — Preview animation.\n- [`glina animate [<file.glb>] [--preset dragon] [--out <file.glb>] [--config <path>]`](/docs/cli/animate) — Animate.\n- [`glina showcase [dragon] [--out <file.glb>] [--config <path>]`](/docs/cli/showcase) — Showcase.\n- [`glina showcases [list | add <name> <file.json> | remove <name>]`](/docs/cli/showcases) — The showcase declarations `showcase` reads.\n- [`glina presets [list | add <name> <file.json> | remove <name>]`](/docs/cli/presets) — The animation presets `animate --preset` reads.\n- [`glina setup [--check] [--dry-run]`](/docs/cli/setup) — Setup.\n- [`glina export-config --out <path> [--config <path>]`](/docs/cli/export-config) — Export config.\n\nMCP protocol method names and MCP tool names are documented separately; they are not human Glina CLI command paths.\n\n## Exit codes\n\n| Code | Meaning |\n|---:|---|\n| 0 | Command completed, health passed, or gate accepted. |\n| 1 | Runtime/config/integration error, a failed doctor check, or gate refusal. |\n| 2 | CLI usage error or unknown command. |\n\nAn unknown command prints `unknown command: <name>` followed by usage and exits 2.\n",
       "headings": [
         {
           "depth": 1,
@@ -858,6 +858,96 @@
     },
     {
       "productSlug": "glina",
+      "slug": "cli/showcases",
+      "title": "glina showcases",
+      "markdown": "# `glina showcases`\n\n## Invocation\n\n```sh\nglina showcases [list | add <name> <file.json> | remove <name>] [--text]\n```\n\n## Purpose\n\nList, add and remove the showcase declarations that `glina showcase <asset>` reads. A declaration is one JSON file under `assets/showcases/<name>.json`: an object with an `actions` list and an `active` field naming one of those actions. Adding one is adding a file; nothing else is generated.\n\n## Inputs and options\n\n- `list`, or no verb, prints every declared name, sorted.\n- `add <name> <file.json>` checks the file and copies it to `assets/showcases/<name>.json`. `<name>` is lowercase letters, digits and dashes.\n- `remove <name>` deletes the declaration.\n- `--text` prints the result as `path: value` lines instead of JSON.\n\n## Output and state\n\n`list` prints `{kind: \"showcase\", names}` and changes nothing. `add` and `remove` print `{kind, name, path, outcome}` with `outcome` `added` or `removed`; the state is the file under `assets/showcases/`. Running `remove` twice is refused the second time, so a removal never repeats.\n\n## Refusals\n\n- `showcases add needs <name> <file.json>` / `showcases remove needs <name>`: a missing argument.\n- `showcases takes list, add or remove; got <verb>`: an unknown verb.\n- `showcase name must be lowercase letters, digits and dashes; got \"<name>\"`.\n- `<file>: <parse error>`, `<file> is not a JSON object`, `<file> has no actions list`, `<file> names active action \"<x>\", which is not one of its actions`: the file does not describe a showcase.\n- `showcase <name> is already declared; remove it first` / `showcase <name> is not declared`.\n\nEach refusal is printed as `error: <message>` and exits 2, like an unknown command: a name Glina has not declared is a usage error.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "glina showcases",
+          "id": ""
+        },
+        {
+          "depth": 2,
+          "text": "Invocation",
+          "id": "invocation"
+        },
+        {
+          "depth": 2,
+          "text": "Purpose",
+          "id": "purpose"
+        },
+        {
+          "depth": 2,
+          "text": "Inputs and options",
+          "id": "inputs-and-options"
+        },
+        {
+          "depth": 2,
+          "text": "Output and state",
+          "id": "output-and-state"
+        },
+        {
+          "depth": 2,
+          "text": "Refusals",
+          "id": "refusals"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "pipeline/rigs/commands.js",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/rigs/commands.js"
+      },
+      "order": 374
+    },
+    {
+      "productSlug": "glina",
+      "slug": "cli/presets",
+      "title": "glina presets",
+      "markdown": "# `glina presets`\n\n## Invocation\n\n```sh\nglina presets [list | add <name> <file.json> | remove <name>] [--text]\n```\n\n## Purpose\n\nList, add and remove the animation presets that `glina animate --preset <name>` reads. A preset is one JSON file under `assets/presets/<name>.json`: an object with an `actions` list and an `active` field naming one of those actions. Adding one is adding a file; nothing else is generated.\n\n## Inputs and options\n\n- `list`, or no verb, prints every declared name, sorted.\n- `add <name> <file.json>` checks the file and copies it to `assets/presets/<name>.json`. `<name>` is lowercase letters, digits and dashes.\n- `remove <name>` deletes the preset.\n- `--text` prints the result as `path: value` lines instead of JSON.\n\n## Output and state\n\n`list` prints `{kind: \"preset\", names}` and changes nothing. `add` and `remove` print `{kind, name, path, outcome}` with `outcome` `added` or `removed`; the state is the file under `assets/presets/`. Running `remove` twice is refused the second time, so a removal never repeats.\n\n## Refusals\n\n- `presets add needs <name> <file.json>` / `presets remove needs <name>`: a missing argument.\n- `presets takes list, add or remove; got <verb>`: an unknown verb.\n- `preset name must be lowercase letters, digits and dashes; got \"<name>\"`.\n- `<file>: <parse error>`, `<file> is not a JSON object`, `<file> has no actions list`, `<file> names active action \"<x>\", which is not one of its actions`: the file does not describe a preset.\n- `preset <name> is already declared; remove it first` / `preset <name> is not declared`.\n\nEach refusal is printed as `error: <message>` and exits 2, like an unknown command: a name Glina has not declared is a usage error.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "glina presets",
+          "id": ""
+        },
+        {
+          "depth": 2,
+          "text": "Invocation",
+          "id": "invocation"
+        },
+        {
+          "depth": 2,
+          "text": "Purpose",
+          "id": "purpose"
+        },
+        {
+          "depth": 2,
+          "text": "Inputs and options",
+          "id": "inputs-and-options"
+        },
+        {
+          "depth": 2,
+          "text": "Output and state",
+          "id": "output-and-state"
+        },
+        {
+          "depth": 2,
+          "text": "Refusals",
+          "id": "refusals"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "pipeline/rigs/commands.js",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/rigs/commands.js"
+      },
+      "order": 375
+    },
+    {
+      "productSlug": "glina",
       "slug": "cli/setup",
       "title": "glina setup",
       "markdown": "# `glina setup`\n\n## Invocation\n\n```sh\nglina setup [--check] [--dry-run]\n```\n\n## Purpose\n\nProvision or inspect the Blender, uv, and `blender-mcp` dependencies used by Glina.\n\n## Inputs and options\n\n- `--check` reports installed or missing dependencies without installing them.\n- `--dry-run` reports `would-install` and `would-resolve` steps without executing installers.\n\n## Output and state\n\nOn macOS it plans Homebrew installs; on Linux it plans apt/snap and the uv installer. Without `--check` or `--dry-run`, missing dependencies may be installed and `blender-mcp` resolved through `uvx`. It prints `{healthy, steps}` and exits 0/1 according to `healthy`.\n\n## Refusals\n\nOther operating systems refuse with `unsupported platform: <os> (install Blender + uv manually)` inside the CLI's `error: <message>` envelope. Install failures use `failed to install <step>: <message>`. Both exit 1. A check that finds missing tools returns `healthy: false` and exit 1.\n",
@@ -899,7 +989,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/cli.js"
       },
-      "order": 375
+      "order": 377
     },
     {
       "productSlug": "glina",
@@ -944,7 +1034,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/cli.js"
       },
-      "order": 376
+      "order": 378
     },
     {
       "productSlug": "glina",
@@ -1004,7 +1094,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/mcp.md"
       },
-      "order": 377
+      "order": 379
     },
     {
       "productSlug": "glina",
@@ -1064,7 +1154,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/runtime-api.md"
       },
-      "order": 379
+      "order": 381
     },
     {
       "productSlug": "glina",
@@ -1099,7 +1189,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/desktop.md"
       },
-      "order": 380
+      "order": 382
     },
     {
       "productSlug": "glina",
@@ -1299,7 +1389,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/runbook.md"
       },
-      "order": 381
+      "order": 383
     },
     {
       "productSlug": "glina",
@@ -1329,7 +1419,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/examples.md"
       },
-      "order": 382
+      "order": 384
     },
     {
       "productSlug": "glina",
@@ -1364,7 +1454,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/walkthrough-verify.md"
       },
-      "order": 383
+      "order": 385
     },
     {
       "productSlug": "glina",
@@ -1409,7 +1499,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/concepts/sculpt-job.md"
       },
-      "order": 385
+      "order": 387
     },
     {
       "productSlug": "glina",
@@ -1439,7 +1529,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/concepts/studio-job.md"
       },
-      "order": 386
+      "order": 388
     },
     {
       "productSlug": "glina",
@@ -1484,7 +1574,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/concepts/verification-gate.md"
       },
-      "order": 387
+      "order": 389
     },
     {
       "productSlug": "glina",
@@ -1529,7 +1619,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/concepts/blender-session.md"
       },
-      "order": 388
+      "order": 390
     },
     {
       "productSlug": "glina",
@@ -1569,7 +1659,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/concepts/browser-session.md"
       },
-      "order": 389
+      "order": 391
     },
     {
       "productSlug": "glina",
@@ -1614,7 +1704,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/concepts/model-backend.md"
       },
-      "order": 390
+      "order": 392
     },
     {
       "productSlug": "glina",
@@ -1649,7 +1739,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/concepts/runtime-art.md"
       },
-      "order": 391
+      "order": 393
     },
     {
       "productSlug": "glina",
@@ -1689,7 +1779,7 @@
         "path": "pipeline/workspace.js",
         "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/workspace.js"
       },
-      "order": 899
+      "order": 901
     },
     {
       "productSlug": "glina",
@@ -1719,7 +1809,7 @@
         "path": "pipeline/workspace.js",
         "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/workspace.js"
       },
-      "order": 900
+      "order": 902
     },
     {
       "productSlug": "glina",
@@ -1749,7 +1839,7 @@
         "path": "pipeline/onboarding.js",
         "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/onboarding.js"
       },
-      "order": 901
+      "order": 903
     }
   ]
 }
