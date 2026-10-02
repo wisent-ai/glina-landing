@@ -106,10 +106,10 @@
           "materials: present",
           "file size: within bounds",
           "gate: PASS",
-          "$ glina blender-health",
-          "blender-mcp session: connected",
-          "$ glina weles-tools",
-          "weles-mcp tools: listed"
+          "$ glina doctor",
+          "config: ok",
+          "browser: ok (weles-mcp, 9 tools)",
+          "sculptor: execute_blender_code did not reach Blender: Could not connect to Blender. Make sure the Blender addon is running."
         ]
       }
     },

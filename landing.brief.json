@@ -53,7 +53,7 @@
       "evidence": "README.md#Install"
     },
     {
-      "claim": "The `glina` CLI covers check-config, sculpt, create, verify, blender-health, and weles-tools, and the `glina-mcp` stdio server exposes the same surface to agent hosts as six tools: glina_create_asset, glina_sculpt, glina_verify_asset, glina_check_config, glina_blender_health, and glina_weles_tools.",
+      "claim": "The `glina` CLI covers check-config, sculpt, create, verify and doctor, and the `glina-mcp` stdio server exposes the same surface to agent hosts as five tools: glina_create_asset, glina_sculpt, glina_verify_asset, glina_check_config and glina_doctor.",
       "evidence": "README.md#Use"
     },
     {
@@ -73,7 +73,7 @@
     "A real terminal transcript of `npm install -g @wisent-ai/glina` followed by `glina check-config` validating the config and its Skarbiec vault references.",
     "A real terminal transcript of `glina verify assets/models/kamien.glb` passing the structural GLB quality gate.",
     "A factual table of the proven live results: kamien.glb (granite boulder with moss patches, 2026-07-27) and krasnolud-wojownik.glb (dwarven warrior, 2026-07-28), both gate-verified.",
-    "Real output of `glina blender-health` probing the Blender session and `glina weles-tools` listing the browser-layer tools."
+    "Real output of `glina doctor` checking the config, the Blender bridge and the browser layer, with the failed step named per check."
   ],
   "brand": {
     "canonicalAssets": [
