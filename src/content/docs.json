@@ -265,7 +265,7 @@
       "productSlug": "glina",
       "slug": "quick-start",
       "title": "Quick start",
-      "markdown": "# Quick start\n\n## Start from an existing GLB\n\nImport an asset you already own instead of generating one:\n\n```sh\nglina import ./my-asset.glb\nglina workspace\nglina verify\n```\n\nThe import stages the exact bytes, runs the canonical structural and configured Blender gate, then persists and activates only accepted content. The final command omits a path and verifies that active copy. `glina onboarding --asset ./my-asset.glb` performs the same operation from first use; skipping leaves an empty, usable workspace.\n\nThe non-mutating evidence blocks below were executed against this repository\nwith Node v22 on macOS. Generation commands are interface examples: they\nrequire configured external systems and operate on the current Blender or\nbrowser session.\n\n## Use a checkout\n\nThis repository is the current artifact; registry availability is not assumed.\nFrom the checkout:\n\n```sh\nnpm install\nnode pipeline/cli.js help\n```\n\nThe package defines two bins for an installed or linked copy: `glina` (the\nCLI, `pipeline/cli.js`) and `glina-mcp` (the MCP stdio server,\n`pipeline/mcp.js`). The rest of this page uses the checkout form where\ncaptured output matters.\n\n## See the surface\n\n```console\n$ node pipeline/cli.js help\nusage: node pipeline/cli.js <command> [args] [--text]\n\nEvery command prints its result as JSON; --text prints the same result as\none path: value line per field. glina <command> --help prints one command.\n\ncommands:\n  onboarding [--reset] [--asset file.glb] [--name id]\n                                    first-run import or walkthrough replay\n  import <file.glb> [--name id] [--config path]\n                                    validate, persist, and activate an existing asset\n  workspace                         list imported assets and the active input\n  create <prompt> [--race r] [--out dir] [--config path]\n                                    studio flow: generate one asset through the Weles browser layer\n  sculpt <prompt> [--out dir] [--filename f.glb] [--rounds n] [--config path]\n                                    LLM (Opus) iteratively builds the model in Blender\n  preview-anim [file.glb] [--clip name] [--frames n] [--fps n] [--out f.gif]\n                                    render an animated GIF of one clip through Blender\n  animate [file.glb] --preset <name> [--out animated.glb]\n                                    apply a declared preset's visibly moving actions\n  showcase <asset> [--out <asset>-showcase.glb]\n                                    build a declared animated reference asset\n  showcases [list | add <name> <file.json> | remove <name>]\n                                    the declarations showcase reads (assets/showcases)\n  presets [list | add <name> <file.json> | remove <name>]\n                                    the declarations animate reads (assets/presets)\n  verify [file.glb] [--config path]\n                                    structural + optional render gate\n  check-config [--config path]      validate the config and resolve its vault references\n  export-config --out <path> [--config path]\n                                    write a resolved, owner-only config for a remote run\n  doctor [--config path]            check the config and vault references, the Blender MCP bridge (handshake + code probe) and the browser layer (Weles MCP tools); exits 1 when any check fails\n  setup [--check] [--dry-run]       provision Blender + uv + blender-mcp\n\ncredentials come from skarbiec:// references in the config, answered by\nSkarbiec or, without it, by the owner-only file GLINA_CREDENTIALS_FILE names;\nmodels come from models.brama or, without Brama, models.openai_compatible;\nbrowser automation goes only through the Weles MCP server;\nBlender work goes only through the Blender MCP server.\n```\n\n## Run the quality gate — no config, no vault, no Blender\n\n`verify` works with defaults when the config file is absent:\n\n```console\n$ node pipeline/cli.js verify assets/models/smok.glb --config /nonexistent.json\n{\n  \"ok\": true,\n  \"errors\": [],\n  \"stats\": {\n    \"meshes\": 38,\n    \"primitives\": 38,\n    \"triangles\": 748,\n    \"materials\": 5,\n    \"animations\": 2,\n    \"animationNames\": [ \"flap\", \"idle\" ],\n    ...\n  },\n  \"thresholds\": { \"triTarget\": 6000, \"triTolerancePct\": 100, ... },\n  \"path\": \"assets/models/smok.glb\"\n}\n$ echo $?\n0\n```\n\nA failing gate exits 1 and names every reason in `errors` — see the\n[verify walkthrough](walkthrough-verify.md).\n\n## Check the toolchain\n\n`setup --check` only probes (`which`), never installs:\n\n```console\n$ node pipeline/cli.js setup --check\n{\n  \"healthy\": true,\n  \"steps\": [\n    { \"step\": \"blender\", \"status\": \"present\", \"path\": \"/opt/homebrew/bin/blender\" },\n    { \"step\": \"uv\", \"status\": \"present\", \"path\": \"/opt/homebrew/bin/uvx\" }\n  ]\n}\n```\n\nPlain `setup` provisions Blender + uv (brew on macOS, apt/snap on Linux) and\nresolves the `blender-mcp` package through uvx.\n\n## Configure for generation\n\nSculpting and studio generation need `pipeline.config.json` (default path:\nthe repo/package root; override with `--config`):\n\n```sh\ncp pipeline.config.example.json pipeline.config.json   # then edit\n```\n\nEvery secret in it must be a `skarbiec://<item>/<field>` reference — the\nloader refuses inline values:\n\n```console\n$ node pipeline/cli.js check-config --config inline.json\nerror: config key 'credentials.password' holds an inline value; secrets must be skarbiec://<item>/<field> references\n```\n\nStore studio credentials once in the vault:\n\n```sh\nskarbiec set TEXT2GAME_ACCOUNT --type login \\\n  --field login_email=you@example.com --field login_password=...\n```\n\n`check-config` then validates the file, resolves every reference against the\nvault, and prints the config with resolved secrets replaced by\n`<resolved: ok>`. See [configuration](configuration.md) for every key.\n\n## Generate\n\n```sh\nglina sculpt \"gothic dwarven tower, low-poly\"        # LLM drives Blender\nglina create \"dwarven axe warrior\" --race dwarves    # studio flow via Weles browser\nglina doctor                                         # check the bridges first\n```\n\nBoth flows end in the verification gate; a broken or off-budget asset fails\nthe job. For agent hosts run `glina-mcp` ([MCP reference](mcp.md)); the\n[desktop app](desktop.md) runs these same commands once per operation.\n",
+      "markdown": "# Quick start\n\n## Start from an existing GLB\n\nImport an asset you already own instead of generating one:\n\n```sh\nglina import ./my-asset.glb\nglina workspace\nglina verify\n```\n\nThe import stages the exact bytes, runs the canonical structural and configured Blender gate, then persists and activates only accepted content. The final command omits a path and verifies that active copy. `glina onboarding --asset ./my-asset.glb` performs the same operation from first use; skipping leaves an empty, usable workspace.\n\nThe examples below show the command paths. Generation and rendering require live external systems; a successful config or process probe alone does not prove that Blender or Weles can complete a job.\n\n## Use a checkout\n\nThis repository is the current artifact; registry availability is not assumed.\nFrom the checkout:\n\n```sh\nnpm install\nnode pipeline/cli.js help\n```\n\nThe package defines two bins for an installed or linked copy: `glina` (the\nCLI, `pipeline/cli.js`) and `glina-mcp` (the MCP stdio server,\n`pipeline/mcp.js`). The rest of this page uses the checkout form where\ncaptured output matters.\n\n## See the surface\n\n`node pipeline/cli.js --help` prints the current command table from the CLI's one command registry. Use `node pipeline/cli.js <command> --help` for one command. The [CLI reference](cli.md) links each command to its full contract.\n\nTo keep a second accepted model as a variant of the first, use `glina import second.glb --name alternate --variant-of first-id`. `glina workspace` shows the parent link. `glina preview-scene` renders the active asset on neutral ground through Blender; see the [scene preview](cli/preview-scene.md) refusal and diagnostic contract.\n\n## Run the quality gate — no config, no vault, no Blender\n\n`verify` works with defaults when the config file is absent:\n\n```sh\nnode pipeline/cli.js verify assets/models/smok.glb --config /nonexistent.json\n```\n\nThe repository's `smok.glb` passes the structural gate with 38 meshes, 748 triangles, five materials, and two moving clips. The command exits 0 and prints the complete report; no Blender session is needed when render smoke is disabled.\n\nA failing gate exits 1 and names every reason in `errors` — see the\n[verify walkthrough](walkthrough-verify.md).\n\n## Check the toolchain\n\n`glina setup --check` locates Blender and uv without installing them. `glina doctor` probes a real code round trip through the Blender MCP bridge; a present executable is not proof of a usable add-on. Plain `setup` provisions Blender and uv, but a connected Blender session is still required for rendering.\n\n## Configure for generation\n\nSculpting and studio generation need `pipeline.config.json` (default path:\nthe repo/package root; override with `--config`):\n\n```sh\ncp pipeline.config.example.json pipeline.config.json   # then edit\n```\n\nEvery secret in it must be a `skarbiec://<item>/<field>` reference — the\nloader refuses inline values:\n\nAn inline credential value is refused before a job starts with `error: config key 'credentials.password' holds an inline value; secrets must be skarbiec://<item>/<field> references`.\n\nStore referenced credentials through Skarbiec's supported intake, never on a command line. `check-config` validates the file and prints `<resolved: ok>` instead of the values. See [configuration](configuration.md) for every key.\n\n## Generate\n\n```sh\nglina sculpt \"gothic dwarven tower, low-poly\"        # LLM drives Blender\nglina create \"dwarven axe warrior\" --race dwarves    # studio flow via Weles browser\nglina doctor                                         # check the bridges first\n```\n\nBoth flows end in the verification gate; a broken or off-budget asset fails\nthe job. For agent hosts run `glina-mcp` ([MCP reference](mcp.md)); the\n[desktop app](desktop.md) runs these same commands once per operation.\n",
       "headings": [
         {
           "depth": 1,
@@ -425,7 +425,7 @@
       "productSlug": "glina",
       "slug": "cli",
       "title": "CLI reference",
-      "markdown": "# CLI reference\n\nInstalled binary: `glina`. In a checkout, replace `glina` with `node pipeline/cli.js`. Successful commands print JSON to stdout except `help`, or the same fields as `path: value` lines with `--text`; operational progress and refusals go to stderr. `--help` anywhere on the line prints help and runs nothing: the whole command table at the top level, and only that command's row after a command (`glina doctor --help`); both are rendered from one table in the CLI.\n\nArgument parsing is intentionally small: `--name value` becomes a string, a flag without a following value becomes `true`, and remaining words are positional. Unknown options are ignored by commands that do not read them.\n\n## Command tree\n\n- [`glina onboarding [--reset] [--asset <file.glb>] [--name <id>]`](/docs/cli/onboarding) — Run first use and optionally accept an existing GLB.\n- [`glina import <file.glb> [--name <id>] [--config <path>]`](/docs/cli/import) — Validate, persist, and activate an asset.\n- [`glina workspace [list | select <id> | remove <id>]`](/docs/cli/workspace) — Inspect imported assets, choose the active one, or take one out.\n- [`glina help`](/docs/cli/help) — Help.\n- [`glina create <prompt> [--race <race>] [--out <dir>] [--config <path>]`](/docs/cli/create) — Create.\n- [`glina sculpt <prompt> [--out <dir>] [--filename <file.glb>] [--rounds <n>] [--config <path>]`](/docs/cli/sculpt) — Sculpt.\n- [`glina verify [<file.glb>] [--config <path>]`](/docs/cli/verify) — Verify.\n- [`glina check-config [--config <path>]`](/docs/cli/check-config) — Check config.\n- [`glina doctor [--config <path>]`](/docs/cli/doctor) — Check the config, the Blender bridge and the browser layer; exit 1 when any check fails.\n- [`glina preview-anim [<file.glb>] [--clip <name>] [--frames <n>] [--fps <n>] [--out <file.gif>] [--config <path>]`](/docs/cli/preview-anim) — Preview animation.\n- [`glina animate [<file.glb>] [--preset dragon] [--out <file.glb>] [--config <path>]`](/docs/cli/animate) — Animate.\n- [`glina showcase [dragon] [--out <file.glb>] [--config <path>]`](/docs/cli/showcase) — Showcase.\n- [`glina showcases [list | add <name> <file.json> | remove <name>]`](/docs/cli/showcases) — The showcase declarations `showcase` reads.\n- [`glina presets [list | add <name> <file.json> | remove <name>]`](/docs/cli/presets) — The animation presets `animate --preset` reads.\n- [`glina setup [--check] [--dry-run]`](/docs/cli/setup) — Setup.\n- [`glina export-config --out <path> [--config <path>]`](/docs/cli/export-config) — Export config.\n\nMCP protocol method names and MCP tool names are documented separately; they are not human Glina CLI command paths.\n\n## Exit codes\n\n| Code | Meaning |\n|---:|---|\n| 0 | Command completed, health passed, or gate accepted. |\n| 1 | Runtime/config/integration error, a failed doctor check, or gate refusal. |\n| 2 | CLI usage error or unknown command. |\n\nAn unknown command prints `unknown command: <name>` followed by usage and exits 2.\n",
+      "markdown": "# CLI reference\n\nInstalled binary: `glina`. In a checkout, replace `glina` with `node pipeline/cli.js`. Successful commands print JSON to stdout except `help`, or the same fields as `path: value` lines with `--text`; operational progress and refusals go to stderr. `--help` anywhere on the line prints help and runs nothing: the whole command table at the top level, and only that command's row after a command (`glina doctor --help`); both are rendered from one table in the CLI.\n\nArgument parsing is intentionally small: `--name value` becomes a string, a flag without a following value becomes `true`, and remaining words are positional. Unknown options are ignored by commands that do not read them.\n\n## Command tree\n\n- [`glina onboarding [--reset] [--asset <file.glb>] [--name <id>]`](/docs/cli/onboarding) — Run first use and optionally accept an existing GLB.\n- [`glina import <file.glb> [--name <id>] [--variant-of <base-id>] [--config <path>]`](/docs/cli/import) — Validate, persist, and activate a base asset or variant.\n- [`glina workspace [list | select <id> | remove <id>]`](/docs/cli/workspace) — Inspect imported assets, choose the active one, or take one out.\n- [`glina help`](/docs/cli/help) — Help.\n- [`glina create <prompt> [--race <race>] [--out <dir>] [--config <path>]`](/docs/cli/create) — Create.\n- [`glina sculpt <prompt> [--out <dir>] [--filename <file.glb>] [--rounds <n>] [--config <path>]`](/docs/cli/sculpt) — Sculpt.\n- [`glina verify [<file.glb>] [--config <path>]`](/docs/cli/verify) — Verify.\n- [`glina check-config [--config <path>]`](/docs/cli/check-config) — Check config.\n- [`glina doctor [--config <path>]`](/docs/cli/doctor) — Check the config, the Blender bridge and the browser layer; exit 1 when any check fails.\n- [`glina preview-anim [<file.glb>] [--clip <name>] [--frames <n>] [--fps <n>] [--out <file.gif>] [--config <path>]`](/docs/cli/preview-anim) — Preview animation.\n- [`glina preview-scene [<file.glb>] [--out <file.png>] [--config <path>]`](/docs/cli/preview-scene) — Render an asset on neutral ground in Blender.\n- [`glina animate [<file.glb>] --preset <name> [--out <file.glb>] [--config <path>]`](/docs/cli/animate) — Apply a declared motion preset.\n- [`glina showcase <asset> [--out <file.glb>] [--config <path>]`](/docs/cli/showcase) — Build a declared animated reference asset.\n- [`glina showcases [list | add <name> <file.json> | remove <name>]`](/docs/cli/showcases) — The showcase declarations `showcase` reads.\n- [`glina presets [list | add <name> <file.json> | remove <name>]`](/docs/cli/presets) — The animation presets `animate --preset` reads.\n- [`glina setup [--check] [--dry-run]`](/docs/cli/setup) — Setup.\n- [`glina export-config --out <path> [--config <path>]`](/docs/cli/export-config) — Export config.\n\nMCP protocol method names and MCP tool names are documented separately; they are not human Glina CLI command paths.\n\n## Exit codes\n\n| Code | Meaning |\n|---:|---|\n| 0 | Command completed, health passed, or gate accepted. |\n| 1 | Runtime/config/integration error, a failed doctor check, or gate refusal. |\n| 2 | CLI usage error or unknown command. |\n\nAn unknown command prints `unknown command: <name>` followed by usage and exits 2.\n",
       "headings": [
         {
           "depth": 1,
@@ -455,7 +455,7 @@
       "productSlug": "glina",
       "slug": "cli/help",
       "title": "glina help",
-      "markdown": "# `glina help`\n\n## Invocation\n\n```sh\nglina help\n```\n\nRunning `glina` with no command has the same effect.\n\n## Purpose\n\nPrint the human CLI usage and the public command list. It does not load configuration or contact Weles or Blender.\n\n## Inputs and options\n\nNone.\n\n## Output and state\n\nWrites usage text to stdout, exits 0, and changes no state.\n\n## Refusals\n\n`help` has no command-specific refusal. An unrecognized command instead writes `unknown command: <name>` followed by the same usage text to stderr and exits 2.\n",
+      "markdown": "# `glina help`\n\n## Invocation\n\n```sh\nglina help\nglina --help\nglina <command> --help\n```\n\nRunning `glina` with no command or `-h` also prints usage. A command followed by `--help` or `-h` prints that command's row and runs nothing.\n\n## Purpose\n\nPrint the human CLI usage and the public command list. It does not load configuration or contact Weles or Blender.\n\n## Inputs and options\n\nThe optional command name before `--help` selects one row; `--help` takes no value.\n\n## Output and state\n\nWrites usage text to stdout, exits 0, and changes no state.\n\n## Refusals\n\n`help` has no command-specific refusal. An unrecognized command instead writes `unknown command: <name>` followed by the same usage text to stderr and exits 2.\n",
       "headings": [
         {
           "depth": 1,
@@ -590,12 +590,12 @@
       "productSlug": "glina",
       "slug": "cli/verify",
       "title": "glina verify",
-      "markdown": "# `glina verify`\n\n## Invocation\n\n```sh\nglina verify [<file.glb>] [--config <path>]\n```\n\n## Purpose\n\nRun Glina's structural quality gate and, when configured, the Blender render-smoke gate.\n\n## Inputs and options\n\n- `<file.glb>` is optional when a workspace import is active. An explicit path wins; otherwise Glina reads the accepted destination recorded by `glina import`.\n- `--config <path>` selects verification thresholds and render-smoke settings. A missing or unreadable config is ignored and built-in gate defaults apply.\n\n## Output and state\n\nReads the GLB, may import it into Blender when render smoke is enabled, and prints the complete verification report. It exits 0 for `ok: true` and 1 for a completed report with `ok: false`.\n\n## Refusals\n\nA missing path writes exactly `error: verify requires a .glb path` and exits 2. An unparseable file or runtime integration error is printed as `error: <message>` and exits 1.\n\nIf neither an explicit file nor an active import exists, Glina exits 2 before verification. If the indexed active destination was removed outside Glina, it refuses rather than choosing another asset silently.\n",
+      "markdown": "# `glina verify`\n\n## Invocation\n\n```sh\nglina verify [<file.glb>] [--config <path>]\n```\n\n## Purpose\n\nRun Glina's structural quality gate and, when configured, the Blender render-smoke gate.\n\n## Inputs and options\n\n- `<file.glb>` is optional when a workspace import is active. An explicit path wins; otherwise Glina reads the accepted destination recorded by `glina import`.\n- `--config <path>` selects verification thresholds and render-smoke settings. A missing explicit file or malformed config refuses; only an absent implicit default uses built-in gate defaults.\n\n## Output and state\n\nReads the GLB, may import it into Blender when render smoke is enabled, and prints the complete verification report. It exits 0 for `ok: true` and 1 for a completed report with `ok: false`.\n\n## Refusals\n\nA missing path writes exactly `error: verify requires a .glb path or an active imported asset` and exits 2. An unparseable file or runtime integration error is printed as `error: <message>` and exits 1.\n\nIf neither an explicit file nor an active import exists, Glina exits 2 before verification. If the indexed active destination was removed outside Glina, it refuses rather than choosing another asset silently.\n",
       "headings": [
         {
           "depth": 1,
           "text": "glina verify",
-          "id": "glina-verify"
+          "id": ""
         },
         {
           "depth": 2,
@@ -725,12 +725,12 @@
       "productSlug": "glina",
       "slug": "cli/preview-anim",
       "title": "glina preview-anim",
-      "markdown": "# `glina preview-anim`\n\n## Invocation\n\n```sh\nglina preview-anim [<file.glb>] [--clip <name>] [--frames <n>] [--fps <n>] [--out <file.gif>] [--config <path>]\n```\n\n## Purpose\n\nRender a Blender animation clip from a GLB to a looping GIF.\n\n## Inputs and options\n\n- `<file.glb>` is optional when a workspace import is active. An explicit path wins; otherwise Glina uses the accepted active destination.\n- `--clip <name>` selects an action; otherwise the longest action is used.\n- `--frames <n>` controls sampled frames; the default maximum is 24.\n- `--fps <n>` controls GIF playback; the default is 10.\n- `--out <file.gif>` selects the result; the default is `<stem>-anim[-<clip>].gif`.\n- `--config <path>` selects Blender MCP settings; an unreadable config is ignored and bridge defaults apply.\n\n## Output and state\n\nImports the GLB into Blender, renders 512×512 frames, assembles the GIF with `ffmpeg` or the `uv run --with pillow` fallback, writes the file, and prints `{outPath, clip, frames, tool}` as JSON.\n\n## Refusals\n\nA missing path writes exactly `error: preview-anim requires a .glb path` and exits 2. Import, missing-action, rendering, or GIF-tool errors are printed as `error: <message>` and exit 1.\n\nWithout either an explicit path or an active import, the command exits 2. A missing indexed active file is a refusal rather than a silent fallback.\n",
+      "markdown": "# `glina preview-anim`\n\n## Invocation\n\n```sh\nglina preview-anim [<file.glb>] [--clip <name>] [--frames <n>] [--fps <n>] [--out <file.gif>] [--config <path>]\n```\n\n## Purpose\n\nRender a Blender animation clip from a GLB to a looping GIF.\n\n## Inputs and options\n\n- `<file.glb>` is optional when a workspace import is active. An explicit path wins; otherwise Glina uses the accepted active destination.\n- `--clip <name>` selects an action; otherwise the longest action is used.\n- `--frames <n>` controls sampled frames; the default maximum is 24.\n- `--fps <n>` controls GIF playback; the default is 10.\n- `--out <file.gif>` selects the result; the default is `<stem>-anim[-<clip>].gif`.\n- `--config <path>` selects Blender MCP settings; a missing explicit file or malformed config refuses. Only an absent implicit default is optional.\n\n## Output and state\n\nImports the GLB into Blender, renders 512×512 frames, assembles the GIF with `ffmpeg` or the `uv run --with pillow` fallback, writes the file, and prints `{outPath, clip, frames, tool}` as JSON.\n\n## Refusals\n\nA missing path writes exactly `error: preview-anim requires a .glb path or an active imported asset` and exits 2. Import, missing-action, rendering, or GIF-tool errors are printed as `error: <message>` and exit 1.\n\nWithout either an explicit path or an active import, the command exits 2. A missing indexed active file is a refusal rather than a silent fallback.\n",
       "headings": [
         {
           "depth": 1,
           "text": "glina preview-anim",
-          "id": "glina-preview-anim"
+          "id": ""
         },
         {
           "depth": 2,
@@ -768,14 +768,14 @@
     },
     {
       "productSlug": "glina",
-      "slug": "cli/animate",
-      "title": "glina animate",
-      "markdown": "# `glina animate`\n\n## Invocation\n\n```sh\nglina animate [<file.glb>] --preset <name> [--out <file.glb>] [--config <path>]\n```\n\n## Purpose\n\nApply Glina's deterministic animation preset to a GLB and gate the animated result.\n\n## Inputs and options\n\n- `<file.glb>` is optional when a workspace import is active. An explicit path wins; otherwise Glina uses the accepted active destination.\n- `--preset <name>` is required and names the preset; no preset is assumed. `dragon` is the one preset that exists.\n- `--out <file.glb>` selects the result; by default `-animated` is inserted before `.glb`.\n- `--config <path>` selects Blender MCP settings; an unreadable config is ignored and bridge defaults apply.\n\n## Output and state\n\nImports the source into Blender, adds visibly moving actions, exports the output, runs the strict gate requiring materials, moving animation, and at least two clips, and prints the result as JSON.\n\n## Refusals\n\nA missing path writes exactly `error: animate requires a .glb path` and exits 2. A missing `--preset` writes exactly `error: animate requires --preset <name>; available presets: dragon` and exits 2. Any other preset refuses with exactly `unknown animation preset: <value>; available presets: dragon` inside the CLI's `error: <message>` envelope and exits 1. Blender, export, and gate errors also exit 1.\n\nWithout either an explicit path or an active import, the command exits 2. A missing indexed active file is a refusal rather than a silent fallback.\n",
+      "slug": "cli/preview-scene",
+      "title": "glina preview-scene",
+      "markdown": "# `glina preview-scene`\n\n## Invocation\n\n```sh\nglina preview-scene [<file.glb>] [--out <file.png>] [--config <path>]\n```\n\n## Purpose\n\nRender a GLB on a neutral ground with a camera framed to its mesh bounds and an area light. This is an artifact preview, not a Potyczka gameplay simulation.\n\n## Inputs and result\n\nAn explicit `.glb` path wins. Without one, Glina uses the active accepted workspace asset; if neither exists it refuses with `error: preview-scene requires a .glb path or an active imported asset` and exits 2. The default output is `previews/<stem>-scene.png` inside the Glina user data directory (`$XDG_DATA_HOME/glina` or `~/.local/share/glina`), so a read-only source can still be previewed. A later preview of the same stem replaces that PNG. `--out` selects another PNG path; its parent directory must already exist. `--config` selects optional Blender MCP settings; a missing explicit file or invalid config refuses. Only an absent implicit default file is optional.\n\nGlina imports the asset into a live Blender MCP session, builds the ground, light and camera, renders to a temporary image and moves a nonempty PNG into the output path. JSON output names `outPath`, `source`, `bytes`, and `scene: neutral-ground`. A missing Blender connection, failed import, absent mesh, render exception or absent/empty image exits 1 with the failed operation on stderr; no successful result is printed. Glina Desktop's Assets gallery offers **Preview in scene** on each GLB and displays the returned PNG or refusal.\n\n## Diagnostic interpretation\n\n`Blender could not import <path>: ... Could not connect to Blender` means the MCP server answered but its Blender add-on did not. A running MCP process alone is not evidence of a usable bridge. `glina doctor` probes a real code round trip through Blender and names that failure.\n",
       "headings": [
         {
           "depth": 1,
-          "text": "glina animate",
-          "id": "glina-animate"
+          "text": "glina preview-scene",
+          "id": ""
         },
         {
           "depth": 2,
@@ -789,37 +789,32 @@
         },
         {
           "depth": 2,
-          "text": "Inputs and options",
-          "id": "inputs-and-options"
+          "text": "Inputs and result",
+          "id": "inputs-and-result"
         },
         {
           "depth": 2,
-          "text": "Output and state",
-          "id": "output-and-state"
-        },
-        {
-          "depth": 2,
-          "text": "Refusals",
-          "id": "refusals"
+          "text": "Diagnostic interpretation",
+          "id": "diagnostic-interpretation"
         }
       ],
       "source": {
         "repository": "glina",
-        "path": "pipeline/cli.js",
+        "path": "pipeline/sculpt/preview.js",
         "ref": "main",
-        "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/cli.js"
+        "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/sculpt/preview.js"
       },
       "order": 372
     },
     {
       "productSlug": "glina",
-      "slug": "cli/showcase",
-      "title": "glina showcase",
-      "markdown": "# `glina showcase`\n\n## Invocation\n\n```sh\nglina showcase <asset> [--out <file.glb>] [--config <path>]\n```\n\n## Purpose\n\nBuild Glina's deterministic cohesive animated reference asset directly in Blender.\n\n## Inputs and options\n\n- `<asset>` is required and names the reference asset; no asset is assumed. `dragon` is the one asset that exists.\n- `--out <file.glb>` selects the result; the default is `assets/models/<asset>-showcase.glb`.\n- `--config <path>` selects Blender MCP settings; an unreadable config is ignored and bridge defaults apply.\n\n## Output and state\n\nCreates the reference scene in Blender, exports it, applies the strict animated quality gate, writes the GLB, and prints the result as JSON.\n\n## Refusals\n\nA missing asset writes exactly `error: showcase requires an asset name; available assets: dragon` and exits 2. Any asset other than `dragon` refuses with exactly `unknown showcase asset: <asset>; available assets: dragon` inside the CLI's `error: <message>` envelope and exits 1. Blender, export, and gate errors also exit 1.\n",
+      "slug": "cli/animate",
+      "title": "glina animate",
+      "markdown": "# `glina animate`\n\n## Invocation\n\n```sh\nglina animate [<file.glb>] --preset <name> [--out <file.glb>] [--config <path>]\n```\n\n## Purpose\n\nApply Glina's deterministic animation preset to a GLB and gate the animated result.\n\n## Inputs and options\n\n- `<file.glb>` is optional when a workspace import is active. An explicit path wins; otherwise Glina uses the accepted active destination.\n- `--preset <name>` is required and names a declaration; no preset is assumed. Glina ships `dragon` for its reference rig and `motion` for any GLB with an armature. `motion` keys three root-motion clips: `idle`, `travel`, and `attack`. `glina presets list` shows the actual installed set; `presets add` accepts more declarations.\n- `--out <file.glb>` selects the result; by default `-animated` is inserted before `.glb`.\n- `--config <path>` selects Blender MCP settings; a missing explicit file or malformed config refuses. Only an absent implicit default is optional.\n\n## Output and state\n\nImports the source into Blender, applies the declared actions, exports the output, runs the gate requiring materials, moving animation and as many clips as the preset declares, and prints the result as JSON. The source remains unchanged. A preset with required bone names refuses a rig missing those bones.\n\n## Refusals\n\nA missing path or active import writes `error: animate requires a .glb path or an active imported asset` and exits 2. A missing `--preset` writes `error: animate requires --preset <name>; available: dragon, motion` and exits 2. An unknown preset exits 2 with `error: unknown preset <name>; available: dragon, motion`. Blender, export, and gate errors exit 1 with the failed operation on stderr.\n\nWithout either an explicit path or an active import, the command exits 2. A missing indexed active file is a refusal rather than a silent fallback.\n",
       "headings": [
         {
           "depth": 1,
-          "text": "glina showcase",
+          "text": "glina animate",
           "id": ""
         },
         {
@@ -858,9 +853,54 @@
     },
     {
       "productSlug": "glina",
+      "slug": "cli/showcase",
+      "title": "glina showcase",
+      "markdown": "# `glina showcase`\n\n## Invocation\n\n```sh\nglina showcase <asset> [--out <file.glb>] [--config <path>]\n```\n\n## Purpose\n\nBuild Glina's deterministic cohesive animated reference asset directly in Blender.\n\n## Inputs and options\n\n- `<asset>` names a declared reference asset. Glina ships `dragon` and a rigged `biped` with walking and idle clips. `glina showcases list` shows the installed set; `showcases add` accepts another JSON declaration.\n- `--out <file.glb>` selects the result; by default Glina creates `outputs/<asset>-showcase.glb` inside its user data directory (`$XDG_DATA_HOME/glina` or `~/.local/share/glina`). It never writes into the installed package.\n- `--config <path>` selects Blender MCP settings; a missing explicit file or malformed config refuses. Only an absent implicit default is optional.\n\n## Output and state\n\nCreates the reference scene in Blender, exports it, applies the strict animated quality gate, writes the GLB, and prints the result as JSON.\n\n## Refusals\n\nA missing asset writes `error: showcase requires an asset name; available: biped, dragon` and exits 2. An unknown asset exits 2 with `error: unknown showcase <name>; available: biped, dragon`. Blender, export, and gate errors exit 1 with their actual failed operation.\n",
+      "headings": [
+        {
+          "depth": 1,
+          "text": "glina showcase",
+          "id": ""
+        },
+        {
+          "depth": 2,
+          "text": "Invocation",
+          "id": "invocation"
+        },
+        {
+          "depth": 2,
+          "text": "Purpose",
+          "id": "purpose"
+        },
+        {
+          "depth": 2,
+          "text": "Inputs and options",
+          "id": "inputs-and-options"
+        },
+        {
+          "depth": 2,
+          "text": "Output and state",
+          "id": "output-and-state"
+        },
+        {
+          "depth": 2,
+          "text": "Refusals",
+          "id": "refusals"
+        }
+      ],
+      "source": {
+        "repository": "glina",
+        "path": "pipeline/cli.js",
+        "ref": "main",
+        "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/cli.js"
+      },
+      "order": 374
+    },
+    {
+      "productSlug": "glina",
       "slug": "cli/showcases",
       "title": "glina showcases",
-      "markdown": "# `glina showcases`\n\n## Invocation\n\n```sh\nglina showcases [list | add <name> <file.json> | remove <name>] [--text]\n```\n\n## Purpose\n\nList, add and remove the showcase declarations that `glina showcase <asset>` reads. A declaration is one JSON file under `assets/showcases/<name>.json`: an object with an `actions` list and an `active` field naming one of those actions. Adding one is adding a file; nothing else is generated.\n\n## Inputs and options\n\n- `list`, or no verb, prints every declared name, sorted.\n- `add <name> <file.json>` checks the file and copies it to `assets/showcases/<name>.json`. `<name>` is lowercase letters, digits and dashes.\n- `remove <name>` deletes the declaration.\n- `--text` prints the result as `path: value` lines instead of JSON.\n\n## Output and state\n\n`list` prints `{kind: \"showcase\", names}` and changes nothing. `add` and `remove` print `{kind, name, path, outcome}` with `outcome` `added` or `removed`; the state is the file under `assets/showcases/`. Running `remove` twice is refused the second time, so a removal never repeats.\n\n## Refusals\n\n- `showcases add needs <name> <file.json>` / `showcases remove needs <name>`: a missing argument.\n- `showcases takes list, add or remove; got <verb>`: an unknown verb.\n- `showcase name must be lowercase letters, digits and dashes; got \"<name>\"`.\n- `<file>: <parse error>`, `<file> is not a JSON object`, `<file> has no actions list`, `<file> names active action \"<x>\", which is not one of its actions`: the file does not describe a showcase.\n- `showcase <name> is already declared; remove it first` / `showcase <name> is not declared`.\n\nEach refusal is printed as `error: <message>` and exits 2, like an unknown command: a name Glina has not declared is a usage error.\n",
+      "markdown": "# `glina showcases`\n\n## Invocation\n\n```sh\nglina showcases [list | add <name> <file.json> | remove <name>] [--text]\n```\n\n## Purpose\n\nList, add and remove the showcase declarations that `glina showcase <asset>` reads. A declaration is a JSON object with an `actions` list and an `active` field naming one of those actions. Built-ins ship under `assets/showcases/`; custom declarations persist under `$XDG_DATA_HOME/glina/showcases/` (or `~/.local/share/glina/showcases/`). An installed package need not be writable.\n\nGlina ships `dragon` and `biped`. The biped declaration has a compact armature, six visible parts, and moving walk and idle clips; additional assets use the same interpreter rather than a second implementation.\n\n## Inputs and options\n\n- `list`, or no verb, prints every declared name, sorted.\n- `add <name> <file.json>` checks the file and copies it into the user data directory. `<name>` is lowercase letters, digits and dashes.\n- `remove <name>` deletes a custom showcase; built-ins are protected.\n- `--text` prints the result as `path: value` lines instead of JSON.\n\n## Output and state\n\n`list` prints `{kind: \"showcase\", names}` and changes nothing. `add` and `remove` print `{kind, name, path, outcome}` with `outcome` `added` or `removed`; `path` is the custom declaration in the user data directory. A second removal is refused.\n\n## Refusals\n\n- `showcases add needs <name> <file.json>` / `showcases remove needs <name>`: a missing argument.\n- `showcases takes list, add or remove; got <verb>`: an unknown verb.\n- `showcase name must be lowercase letters, digits and dashes; got \"<name>\"`.\n- `<file>: <parse error>`, `<file> is not a JSON object`, `<file> has no actions list`, `<file> names active action \"<x>\", which is not one of its actions`: the file does not describe a showcase.\n- `showcase <name> is already declared; remove it first` / `showcase <name> is not declared`.\n- `showcase <name> is built in and cannot be removed`: the package's declaration is protected; copy it to a new name to customize it.\n\nEach refusal is printed as `error: <message>` and exits 2, like an unknown command: a name Glina has not declared is a usage error.\n",
       "headings": [
         {
           "depth": 1,
@@ -899,13 +939,13 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/rigs/commands.js"
       },
-      "order": 374
+      "order": 375
     },
     {
       "productSlug": "glina",
       "slug": "cli/presets",
       "title": "glina presets",
-      "markdown": "# `glina presets`\n\n## Invocation\n\n```sh\nglina presets [list | add <name> <file.json> | remove <name>] [--text]\n```\n\n## Purpose\n\nList, add and remove the animation presets that `glina animate --preset <name>` reads. A preset is one JSON file under `assets/presets/<name>.json`: an object with an `actions` list and an `active` field naming one of those actions. Adding one is adding a file; nothing else is generated.\n\n## Inputs and options\n\n- `list`, or no verb, prints every declared name, sorted.\n- `add <name> <file.json>` checks the file and copies it to `assets/presets/<name>.json`. `<name>` is lowercase letters, digits and dashes.\n- `remove <name>` deletes the preset.\n- `--text` prints the result as `path: value` lines instead of JSON.\n\n## Output and state\n\n`list` prints `{kind: \"preset\", names}` and changes nothing. `add` and `remove` print `{kind, name, path, outcome}` with `outcome` `added` or `removed`; the state is the file under `assets/presets/`. Running `remove` twice is refused the second time, so a removal never repeats.\n\n## Refusals\n\n- `presets add needs <name> <file.json>` / `presets remove needs <name>`: a missing argument.\n- `presets takes list, add or remove; got <verb>`: an unknown verb.\n- `preset name must be lowercase letters, digits and dashes; got \"<name>\"`.\n- `<file>: <parse error>`, `<file> is not a JSON object`, `<file> has no actions list`, `<file> names active action \"<x>\", which is not one of its actions`: the file does not describe a preset.\n- `preset <name> is already declared; remove it first` / `preset <name> is not declared`.\n\nEach refusal is printed as `error: <message>` and exits 2, like an unknown command: a name Glina has not declared is a usage error.\n",
+      "markdown": "# `glina presets`\n\n## Invocation\n\n```sh\nglina presets [list | add <name> <file.json> | remove <name>] [--text]\n```\n\n## Purpose\n\nList, add and remove the animation presets that `glina animate --preset <name>` reads. A preset is one JSON file with an `actions` list and an `active` field naming one of those actions. Built-ins ship under `assets/presets/`; custom declarations persist under `$XDG_DATA_HOME/glina/presets/` (or `~/.local/share/glina/presets/`). An installed package need not be writable.\n\nBuilt-in declarations are `dragon` (its named wing and tail bones) and `motion` (root-motion clips idle, travel and attack without required bone names). `motion` still requires a GLB with an armature; a mesh with no armature refuses at the Blender operation.\n\n## Inputs and options\n\n- `list`, or no verb, prints every declared name, sorted.\n- `add <name> <file.json>` checks the file and copies it into the user data directory. `<name>` is lowercase letters, digits and dashes.\n- `remove <name>` deletes a custom preset; built-ins are protected.\n- `--text` prints the result as `path: value` lines instead of JSON.\n\n## Output and state\n\n`list` prints `{kind: \"preset\", names}` and changes nothing. `add` and `remove` print `{kind, name, path, outcome}` with `outcome` `added` or `removed`; `path` is the custom declaration in the user data directory. A second removal is refused.\n\n## Refusals\n\n- `presets add needs <name> <file.json>` / `presets remove needs <name>`: a missing argument.\n- `presets takes list, add or remove; got <verb>`: an unknown verb.\n- `preset name must be lowercase letters, digits and dashes; got \"<name>\"`.\n- `<file>: <parse error>`, `<file> is not a JSON object`, `<file> has no actions list`, `<file> names active action \"<x>\", which is not one of its actions`: the file does not describe a preset.\n- `preset <name> is already declared; remove it first` / `preset <name> is not declared`.\n- `preset <name> is built in and cannot be removed`: the package's declaration is protected; copy it to a new name to customize it.\n\nEach refusal is printed as `error: <message>` and exits 2, like an unknown command: a name Glina has not declared is a usage error.\n",
       "headings": [
         {
           "depth": 1,
@@ -944,7 +984,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/rigs/commands.js"
       },
-      "order": 375
+      "order": 376
     },
     {
       "productSlug": "glina",
@@ -989,7 +1029,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/cli.js"
       },
-      "order": 377
+      "order": 378
     },
     {
       "productSlug": "glina",
@@ -1034,7 +1074,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/cli.js"
       },
-      "order": 378
+      "order": 379
     },
     {
       "productSlug": "glina",
@@ -1094,7 +1134,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/mcp.md"
       },
-      "order": 379
+      "order": 380
     },
     {
       "productSlug": "glina",
@@ -1154,13 +1194,13 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/runtime-api.md"
       },
-      "order": 381
+      "order": 382
     },
     {
       "productSlug": "glina",
       "slug": "desktop",
       "title": "macOS desktop companion",
-      "markdown": "# macOS desktop companion\n\nGlina Desktop is a separate SwiftUI client in the `glina-desktop` repository. It does not reimplement pipeline jobs and keeps no Glina process running: every operation is one finite run of the installed `glina` CLI.\n\n## Command lifecycle\n\n`GlinaCommand` searches PATH first, then:\n\n1. `~/.stado/bin/glina`\n2. `~/.local/bin/glina`\n3. `/opt/homebrew/bin/glina`\n4. `/usr/local/bin/glina`\n\nFor each operation it starts one `glina` process, streams its stdout and stderr into the live log as they are written, and waits for it to exit. The exit status and the JSON document the command prints last are the result; a failed command shows the last line it wrote to stderr. A missing executable is reported as `Glina is not installed.` and the panel offers Retry.\n\n## Client mappings\n\n| Window action | Command |\n|---|---|\n| Check config | `glina check-config` |\n| Doctor | `glina doctor` |\n| Setup | `glina setup [--check] [--dry-run]`; the two toggles are the two flags, check-only on by default so a click installs nothing |\n| Export Config | `glina export-config --out <path>` |\n| Sculpt | `glina sculpt <prompt> --rounds <n>` |\n| Create | `glina create <prompt> [--race <race>]` |\n| Verify | `glina verify <path>` |\n| Animate | `glina animate [<path>] --preset <name>`; an empty path animates the active imported asset |\n| Showcase | `glina showcase <asset>` |\n| Declarations | `glina showcases\\|presets list`, `… add <name> <file.json>`, `… remove <name>` |\n| Animation preview | `glina preview-anim <path> [--clip <name>]` |\n| Import | `glina import <file.glb> [--name <id>]` |\n\nA failed doctor check exits 1 with the report on stdout; the window shows the failed checks, each as `<name>: <error>`, taken from the report itself rather than from the bridges' stderr chatter.\n\n## Import existing assets\n\nImport runs `glina import`, so the window and the CLI persist, verify and activate an asset through the same operation, and the accepted destination becomes the Assets directory, animation selection and Verify input.\n",
+      "markdown": "# macOS desktop companion\n\nGlina Desktop is a separate SwiftUI client in the `glina-desktop` repository. It does not reimplement pipeline jobs and keeps no Glina process running: every operation is one finite run of the installed `glina` CLI.\n\n## Command lifecycle\n\n`GlinaCommand` searches PATH first, then:\n\n1. `~/.stado/bin/glina`\n2. `~/.local/bin/glina`\n3. `/opt/homebrew/bin/glina`\n4. `/usr/local/bin/glina`\n\nFor each operation the app starts one `glina` process, streams stdout and stderr into the live log, and waits for it to exit. The exit status and final JSON document are the result. A failed workspace import shows the JSON report's `reason`; other failures show stderr or the failed doctor checks. A missing executable is reported as `Glina is not installed.` and the panel offers Retry.\n\n## Client mappings\n\n| Window action | Command |\n|---|---|\n| Check config | `glina check-config` |\n| Doctor | `glina doctor` |\n| Setup | `glina setup [--check] [--dry-run]`; the two toggles are the two flags, check-only on by default so a click installs nothing |\n| Export Config | `glina export-config --out <path>` |\n| Sculpt | `glina sculpt <prompt> --rounds <n>` |\n| Create | `glina create <prompt> [--race <race>]` |\n| Verify | `glina verify <path>` |\n| Animate | `glina animate [<path>] --preset <name>`; an empty path animates the active imported asset |\n| Showcase | `glina showcase <asset>` |\n| Declarations | `glina showcases\\|presets list`, `… add <name> <file.json>`, `… remove <name>` |\n| Animation preview | `glina preview-anim <path> [--clip <name>]` |\n| Import | `glina import <file.glb> [--variant-of <base-id>]`; the Assets and Check Config screens accept the optional base id |\n| Workspace | `glina workspace list\\|select <id>\\|remove <id>`; variants are shown with `variantOf`, and base removal refuses while variants remain |\n| Scene preview | `glina preview-scene <file.glb>`; Assets offers **Preview in scene** on a GLB, displays the PNG and reports a refused Blender render |\n\nA failed doctor check exits 1 with the report on stdout; the window shows the failed checks, each as `<name>: <error>`, taken from the report itself rather than from the bridges' stderr chatter.\n\n## Import existing assets\n\nImport runs `glina import`, so the window and CLI verify and activate the same asset. A variant names an existing base id; a refused parent or failed gate leaves existing data untouched and displays the report's reason. The accepted destination becomes the Assets directory, animation selection and Verify input. The Assets gallery renders a selected GLB on neutral ground through the same Blender bridge, while animation preview remains a separate GIF operation.\n",
       "headings": [
         {
           "depth": 1,
@@ -1189,7 +1229,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/desktop.md"
       },
-      "order": 382
+      "order": 383
     },
     {
       "productSlug": "glina",
@@ -1389,7 +1429,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/runbook.md"
       },
-      "order": 383
+      "order": 384
     },
     {
       "productSlug": "glina",
@@ -1419,7 +1459,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/examples.md"
       },
-      "order": 384
+      "order": 385
     },
     {
       "productSlug": "glina",
@@ -1454,7 +1494,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/walkthrough-verify.md"
       },
-      "order": 385
+      "order": 386
     },
     {
       "productSlug": "glina",
@@ -1499,7 +1539,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/concepts/sculpt-job.md"
       },
-      "order": 387
+      "order": 388
     },
     {
       "productSlug": "glina",
@@ -1529,7 +1569,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/concepts/studio-job.md"
       },
-      "order": 388
+      "order": 389
     },
     {
       "productSlug": "glina",
@@ -1574,7 +1614,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/concepts/verification-gate.md"
       },
-      "order": 389
+      "order": 390
     },
     {
       "productSlug": "glina",
@@ -1619,7 +1659,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/concepts/blender-session.md"
       },
-      "order": 390
+      "order": 391
     },
     {
       "productSlug": "glina",
@@ -1659,7 +1699,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/concepts/browser-session.md"
       },
-      "order": 391
+      "order": 392
     },
     {
       "productSlug": "glina",
@@ -1704,7 +1744,7 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/concepts/model-backend.md"
       },
-      "order": 392
+      "order": 393
     },
     {
       "productSlug": "glina",
@@ -1739,18 +1779,18 @@
         "ref": "main",
         "url": "https://github.com/wisent-ai/glina/blob/main/docs/concepts/runtime-art.md"
       },
-      "order": 393
+      "order": 394
     },
     {
       "productSlug": "glina",
       "slug": "cli/import",
       "title": "glina import",
-      "markdown": "# `glina import`\n\n## Invocation\n\n```sh\nglina import <file.glb> [--name <id>] [--config <path>]\n```\n\n## Accepted input\n\nThe input must be a readable `.glb`. Glina stages the exact bytes under its data directory, runs the same `verifyAsset` structural gate used everywhere else and the configured Blender render-smoke gate when enabled, then commits only a successful candidate. No generation, model inference, trade, or credential display occurs.\n\n`--name` may contain at most 64 ASCII letters, digits, dots, underscores, or hyphens and must begin with a letter or digit. Without it, Glina derives the id from the filename. `--config` is optional; an absent config uses the built-in verification defaults.\n\n## Results, duplicates, and failures\n\nThe JSON report is one of:\n\n- `imported`: a new exact GLB and manifest entry were committed and activated.\n- `unchanged`: the same SHA-256 content already exists; it is reactivated without another copy.\n- `conflicting`: the id or destination already belongs to different content; existing data is preserved.\n- `rejected`: reading or complete verification failed; no partial destination or manifest entry remains.\n\nThe report includes source, id and durable path when applicable, a reason when refused, and the canonical verification report. It never prints credential contents.\n\n## Reuse\n\nThe accepted destination becomes the default when `glina verify`, `glina animate`, or `glina preview-anim` omits its GLB path. An explicit path always wins.",
+      "markdown": "# `glina import`\n\n## Invocation\n\n```sh\nglina import <file.glb> [--name <id>] [--variant-of <base-id>] [--config <path>]\n```\n\n## Accepted input\n\nThe input must be a readable `.glb`. Glina stages the exact bytes under its data directory, runs the same `verifyAsset` structural gate used everywhere else and the configured Blender render-smoke gate when enabled, then commits only a successful candidate. No generation, model inference, trade, or credential display occurs.\n\n`--name` may contain at most 64 ASCII letters, digits, dots, underscores, or hyphens and must begin with a letter or digit. Without it, Glina derives the id from the filename. An absent implicit config uses the built-in gate; a missing explicit `--config` file or malformed config refuses rather than silently dropping its settings.\n\n`--variant-of` links a distinct accepted GLB to an existing base asset id. A variant cannot parent another variant. Glina refuses an unknown parent or bytes already held in the workspace without changing the active selection or stored files. The result names `variantOf`; omit the option for an independent base asset.\n\n## Results, duplicates, and failures\n\nThe JSON report is one of:\n\n- `imported`: a new exact GLB and manifest entry were committed and activated.\n- `unchanged`: the same SHA-256 content already exists; it is reactivated without another copy.\n- `conflicting`: the id or destination already belongs to different content; existing data is preserved.\n- `rejected`: reading or complete verification failed; no partial destination or manifest entry remains.\n\nThe report includes source, id, variant parent and durable path when applicable, a reason when refused, and the canonical verification report. It never prints credential contents. A failed gate lists the actual structural reasons; `variant parent <id> is not in the Glina workspace` identifies a missing base.\n\n## Reuse\n\nThe accepted destination becomes the default when `glina verify`, `glina animate`, `glina preview-anim`, or `glina preview-scene` omits its GLB path. An explicit path always wins. `glina workspace remove <base-id>` refuses while that base has variants; remove the variants first. The original files are never deleted.",
       "headings": [
         {
           "depth": 1,
           "text": "glina import",
-          "id": "glina-import"
+          "id": ""
         },
         {
           "depth": 2,
@@ -1775,17 +1815,17 @@
       ],
       "source": {
         "repository": "glina",
+        "path": "pipeline/workspace/assets.js",
         "ref": "main",
-        "path": "pipeline/workspace.js",
-        "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/workspace.js"
+        "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/workspace/assets.js"
       },
-      "order": 901
+      "order": 902
     },
     {
       "productSlug": "glina",
       "slug": "cli/workspace",
       "title": "glina workspace",
-      "markdown": "# `glina workspace`\n\n## Invocation\n\n```sh\nglina workspace [list]\nglina workspace select <id>\nglina workspace remove <id>\n```\n\n## Output and retained state\n\n`list` (the default) prints the `glina.workspace.v1` manifest summary: the active asset id and every imported asset's id, digest, durable path, original source path, import time, structural statistics, and active marker. It does not print GLB contents or credentials and makes no mutation.\n\n`select <id>` makes an imported asset the active input that `verify`, `preview-anim` and `animate` read when no file is named. `remove <id>` takes an asset out of the workspace and deletes the workspace's own copy; the file it was imported from is not touched. Removing the active asset leaves no active asset rather than activating one nobody chose. Both print the same summary as `list`.\n\nState lives under `$XDG_DATA_HOME/glina` or `~/.local/share/glina` and persists across CLI and desktop launches. If the manifest schema or an entry is malformed, Glina refuses rather than guessing. If the active destination is missing, consuming commands refuse and ask for re-import.\n\n## Refusals\n\n- An id the workspace does not hold: `the Glina workspace holds no asset named <id>; it holds <ids>` (exit 1).\n- `select` on the asset that is already active: `asset <id> is already the active one` (exit 1).\n- Any other word after `workspace`, or `select`/`remove` without an id: exit 2 with the forms it takes.\n\nGlina Desktop offers the same three runs under **Workspace**: pick list, select or remove, name the asset id, and the window runs `glina workspace` with them.\n",
+      "markdown": "# `glina workspace`\n\n## Invocation\n\n```sh\nglina workspace [list]\nglina workspace select <id>\nglina workspace remove <id>\n```\n\n## Output and retained state\n\n`list` (the default) prints the `glina.workspace.v2` summary: the active asset id and every accepted asset's id, digest, durable path, original source path, import time, structural statistics, `variantOf` parent (or null), and active marker. It does not print GLB contents or credentials and makes no mutation. An existing v1 manifest remains readable and is written as v2 on the next mutation.\n\n`select <id>` makes a base asset or variant the active input that `verify`, `preview-anim`, `preview-scene` and `animate` read when no file is named. `remove <id>` takes an asset out of the workspace and deletes the workspace's own copy; the source file is not touched. A base with variants cannot be removed until its variants are removed. Removing the active asset leaves no active asset rather than activating one nobody chose. Both commands print the same summary as `list`.\n\nState lives under `$XDG_DATA_HOME/glina` or `~/.local/share/glina` and persists across CLI and desktop launches. If the manifest schema or an entry is malformed, Glina refuses rather than guessing. If the active destination is missing, consuming commands refuse and ask for re-import.\n\n## Refusals\n\n- An id the workspace does not hold: `the Glina workspace holds no asset named <id>; it holds <ids>` (exit 1).\n- `select` on the asset that is already active: `asset <id> is already the active one` (exit 1).\n- Removing a base that still has variants: `asset <id> has variants <ids>; remove those variants before their base asset` (exit 1; no state changes).\n- Any other word after `workspace`, or `select`/`remove` without an id: exit 2 with the forms it takes.\n\nGlina Desktop offers the same three runs under **Workspace** and accepts a variant parent id while importing a GLB. A refused import shows the report's reason rather than a generic process failure.\n",
       "headings": [
         {
           "depth": 1,
@@ -1810,11 +1850,11 @@
       ],
       "source": {
         "repository": "glina",
+        "path": "pipeline/workspace/manage.js",
         "ref": "main",
-        "path": "pipeline/workspace.js",
-        "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/workspace.js"
+        "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/workspace/manage.js"
       },
-      "order": 902
+      "order": 903
     },
     {
       "productSlug": "glina",
@@ -1844,7 +1884,7 @@
         "path": "pipeline/onboarding.js",
         "url": "https://github.com/wisent-ai/glina/blob/main/pipeline/onboarding.js"
       },
-      "order": 903
+      "order": 904
     }
   ]
 }

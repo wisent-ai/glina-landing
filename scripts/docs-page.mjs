@@ -14,7 +14,7 @@ import { marked } from "marked";
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const CORPUS = resolve(ROOT, "src/content/docs.json");
 const USAGE = `usage: node scripts/docs-page.mjs export <slug> <markdown-file>
-       node scripts/docs-page.mjs import <slug> <markdown-file>
+       node scripts/docs-page.mjs import <slug> <markdown-file> [--source <repository>:<path>]
        node scripts/docs-page.mjs create <slug> <markdown-file> --source <repository>:<path> --after <slug>
        node scripts/docs-page.mjs remove <slug>
        node scripts/docs-page.mjs list
@@ -85,6 +85,14 @@ function write() {
   writeFileSync(CORPUS, `${JSON.stringify(corpus, null, 2)}\n`, "utf8");
 }
 
+function sourceFor(value) {
+  const colon = value.indexOf(":");
+  if (colon < 1 || colon === value.length - 1) refuse(`Documentation refused: --source needs <repository>:<path>.`, 2);
+  const repository = value.slice(0, colon);
+  const path = value.slice(colon + 1);
+  return { repository, path, ref: "main", url: `https://github.com/wisent-ai/${repository}/blob/main/${path}` };
+}
+
 if (operation === "export") {
   if (at < 0) refuse(`Documentation refused: no page has the slug ${slug}.`, 1);
   if (!markdownFile) refuse(USAGE, 2);
@@ -98,13 +106,15 @@ if (operation === "import") {
   if (!markdownFile || !existsSync(markdownFile)) refuse(`Documentation refused: ${markdownFile} does not exist.`, 2);
   const markdown = readFileSync(resolve(markdownFile), "utf8");
   const page = pages[at];
-  if (page.markdown === markdown) {
+  const source = options.source ? sourceFor(options.source) : page.source;
+  if (page.markdown === markdown && JSON.stringify(page.source) === JSON.stringify(source)) {
     console.log(`${slug} is unchanged`);
     process.exit(0);
   }
   page.markdown = markdown;
   page.title = title(markdown);
   page.headings = headings(markdown);
+  page.source = source;
   write();
   console.log(`imported ${markdownFile} into ${slug} (${page.headings.length} headings)`);
   process.exit(0);
@@ -121,9 +131,6 @@ if (operation === "create") {
     refuse(`Documentation refused: --after must name an existing page; ${afterSlug ?? "nothing"} is not one.`, 1);
   }
   const markdown = readFileSync(resolve(markdownFile), "utf8");
-  const colon = source.indexOf(":");
-  const repository = source.slice(0, colon);
-  const path = source.slice(colon + 1);
   const order = pages[after].order + 1;
   for (const page of pages) if (page.order >= order) page.order += 1;
   pages.push({
@@ -132,7 +139,7 @@ if (operation === "create") {
     title: title(markdown),
     markdown,
     headings: headings(markdown),
-    source: { repository, path, ref: "main", url: `https://github.com/wisent-ai/${repository}/blob/main/${path}` },
+    source: sourceFor(source),
     order,
   });
   write();
