@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build:review": "node scripts/check-command-coverage.mjs && node scripts/design-lint.mjs && next build",
-    "build": "node scripts/check-command-coverage.mjs && node scripts/design-lint.mjs && next build",
+    "build": "node scripts/design-lint.mjs && next build",
+    "docs:coverage": "node scripts/check-command-coverage.mjs",
     "start": "next start"
   },
   "dependencies": {
