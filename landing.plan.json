@@ -91,11 +91,11 @@
       "items": [],
       "artifact": {
         "type": "terminal",
-        "caption": "Install, check-config, verify, and health probes",
+        "caption": "Install, config check, verify, and health probes",
         "lines": [
           "$ npm install -g @wisent-ai/glina",
           "added @wisent-ai/glina",
-          "$ glina check-config",
+          "$ glina config check",
           "config: valid",
           "skarbiec:// refs: resolved",
           "inline secrets: rejected (none present)",
