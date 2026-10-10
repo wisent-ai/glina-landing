@@ -29,12 +29,12 @@
       "evidence": "README.md#Verification gate"
     },
     {
-      "claim": "The gate checks a valid glTF container, mesh/primitive sanity, a triangle budget (default 6000 ±100%), materials/skins/animation presence, file-size bounds, and an optional Blender render smoke.",
-      "evidence": "README.md#Verification gate"
+      "claim": "The gate checks glTF structure, mesh/primitive sanity, declared triangle bounds, materials/skins/animation presence, and an optional Blender render smoke. Verification budgets come from the job or configuration, not an implicit triangle allowance.",
+      "evidence": "pipeline/gate/verify.js"
     },
     {
-      "claim": "Secrets are handled only through Skarbiec: config holds `skarbiec://<item>/<field>` refs and the loader rejects inline secrets and credential-shaped environment variables.",
-      "evidence": "README.md#Hard rules (never bypass)"
+      "claim": "Config holds role://<role>/<field> credential references resolved through Stado and Skarbiec, or an explicitly selected owner-only credential file. Original config rejects inline secret values; changing a vault item name does not change its role.",
+      "evidence": "pipeline/host/credentials.js"
     },
     {
       "claim": "Browser automation runs only through the Weles MCP stdio server (`weles-mcp`), never a local Chromium profile.",
@@ -45,8 +45,8 @@
       "evidence": "README.md#Hard rules (never bypass)"
     },
     {
-      "claim": "Model access goes only through Brama, the Wisent model router; there is no direct provider API code in the package — direct paths were deleted at the owner's demand, not gated.",
-      "evidence": "README.md#Hard rules (never bypass)"
+      "claim": "Model access uses exactly one configured route: signed requests through Brama, or an explicitly configured OpenAI-compatible backend for users without Brama. The model alias is required; routes are never silently switched.",
+      "evidence": "pipeline/sculpt/llm.js"
     },
     {
       "claim": "Installation is `npm install -g @wisent-ai/glina`, and the package ships two bins: `glina` (CLI) and `glina-mcp` (MCP stdio server for agents).",
@@ -70,7 +70,7 @@
     }
   ],
   "requiredProof": [
-    "A real terminal transcript of `npm install -g @wisent-ai/glina` followed by `glina config check` validating the config and its Skarbiec vault references.",
+    "A real terminal transcript of `npm install -g @wisent-ai/glina` followed by `glina config check` validating the config and resolving its credential roles without printing secret values.",
     "A real terminal transcript of `glina verify assets/models/kamien.glb` passing the structural GLB quality gate.",
     "A factual table of the proven live results: kamien.glb (granite boulder with moss patches, 2026-07-27) and krasnolud-wojownik.glb (dwarven warrior, 2026-07-28), both gate-verified.",
     "Real output of `glina doctor` checking the config, the Blender bridge and the browser layer, with the failed step named per check."
@@ -100,7 +100,7 @@
       "Inventing a new logo, font, palette, or claim because a canonical asset is inconvenient to locate.",
       "Copying another company's copy, layout, illustration, product UI, or brand assets.",
       "Invented social proof or performance numbers: no customer names, no adoption counts, no asset-count or time-saved figures beyond the two proven runs.",
-      "Claims of direct provider API access; every model call goes through Brama.",
+      "Claims of implicit model routes, model aliases, credential item names or verification budgets.",
       "Generic slogans that omit the product or the outcome.",
       "Multiple equal-weight primary CTAs.",
       "Placeholder product screenshots presented as real.",
