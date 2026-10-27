@@ -26,7 +26,10 @@ export function EchoAnalytics() {
   useEffect(() => {
     if (!analytics || !pathname) return;
     const url = new URL(window.location.href);
-    void fetch(analytics.collectorUrl, {
+    // A page view that does not reach the collector is said in the console
+    // with its cause, not dropped unseen.
+    const collector = analytics.collectorUrl;
+    fetch(collector, {
       method: "POST",
       headers: { "content-type": "application/json" },
       keepalive: true,
@@ -40,13 +43,23 @@ export function EchoAnalytics() {
         host: url.host,
         path: pathname + url.search,
         url: url.toString(),
-        referrer: document.referrer || null,
+        // A page reached directly has no referrer: the browser gives "".
+        referrer: document.referrer === "" ? null : document.referrer,
         locale: navigator.language,
         screenWidth: window.screen.width,
         screenHeight: window.screen.height,
         occurredAt: new Date().toISOString(),
       }),
-    });
+    }).then(
+      (response) => {
+        if (!response.ok) {
+          console.warn(`echo analytics: ${collector} answered ${response.status}`);
+        }
+      },
+      (error) => {
+        console.warn(`echo analytics: ${collector} could not be reached: ${error}`);
+      },
+    );
   }, [pathname]);
 
   return null;
